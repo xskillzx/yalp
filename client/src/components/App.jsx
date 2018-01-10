@@ -4,14 +4,28 @@ import Home from './Home.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
-const App = () => {
-  return (
-    <Switch>
-      <Route exact path="/" component={Home}/>
-      <Route path="/login" component={Login}/>
-      <Route path="/signup" component={Signup}/>
-    </Switch>
-  )
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  createUser(userData) {
+    console.log(`Welcome to Yalp!, ${userData.username}`);
+  }
+
+  loginUser(userData) {
+    console.log(`Welcome back!, ${userData.username}`);
+  }
+
+  render() {
+    return (
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" render={ () => <Login loginUser={this.loginUser.bind(this)} /> } />
+        <Route path="/signup" render={ () => <Signup createUser={this.createUser.bind(this)} /> } />
+      </Switch>
+    )
+  }
 }
 
 export default App;
