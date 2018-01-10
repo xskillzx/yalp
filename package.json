@@ -8,8 +8,8 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "build:client": "webpack --config ./webpack.config.js/",
-    "database-test": "mocha server/spec/server-spec.js"
-
+    "server-test": "mocha server/spec/server-spec.js",
+    "database-test": "mocha database/spec/database-spec.js"
   },
   "repository": {
     "type": "git",
