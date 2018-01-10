@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kayfo23/yalp.git"
+    "url": "git+https://github.com/teamyalp/yalp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kayfo23/yalp/issues"
+    "url": "https://github.com/teamyalp/yalp/issues"
   },
-  "homepage": "https://github.com/kayfo23/yalp#readme",
+  "homepage": "https://github.com/teamyalp/yalp#readme",
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
