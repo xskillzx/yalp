@@ -6,14 +6,14 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import App from '../src/index.jsx';
+import SignUp from '../src/components/SignUp.jsx';
 
 
 
 
-test('App should render a Sign-Up title', () => {
+test('SignUp should render a Sign-Up title', () => {
 
-  const app = shallow(<App />);
+  const signup = shallow(<SignUp />);
 
-  expect(app.text()).toEqual('Sign-Up:Sign-Up');
+  expect(signup.text()).toEqual('Sign-Up:Sign-Up');
 });
