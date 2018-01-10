@@ -1,13 +1,12 @@
 language: node_js
-
-# install:
-#   - npm install
-#
+node_js:
+  - v6.11.5
 # cache:
 #   directories:
 #     - node-modules # NPM packages
-
-script: npm run react-test & npm run react-dev & npm run server-dev
+before_script:
+  - npm run build:client
+script: npm run react-test
   # need to include --exit at the end of mocha to stop the running
 
 # notifications:
