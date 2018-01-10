@@ -16,7 +16,6 @@ class Signup extends React.Component {
   }
 
   getFormData(e) {
-    // this.setState({animal: 'peter'})
     e.preventDefault();
     this.formData = {
       name: this.refs.name.value,

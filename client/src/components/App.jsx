@@ -10,11 +10,11 @@ class App extends React.Component {
   }
 
   createUser(userData) {
-    console.log(`Welcome to Yalp!, ${userData.username}`);
+    console.log(userData);
   }
 
   loginUser(userData) {
-    console.log(`Welcome back!, ${userData.username}`);
+    console.log(userData);
   }
 
   render() {

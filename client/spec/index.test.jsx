@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import SignUp from '../src/components/SignUp.jsx';
+import SignUp from '../src/components/Signup.jsx';
 import Login from '../src/components/Login.jsx'
 
 test('Signup should render a form', () => {
