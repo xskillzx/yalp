@@ -1,5 +1,7 @@
 language: javascript
 
+before_script:
+  - npm run build:client
 script: npm run react-test
 
 notifications:

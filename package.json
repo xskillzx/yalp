@@ -7,7 +7,8 @@
     "react-test": "jest",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "test": "npm run react-test"
+    "test": "npm run react-test",
+    "build:client": "webpack --config ./webpack.config.js/"
   },
   "repository": {
     "type": "git",
