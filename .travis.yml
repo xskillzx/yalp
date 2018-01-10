@@ -11,7 +11,7 @@ services:
 before_script:
   - npm run build:client
   - npm run build:database
-# script: node ./server/index.js & npm run react-test & npm run server-test & npm run database-test
+script: node ./server/index.js & npm run react-test & npm run server-test & npm run database-test
 
 notifications:
   slack:

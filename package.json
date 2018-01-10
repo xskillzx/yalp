@@ -11,8 +11,7 @@
     "build:server": "node ./server/index.js",
     "server-test": "mocha server/spec/server-spec.js",
     "react-test": "jest",
-    "build:client": "webpack --config ./webpack.config.js/",
-    "test": "node ./server/index.js; npm run react-test; npm run server-test; npm run database-test"
+    "build:client": "webpack --config ./webpack.config.js/"
   },
   "repository": {
     "type": "git",
