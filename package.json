@@ -9,9 +9,11 @@
     "server-dev": "nodemon server/index.js",
     "build:client": "webpack --config ./webpack.config.js/",
     "build:server": "node ./server/index.js",
-    "build:database": "node ./database/index.js",
+    "start:database": "mysql.server start",
+    "build:database": "mysql -u root < schema.sql",
     "server-test": "mocha server/spec/server-spec.js",
-    "database-test": "mocha database/spec/database-spec.js"
+    "database-test": "mocha database/spec/database-spec.js",
+    "end:database": "mysql.server stop"
   },
   "repository": {
     "type": "git",

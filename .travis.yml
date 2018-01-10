@@ -6,9 +6,11 @@ cache:
   - node-modules
 before_script:
   - npm run build:client
-  - npm run build:server
-  - npm run build:database
-script: npm run react-test & npm run server-test & npm run database-test
+  # - npm run build:server
+  - npm run start:database
+script: node ./server/index.js & npm run react-test & npm run server-test & npm run database-test
+after_script:
+  - npm run end:database
 notifications:
   slack:
     secure: gymsK8tXem7jkTrrQS65WQMYa5mz5MNMkb4VppyPoDqxWSrAJaLVeguuMPelLfqAIy1r5WxrTcU1iLb4r7OQwgbeXisS5cBGMl7NPwIUFjPMAjtuiKEFlaGdlYy2pcWbWSXzGPzQuM42Hm3Xl9jQ24bSJGyr3u86mqJ/LUWIZRqmqncZgziCoyqzTjW5pK8gYc6cZ0NHms0XXSTLNlpx9RJRAiA4mEaktXgj9Cy1JhlXgGO9P9spyOOFlEl/rxIrd2dvhWhNmuPhni6f6/cBKdS9ls7v2yOsqFieW15GOvXP0yV46UMuMBRciErwPouLAhfEkAIdEXypjD5RpMLVQRrZW3TTZ2VwWCXk5iwsvTFBVT9iiNeAj1ve4LG94EW430HrsPOcGGfx4xNzddkauVRBlZQ8Qb+1vjxDu9YCnMHPZBzWlJ7CSe++qFFrhcB5Zm6JnMvPyb3RibOxxZnY3u1prqXU6X4luwaHZoitTg6VMjT/iQoDsZGeCn23etIq4pXfZ48KHIKBdhE5XS01lrcIcQG9ZQgAG7D4utrzUPCf7bhqEcB/qlAamdTIZw1AAErioifEfEr8FmKRQ1CP3wiHtlVrOzY4hmyFROc+iOAQfLGxH79aeR7q4b89DuJ4cR1/u1A/dwNLAoDwnI/izEcMmBmFKu+idkqxxC592HI=
