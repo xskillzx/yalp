@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve static asset...
-app.use(express.static(__dirname + '../client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 // when user login, username, password
 app.get('/users/:username', (req, res) => {
