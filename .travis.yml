@@ -1,14 +1,14 @@
 language: node_js
 
-install:
-  - npm install
-  
-cache:
-  directories:
-    - node-modules # NPM packages
+# install:
+#   - npm install
+#
+# cache:
+#   directories:
+#     - node-modules # NPM packages
 
-script:
-  - npm test
+script: npm run react-test & npm run react-dev & npm run server-dev
+  # need to include --exit at the end of mocha to stop the running
 
 # notifications:
 #   email:
