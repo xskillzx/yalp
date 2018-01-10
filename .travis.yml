@@ -1,5 +1,7 @@
 language: javascript
 
+script: npm run react-test
+
 notifications:
   email:
     recipients:
