@@ -4,7 +4,7 @@
   "description": "Hack Reactor Greenfield - Group 6 - YALP",
   "main": "index.js",
   "scripts": {
-    "react-test": "jest",
+    "react-test": "npm run jest",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "test": "npm run react-test",
