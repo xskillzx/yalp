@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "react-dev": "webpack -d --watch",
-    "server-test": "mocha server/test/serverSpec.js"
+    "react-dev": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
