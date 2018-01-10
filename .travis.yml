@@ -5,14 +5,14 @@ cache:
   directories:
   - node-modules
 
-# services:
-#   - mysql
+services:
+  - mysql
 
 before_script:
   - npm run build:client
-  # - npm run build:server
   # - npm run start:database
-script: node ./server/index.js & npm run react-test & npm run server-test # & npm run database-test
+  - npm build:database
+script: node ./server/index.js & npm run react-test & npm run server-test & npm run database-test
 # after_script:
 #   - npm run end:database
 notifications:
