@@ -1,5 +1,8 @@
 language: javascript
 
+cache:
+  directories:
+    - node-modules # NPM packages 
 script: npm run react-test
 
 notifications:
