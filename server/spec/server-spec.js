@@ -13,15 +13,15 @@ describe('loading express', function() {
     server.close();
   });
 
-  it('should respond to GET /', function() {
-    return request(server)
-      .get('/')
-      .set('Accept', 'application/json')
-      .expect(200)
-      .then(resp => {
-        expect(resp.body).to.equal('ok');
-      });
-  });
+  // it('should respond to GET /', function() {
+  //   return request(server)
+  //     .get('/')
+  //     .set('Accept', 'application/json')
+  //     .expect(200)
+  //     .then(resp => {
+  //       expect(resp.body).to.equal('ok');
+  //     });
+  // });
 
   it('should respond to GET /users', function() {
     return request(server)
