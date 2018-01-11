@@ -62,12 +62,40 @@ const getBusinessById = function (id, cb) {
     })
 }
 
+const getFriendsReviews = function (userID, cb) {
+
+    let query = `SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id`;
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            cb(null, results)
+        }
+    })
+}
+
+//get non-friends' reviews for a specific business
+
+const getStrangersReviews = function (userID, cb) {
+
+    let query = `SELECT reviews.text FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id)`;
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            cb(null, results)
+        }
+    })
+}
+
 //temp function for searches, using mock data
 
 const tempSearch = function (search, cb) {
-  let query = `SELECT * FROM businesses`
+    let query = `SELECT * FROM businesses`
 
-      connection.query(query, (err, results) => {
+    connection.query(query, (err, results) => {
         console.log(results)
         if (err) {
             cb(err)
@@ -176,5 +204,7 @@ module.exports = {
     postUser,
     getUserByUsername,
     getBusinessById,
-    tempSearch
+    tempSearch,
+    getStrangersReviews,
+    getFriendsReviews
 }
