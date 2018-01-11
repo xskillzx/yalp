@@ -4,10 +4,10 @@
   "description": "Hack Reactor Greenfield - Group 6 - YALP",
   "main": "index.js",
   "scripts": {
+    "start": "npm run build:server",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "build:database": "mysql -u root < schema.sql",
-    "end:database": "mysql.server stop",
     "database-test": "mocha database/spec/database-spec.js",
     "build:server": "node ./server/index.js",
     "server-test": "mocha server/spec/server-spec.js",
