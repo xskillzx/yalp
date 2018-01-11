@@ -32,8 +32,16 @@ app.post('/signup', (req, res) => {
 });
 
 // when user search
-app.post('/businesses/search', (req, res) => {
-  res.status(201).json('ok');
+app.get('/search', (req, res) => {
+  db.tempSearch(req.body, (err, results) => {
+    console.log(results)
+    if (err) {
+      res.status(400);
+      res.end('Failed to Search.');
+    } else {
+      res.status(201).json(results);
+    }
+  })
 });
 
 // when user clicks on a business

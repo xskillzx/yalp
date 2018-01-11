@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'yalp'
 })
 
@@ -54,6 +54,21 @@ const getBusinessById = function (id, cb) {
     let query = `SELECT businesses.name FROM businesses WHERE businesses.id = ${id}`
 
     connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            cb(null, results)
+        }
+    })
+}
+
+//temp function for searches, using mock data
+
+const tempSearch = function (search, cb) {
+  let query = `SELECT * FROM businesses`
+
+      connection.query(query, (err, results) => {
+        console.log(results)
         if (err) {
             cb(err)
         } else {
@@ -140,5 +155,6 @@ module.exports = {
     getUser,
     postUser,
     getUserByUsername,
-    getBusinessById
+    getBusinessById,
+    tempSearch
 }
