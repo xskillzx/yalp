@@ -8,6 +8,7 @@ services:
   - mysql
 before_script:
   - npm run build:database
+  - npm run postinstall
 # Travis CI automatically runs: npm install, npm start, npm test
 deploy:
   provider: heroku
