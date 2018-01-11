@@ -1,6 +1,6 @@
 //SERVER SPECS
 const assert = require('assert');
-// const expect = require('chai').expect;
+const expect = require('chai').expect;
 const request = require('supertest');
 
 describe('loading express', function() {
