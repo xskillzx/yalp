@@ -11,9 +11,9 @@ services:
 before_script:
   # - npm run build:client
   - npm run build:database
-script:
   - npm start
   - node ./server/index.js
+script:
   - npm run react-test
   - npm run server-test
   - npm run database-test
