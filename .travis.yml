@@ -9,9 +9,8 @@ services:
   - mysql
 
 before_script:
-  # - npm run build:client
+  - npm run build:client
   - npm run build:database
-  - npm start
 script:
   - npm run build:server & npm run react-test & npm run server-test #& npm run database-test
 # script: npm start & node ./server/index.js & npm test

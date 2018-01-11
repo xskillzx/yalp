@@ -14,7 +14,7 @@
     "server-test": "mocha server/spec/server-spec.js --compilers js:babel-core/register --exit",
     "react-test": "jest",
     "build:client": "webpack --config ./webpack.config.js/",
-    "start": "webpack --config ./webpack.config.js/",
+    "start": "node ./server/index.js",
     "postinstall" : "webpack -d",
     "test": "jest && mocha database/spec/database-spec.js --compilers js:babel-core/register --exit && mocha server/spec/server-spec.js --compilers js:babel-core/register --exit"
   },
