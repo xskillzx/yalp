@@ -8,6 +8,7 @@ class Search extends React.Component {
   }
 
   render() {
+    console.log('Search')
     return (
       <div>
         <input ref="searchTerm" type="text" size="30" placeholder="What's nearby?" />
