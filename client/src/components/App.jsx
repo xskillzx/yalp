@@ -32,11 +32,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" render={ () => <Login loginUser={this.loginUser.bind(this)} /> } />
-        <Route path="/signup" render={ () => <Signup createUser={this.createUser.bind(this)} /> } />
-      </Switch>
+      <div>
+        <div id="topnav">
+            YALP
+        </div>
+
+        <div id="form-background">
+          <div id="form">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" render={ () => <Login loginUser={this.loginUser.bind(this)} /> } />
+              <Route path="/signup" render={ () => <Signup createUser={this.createUser.bind(this)} /> } />
+            </Switch>
+          </div>
+        </div>
+
+      </div>
     )
   }
 }
