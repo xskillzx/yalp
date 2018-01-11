@@ -1,0 +1,50 @@
+body {
+  font-family: 'avenir';
+  background-image: url("beer.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-size: 24px;
+  color: white;
+}
+#topnav {
+  background-color: #FF0000;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  margin: -10px -10px 0 -10px;
+  padding: 10px;
+}
+#form-background {
+  height: 500px;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 100px;
+  opacity: 1;
+  background-color: rgba(20,20,20,0.8);
+}
+#form {
+  margin-top: 50px;
+  padding: 50px;
+}
+#form input {
+  width: 80%;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+input[type=submit] {
+  background-color: #f00;
+  color: #fff;
+  border: none;
+}
+button {
+  display: block;
+  margin: 8px 0;
+  padding: 12px 20px;
+  background-color: red;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+}

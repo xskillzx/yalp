@@ -11,15 +11,14 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1> Welcome to Yalp! </h1>
         <Link to="/login">
-          <button type="Login">
+          <button type="Login" id="login-btn">
             Log In
           </button>
         </Link>
         <Link to="/signup">
-          <button type="Signup">
-            New User?
+          <button type="Signup" id="signup-btn">
+            Sign Up
           </button>
         </Link>
       </div>
