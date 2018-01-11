@@ -90,28 +90,48 @@ const tempSearch = function (search, cb) {
 
 //Users
 
-//INSERT INTO users (name, email, password, username) VALUES ("Chris", "Chris@Chris.com", "Chris", "ChrisChris");
-//INSERT INTO users (name, email, password, username) VALUES ("Kayleigh", "Kayleigh@Kayleigh.com", "Kayleigh", "Kayleigh");
-//INSERT INTO users (name, email, password, username) VALUES ("Connor", "Connor@Connor.com", "Connor", "Connor");
-//INSERT INTO users (name, email, password, username) VALUES ("Peter", "Peter@Peter.com", "Peter", "PeterPeterPumpkinEater");
-//INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
-//INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
+// INSERT INTO users (name, email, password, username) VALUES ("Chris", "Chris@Chris.com", "Chris", "ChrisChris");
+// INSERT INTO users (name, email, password, username) VALUES ("Kayleigh", "Kayleigh@Kayleigh.com", "Kayleigh", "Kayleigh");
+// INSERT INTO users (name, email, password, username) VALUES ("Connor", "Connor@Connor.com", "Connor", "Connor");
+// INSERT INTO users (name, email, password, username) VALUES ("Peter", "Peter@Peter.com", "Peter", "PeterPeterPumpkinEater");
+// INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
+// INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
 
 //Reviews 
 //user_id, business_id, text
 
-//INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
-//INSERT INTO reviews (user_id, business_id, text) VALUES (2, 2, "this place sucks ass");
-//INSERT INTO reviews (user_id, business_id, text) VALUES (3, 3, "this place could use better service");
-//INSERT INTO reviews (user_id, business_id, text) VALUES (4, 4, "this place is pretty mediocre");
+// INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
+// INSERT INTO reviews (user_id, business_id, text) VALUES (2, 2, "this place sucks ass");
+// INSERT INTO reviews (user_id, business_id, text) VALUES (3, 3, "this place could use better service");
+// INSERT INTO reviews (user_id, business_id, text) VALUES (4, 4, "this place is pretty mediocre");
+// INSERT INTO reviews (user_id, business_id, text) VALUES (5, 5, "this place is pretty good");
+// INSERT INTO reviews (user_id, business_id, text) VALUES (6, 6, "this place is utter trash");
 
 //CheckIns
 
-//INSERT INTO checkins (user_id, business_id) VALUES (1, 1);
-//INSERT INTO checkins (user_id, business_id) VALUES (2, 2);
-//INSERT INTO checkins (user_id, business_id) VALUES (3, 3);
-//INSERT INTO checkins (user_id, business_id) VALUES (4, 4);
-//INSERT INTO checkins (user_id, business_id) VALUES (5, 5);
+// INSERT INTO checkins (user_id, business_id) VALUES (1, 1);
+// INSERT INTO checkins (user_id, business_id) VALUES (2, 2);
+// INSERT INTO checkins (user_id, business_id) VALUES (3, 3);
+// INSERT INTO checkins (user_id, business_id) VALUES (4, 4);
+// INSERT INTO checkins (user_id, business_id) VALUES (5, 5);
+// INSERT INTO checkins (user_id, business_id) VALUES (6, 6);
+
+//friends
+
+// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 2);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 3);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 4);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 6);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (2, 3);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (2, 5);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (2, 6);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (3, 4);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (3, 5);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (3, 6);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (4, 6);
+// INSERT INTO checkins (user_id1, user_id2) VALUES (5, 6);
+
+
 
 //TEST FUNCTION CALLS
 
