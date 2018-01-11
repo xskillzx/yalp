@@ -4,15 +4,16 @@
   "description": "Hack Reactor Greenfield - Group 6 - YALP",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:server",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "build:database": "mysql -u root < schema.sql",
-    "database-test": "mocha database/spec/database-spec.js",
+    "database-test": "mocha database/spec/database-spec.js --compilers js:babel-core/register --exit",
     "build:server": "node ./server/index.js",
-    "server-test": "mocha server/spec/server-spec.js",
+    "server-test": "mocha server/spec/server-spec.js --compilers js:babel-core/register --exit",
     "react-test": "jest",
-    "build:client": "webpack --config ./webpack.config.js/"
+    "build:client": "webpack --config ./webpack.config.js/",
+    "start": "webpack --config ./webpack.config.js/",
+    "test": "jest && mocha database/spec/database-spec.js --compilers js:babel-core/register --exit && mocha server/spec/server-spec.js --compilers js:babel-core/register --exit"
   },
   "repository": {
     "type": "git",
