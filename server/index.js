@@ -46,10 +46,9 @@ app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
 });
 
-app.listen(3000, () => {
-  console.log(`Listening at port 3000`);
+const server = app.listen(3000, () => {
+  var port = server.address().port;
+  console.log('Listening at port %s', port);
 });
 
-// server();
-// const port = server.address().port;
-// module.exports = server;
+module.exports = server;
