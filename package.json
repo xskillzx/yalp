@@ -13,7 +13,7 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "build:database": "mysql -u root < schema.sql",
-    "test": "jest && mocha --exit",
+    "test": "jest && mocha --exit"
   },
   "repository": {
     "type": "git",
