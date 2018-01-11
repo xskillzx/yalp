@@ -38,11 +38,11 @@ CREATE TABLE `checkins` (
   PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `searches`;
-        
-CREATE TABLE `searches` (
+CREATE TABLE `bookmarks` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `name` MEDIUMTEXT NOT NULL,
+  `user_id` INTEGER NOT NULL,
+  `business_id` INTEGER NOT NULL,
+  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
@@ -53,6 +53,13 @@ CREATE TABLE `friends` (
   PRIMARY KEY (`id`)
 );
 
+DROP TABLE IF EXISTS `searches`;
+        
+CREATE TABLE `searches` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` MEDIUMTEXT NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
 INSERT INTO businesses (name) VALUE ("Tu Lan");
 INSERT INTO businesses (name) VALUE ("Chipotle");
