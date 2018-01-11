@@ -13,10 +13,7 @@ before_script:
   - npm run build:database
   - npm start
 script:
-  - node ./server/index.js
-  - npm run react-test
-  - npm run server-test
-  - npm run database-test
+  - npm run build:server & npm run react-test & npm run server-test & npm run database-test
 # script: npm start & node ./server/index.js & npm test
 
 notifications:
