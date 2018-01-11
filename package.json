@@ -13,7 +13,7 @@
     "react-test": "jest",
     "build:client": "webpack --config ./webpack.config.js/",
     "start": "webpack --config ./webpack.config.js/",
-    "test": "jest && mocha database/spec/database-spec.js --compilers js:babel-core/register && mocha server/spec/server-spec.js --compilers js:babel-core/register --exit"
+    "test": "jest && mocha database/spec/database-spec.js --compilers js:babel-core/register --exit && mocha server/spec/server-spec.js --compilers js:babel-core/register --exit"
   },
   "repository": {
     "type": "git",
