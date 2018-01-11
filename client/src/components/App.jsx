@@ -76,7 +76,7 @@ class App extends React.Component {
           </Link> : 'YALP' }
         </div>
         <Switch>
-          <Route path="/listings" render={ () => <div id="form"><BusinessList getBusinesses={this.getBusinesses.bind(this)}/></div> } />
+          <Route path="/listings" render={ () => <div id="listings"><BusinessList getBusinesses={this.getBusinesses.bind(this)}/></div> } />
           <Route exact path="/" render={ () => <div id="form-background"><div id="form"><Home /></div></div> }/>
           <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search getBusinesses={this.getBusinesses.bind(this)}/></div></div> }/>
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
