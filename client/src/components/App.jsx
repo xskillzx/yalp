@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,11 +11,23 @@ class App extends React.Component {
   }
 
   createUser(userData) {
-    console.log(userData);
+    axios.post('/signup', userData)
+      .then(resp => {
+        console.log(resp);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   loginUser(userData) {
-    console.log(userData);
+    axios.post('/login', userData)
+      .then(resp => {
+        console.log(resp);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
