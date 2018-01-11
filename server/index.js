@@ -1,10 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-
-app.get('/', (req, res) => {
-  res.status(200).json('ok');
-});
+const db = require('../database/index.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,14 +9,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // serve static asset...
 app.use(express.static(__dirname + '/../client/dist'));
 
-// when user login, username, password
-app.get('/users/:username', (req, res) => {
-  res.status(200).json('ok');
+app.post('/login', (req, res) => {
+  db.getUserByUsername(req.body, (err, results) => {
+    if (err) {
+      res.status(400);
+      res.end('Invalid User.');
+    } else {
+      res.status(201).json(results);
+    }
+  });
 });
 
-// when user create
-app.post('/users', (req, res) => {
-  res.status(201).json('ok');
+app.post('/signup', (req, res) => {
+  db.postUser(req.body, (err, results) => {
+    if (err) {
+      res.status(400);
+      res.end('Failed to Create User.');
+    } else {
+      res.status(201).json(results);
+    }
+  });
 });
 
 // when user search
@@ -37,9 +46,10 @@ app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
 });
 
-const server = app.listen(3000, () => {
-  const port = server.address().port;
-  console.log(`Listening at port ${port}`);
+app.listen(3000, () => {
+  console.log(`Listening at port 3000`);
 });
 
-module.exports = server;
+// server();
+// const port = server.address().port;
+// module.exports = server;

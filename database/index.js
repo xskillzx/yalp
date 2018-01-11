@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    pw: '',
+    password: 'root',
     database: 'yalp'
 })
 
@@ -21,25 +21,24 @@ const getUser = function (user, cb) {
 }
 
 const postUser = function (user, cb) {
-    //name, email, password, username
     let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?)`
 
-    connection.query(query, [user.name, user.email, user.password, user.username], (err) => {
+    connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
         if (err) {
-            cb(err);
+            cb(err, null);
         } else {
-            cb(null);
+            cb(null, results);
         }
+        return;
     })
 }
 
 //get user by id
 
-const getUserById = function (id, cb) {
+const getUserByUsername = function (user, cb) {
+    let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?`
 
-    let query = `SELECT users.name FROM users WHERE users.id = ${id}`
-
-    connection.query(query, (err, results) => {
+    connection.query(query, [user.username, user.password], (err, results) => {
         if (err) {
             cb(err)
         } else {
@@ -104,6 +103,6 @@ module.exports = {
     connection,
     getUser,
     postUser,
-    getUserById,
+    getUserByUsername,
     getBusinessById
 }
