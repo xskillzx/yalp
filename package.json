@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Hack Reactor Greenfield - Group 6 - YALP",
   "main": "index.js",
+  "engines": {
+    "node": ">=6.11.5",
+    "npm": ">=3.10.10"
+  }
   "scripts": {
     "start": "npm run build:server",
     "react-dev": "webpack -d --watch",
