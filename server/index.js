@@ -54,7 +54,7 @@ app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
 });
 
-const server = app.listen(3000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   var port = server.address().port;
   console.log('Listening at port %s', port);
 });
