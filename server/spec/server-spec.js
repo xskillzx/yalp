@@ -17,6 +17,10 @@ describe('loading express', function() {
     request(server)
       .post('/login')
       .set('Accept', 'application/json')
+      .send({
+        username: 'connorchen',
+        password: 'connorchen'
+      })
       .expect(201)
       .then(resp => {
         expect(resp.body).to.eql([]);
