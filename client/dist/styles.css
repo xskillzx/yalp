@@ -27,7 +27,8 @@ body {
 }
 #form input {
   width: 80%;
-  width: 100%;
+  width: 80%;
+  display: inline;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -37,15 +38,18 @@ input[type=submit] {
   background-color: #f00;
   color: #fff;
   border: none;
+  display: inline;
 }
 button {
-  display: block;
-  margin: 8px 0;
+  margin: 8px 8px;
   padding: 12px 20px;
   background-color: red;
   color: #fff;
   font-size: 20px;
   border: none;
+}
+button[type=Search] {
+  display: inline;
 }
 .logoLink {
   text-decoration: none;
@@ -78,4 +82,14 @@ button {
 }
 .logo {
   width: 2.5%;
+}
+
+.businessInfo {
+  margin: 0;
+  width: 30%;
+  height: 40%;
+  border: 3px solid red;
+}
+.businessPage {
+  margin: 0 100px;
 }
