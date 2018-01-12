@@ -75,28 +75,24 @@ class App extends React.Component {
       });
   }
 
-  updateBusiness(business) {
-    getBusinessInfo(business.id)
+  updateBusiness(e, business) {
+    e.preventDefault()
+    this.getBusinessInfo(business.id)
     // this.setState({business: business})
     // console.log(business);
   }
 
-  // getBusinessInfo(businessId) {
-  //   console.log('gettingInfo');
-  //   let self = this;
-  //   axios.get(`/server/business/${businessId}`, {
-  //     params: {
-  //       Authorization: `Bearer ${config.YELP_API_KEY}`
-  //     }
-  //   })
-  //     .then(resp => {
-  //       console.log(resp)
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
+  getBusinessInfo(businessId) {
+    console.log('gettingInfo');
+    let self = this;
+    axios.get(`/server/business/${businessId}`)
+      .then(resp => {
+        console.log(resp)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (

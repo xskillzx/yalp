@@ -12,7 +12,7 @@ class BusinessList extends React.Component {
     console.log(this.props.businesses.data.businesses)
     return (
       this.props.businesses.data.businesses.map(business => 
-        <Link key={business.id} to={`/business/${business.id}`} onClick={(e) => this.props.updateBusiness(business)} style={{ textDecoration: 'none' }}>
+        <Link key={business.id} to={`/business/${business.id}`} onClick={(e) => this.props.updateBusiness(e, business)} style={{ textDecoration: 'none' }}>
         <BusinessEntry business={business} key={business.id} />
         </Link> 
       )
