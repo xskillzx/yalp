@@ -83,13 +83,13 @@ button[type=Search] {
 .logo {
   width: 2.5%;
 }
-
+.businessPage {
+  margin: 5%;
+  background: white;
+}
 .businessInfo {
   margin: 0;
   width: 30%;
   height: 40%;
   border: 3px solid red;
-}
-.businessPage {
-  margin: 0 100px;
 }

@@ -5,28 +5,31 @@ import BusinessInfo from './BusinessInfo.jsx';
 import PhotoFeed from './PhotoFeed.jsx';
 import Reviews from './Reviews.jsx';
 
-//props.business = business obj
 class BusinessPage extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  getInfo() {
+    this.props.getBusinessInfo();
   }
 
   render() {
     return (
       <div className="businessPage">
         <div id="form">
-            <Search />
+            <Search getBusinesses={this.props.getBusinesses}/>
         </div>
         <div className="businessInfo">
-            <BusinessInfo business={this.props.business}/>
+            <BusinessInfo /> 
         </div>
         <div className="PhotoFeed">
           <PhotoFeed />
         </div>
         <div className="reviews">
-          <Reviews />
-        </div>
-        <div>
+          <Reviews />  
+        </div> 
+        <div> 
         </div>
       </div>
     )
