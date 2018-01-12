@@ -113,27 +113,8 @@ it('postUser adds a new user to our user table', function (done) {
     })
 })
 
-<<<<<<< HEAD
 it('should retrieve a business from the database using its id number', function (done) {
 
-=======
-it('should retrieve a user from the database using his or her id number', function (done) {
-    
-    let userID = 1;
-
-    db.getUserById(userID, (error, result) => {
-        if (error) {
-            done(error);
-            return;
-        }
-        expect(result[0].hasOwnProperty('name')).to.equal(true);
-        done();
-    })
-})
-
-it('should retrieve a business from the database using its id number', function (done) {
-    
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
     let businessID = 1;
 
     db.getBusinessById(businessID, (error, result) => {

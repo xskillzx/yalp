@@ -62,7 +62,6 @@ const getBusinessById = function (id, cb) {
     })
 }
 
-<<<<<<< HEAD
 const getFriendsReviews = function (userID, cb) {
 
     let query = `SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id`;
@@ -97,14 +96,6 @@ const tempSearch = function (search, cb) {
     let query = `SELECT * FROM businesses`
 
     connection.query(query, (err, results) => {
-=======
-//temp function for searches, using mock data
-
-const tempSearch = function (search, cb) {
-  let query = `SELECT * FROM businesses`
-
-      connection.query(query, (err, results) => {
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
         console.log(results)
         if (err) {
             cb(err)
@@ -127,26 +118,16 @@ const tempSearch = function (search, cb) {
 
 //Users
 
-<<<<<<< HEAD
 // INSERT INTO users (name, email, password, username) VALUES ("Chris", "Chris@Chris.com", "Chris", "ChrisChris");
 // INSERT INTO users (name, email, password, username) VALUES ("Kayleigh", "Kayleigh@Kayleigh.com", "Kayleigh", "Kayleigh");
 // INSERT INTO users (name, email, password, username) VALUES ("Connor", "Connor@Connor.com", "Connor", "Connor");
 // INSERT INTO users (name, email, password, username) VALUES ("Peter", "Peter@Peter.com", "Peter", "PeterPeterPumpkinEater");
 // INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
 // INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
-=======
-//INSERT INTO users (name, email, password, username) VALUES ("Chris", "Chris@Chris.com", "Chris", "ChrisChris");
-//INSERT INTO users (name, email, password, username) VALUES ("Kayleigh", "Kayleigh@Kayleigh.com", "Kayleigh", "Kayleigh");
-//INSERT INTO users (name, email, password, username) VALUES ("Connor", "Connor@Connor.com", "Connor", "Connor");
-//INSERT INTO users (name, email, password, username) VALUES ("Peter", "Peter@Peter.com", "Peter", "PeterPeterPumpkinEater");
-//INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
-//INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
 
 //Reviews 
 //user_id, business_id, text
 
-<<<<<<< HEAD
 // INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
 // INSERT INTO reviews (user_id, business_id, text) VALUES (2, 2, "this place sucks ass");
 // INSERT INTO reviews (user_id, business_id, text) VALUES (3, 3, "this place could use better service");
@@ -179,20 +160,6 @@ const tempSearch = function (search, cb) {
 // INSERT INTO checkins (user_id1, user_id2) VALUES (5, 6);
 
 
-=======
-//INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
-//INSERT INTO reviews (user_id, business_id, text) VALUES (2, 2, "this place sucks ass");
-//INSERT INTO reviews (user_id, business_id, text) VALUES (3, 3, "this place could use better service");
-//INSERT INTO reviews (user_id, business_id, text) VALUES (4, 4, "this place is pretty mediocre");
-
-//CheckIns
-
-//INSERT INTO checkins (user_id, business_id) VALUES (1, 1);
-//INSERT INTO checkins (user_id, business_id) VALUES (2, 2);
-//INSERT INTO checkins (user_id, business_id) VALUES (3, 3);
-//INSERT INTO checkins (user_id, business_id) VALUES (4, 4);
-//INSERT INTO checkins (user_id, business_id) VALUES (5, 5);
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
 
 //TEST FUNCTION CALLS
 
@@ -237,11 +204,7 @@ module.exports = {
     postUser,
     getUserByUsername,
     getBusinessById,
-<<<<<<< HEAD
     tempSearch,
     getStrangersReviews,
     getFriendsReviews
-=======
-    tempSearch
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
 }

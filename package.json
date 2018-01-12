@@ -8,25 +8,12 @@
     "npm": ">=3.10.10"
   },
   "scripts": {
-<<<<<<< HEAD
     "postinstall": "webpack --config ./webpack.config.js/",
     "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "build:database": "mysql -u root < schema.sql",
     "test": "jest && mocha --exit"
-=======
-    "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js",
-    "build:database": "mysql -u root < schema.sql",
-    "database-test": "mocha database/spec/database-spec.js --compilers js:babel-core/register --exit",
-    "build:server": "node ./server/index.js",
-    "server-test": "mocha server/spec/server-spec.js --compilers js:babel-core/register --exit",
-    "react-test": "jest",
-    "build:client": "webpack --config ./webpack.config.js/",
-    "start": "webpack --config ./webpack.config.js/",
-    "test": "jest && mocha database/spec/database-spec.js --compilers js:babel-core/register --exit && mocha server/spec/server-spec.js --compilers js:babel-core/register --exit"
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
   },
   "repository": {
     "type": "git",
@@ -68,13 +55,8 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-<<<<<<< HEAD
     "file-loader": "^1.1.6",
     "jest": "^22.0.5",
-=======
-    "jest": "^22.0.5",
-    "react-test-renderer": "^16.2.0",
->>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
     "mocha": "^4.1.0",
     "react-test-renderer": "^16.2.0",
     "supertest": "^3.0.0"
