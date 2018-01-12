@@ -14,7 +14,7 @@ class BusinessPage extends React.Component {
   render() {
     return (
       <div className="businessPage">
-        <div>
+        <div id="form">
             <Search />
         </div>
         <div className="businessInfo">
@@ -27,11 +27,6 @@ class BusinessPage extends React.Component {
           <Reviews />  
         </div> 
         <div> 
-          <div id="form">
-            <Switch>
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </div>
         </div>
       </div>
     )

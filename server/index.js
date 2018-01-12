@@ -45,7 +45,7 @@ let fakeData = {
       "transactions": ["pickup", "delivery"]
     },
     {
-      "rating": 3,
+      "rating": 10,
       "price": "$$",
       "phone": "+1111111111",
       "id": "P-L-U-U",
