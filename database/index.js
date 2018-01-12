@@ -1,11 +1,22 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'yalp'
-})
+let connection;
+
+if (process.env.JAWSDB_URL) {
+    connection = mysql.createConnection({
+        host: 'lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        user: 'ybr7ph732nxw8g1g',
+        password: 'cmk1cc2z3q81thtz',
+        database: 'e36d84um3m6uotkz'
+    })
+} else {
+    connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'yalp'
+    })
+}
 
 const getUser = function (user, cb) {
     //user obj contain username & pw for authentication
