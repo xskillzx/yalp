@@ -59,6 +59,10 @@ class App extends React.Component {
       });
   }
 
+  logoutUser() {
+    this.setState({loggedIn: false})
+  }
+
   getBusinesses(search) {
     let self = this;
     console.log(search)
@@ -100,10 +104,15 @@ class App extends React.Component {
       <div>
         <div id="topnav">
           {this.state.loggedIn ? 
-            <Link to="/search" className="logoLink">
-              <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
-              YALP!
-            </Link> : 
+            <div>
+              <Link to="/search" className="logoLink">
+                <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
+                YALP!
+              </Link>
+              <Link to="/" className="logout">
+                <div onClick={this.logoutUser.bind(this)}>Log Out</div>
+              </Link>
+            </div> : 
             <div>
               <img className="logo" src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
               YALP!
