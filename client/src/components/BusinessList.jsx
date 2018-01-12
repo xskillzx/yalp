@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
-import Search from './Search.jsx';
+import BusinessEntry from './BusinessEntry.jsx';
 
 class BusinessList extends React.Component {
   constructor(props) {
@@ -9,10 +8,9 @@ class BusinessList extends React.Component {
   }
 
   render() {
+    console.log(this.props.businesses.data.businesses)
     return (
-      <div id="businessEntry">
-        <h1>BUSINESSES</h1>
-      </div>
+      this.props.businesses.data.businesses.map(business => <BusinessEntry business={business} key={business.id} /> )
     )
   }
 }
