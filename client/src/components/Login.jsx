@@ -28,8 +28,13 @@ class Login extends React.Component {
           </button>
         </Link>
         <form onSubmit={ this.getFormData.bind(this) }>
+<<<<<<< HEAD
           <input ref="username" id="username" type="text" placeholder="Username" />
           <input ref="password" id="password" type="password" placeholder="Password" />
+=======
+          <p>Username: <input ref="username" id="username" type="text" /></p>
+          <p>Password: <input ref="password" id="password" type="password" /></p>
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
           <input type="submit" value="Log In" />
         </form>
       </div>
@@ -38,4 +43,8 @@ class Login extends React.Component {
 }
 
 
+<<<<<<< HEAD
 export default Login;
+=======
+export default Login;
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2

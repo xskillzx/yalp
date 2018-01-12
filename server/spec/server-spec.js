@@ -13,9 +13,25 @@ describe('loading express', function() {
     server.close();
   });
 
+<<<<<<< HEAD:server/spec/server-spec.js
   it('should respond to POST /login', function() {
     request(server)
       .post('/login')
+=======
+  // it('should respond to GET /', function() {
+  //   return request(server)
+  //     .get('/')
+  //     .set('Accept', 'application/json')
+  //     .expect(200)
+  //     .then(resp => {
+  //       expect(resp.body).to.equal('ok');
+  //     });
+  // });
+
+  it('should respond to GET /users', function() {
+    return request(server)
+      .get('/users/username')
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2:server/spec/server-spec.js
       .set('Accept', 'application/json')
       .send({
         username: 'connorchen',

@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // serve static asset...
 app.use(express.static(__dirname + '/../client/dist'));
 
+<<<<<<< HEAD
 let fakeData = {
   "total": 8228,
   "businesses": [
@@ -118,6 +119,9 @@ let fakeData = {
 }
 
 app.post('/serverlogin', (req, res) => {
+=======
+app.post('/login', (req, res) => {
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
   db.getUserByUsername(req.body, (err, results) => {
     if (err) {
       res.status(400);
@@ -128,7 +132,11 @@ app.post('/serverlogin', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 app.post('/serversignup', (req, res) => {
+=======
+app.post('/signup', (req, res) => {
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
   db.postUser(req.body, (err, results) => {
     if (err) {
       res.status(400);
@@ -140,14 +148,24 @@ app.post('/serversignup', (req, res) => {
 });
 
 // when user search
+<<<<<<< HEAD
 app.get('/serversearch', (req, res) => {
   db.tempSearch(req.body, (err, results) => {
+=======
+app.get('/search', (req, res) => {
+  db.tempSearch(req.body, (err, results) => {
+    console.log(results)
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
     if (err) {
       res.status(400);
       res.end('Failed to Search.');
     } else {
+<<<<<<< HEAD
       //using fake data object mirroring API
       res.status(201).json(fakeData);
+=======
+      res.status(201).json(results);
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
     }
   })
 });
@@ -162,9 +180,19 @@ app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
 });
 
+<<<<<<< HEAD
 const server = app.listen(process.env.PORT || 3000, () => {
   var port = server.address().port;
   console.log('Listening at port %s', port);
 });
 
 module.exports = server;
+=======
+app.listen(3000, () => {
+  console.log(`Listening at port 3000`);
+});
+
+// server();
+// const port = server.address().port;
+// module.exports = server;
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2

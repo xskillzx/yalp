@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { browserHistory, withRouter , Redirect, Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Home from './Home.jsx';
@@ -7,10 +8,18 @@ import Signup from './Signup.jsx';
 import Search from './Search.jsx';
 import BusinessList from './BusinessList.jsx';
 import BusinessPage from './BusinessPage.jsx';
+=======
+import { Switch, Route } from 'react-router-dom';
+import Home from './Home.jsx';
+import Login from './Login.jsx';
+import Signup from './Signup.jsx';
+import axios from 'axios';
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
 
 class App extends React.Component {
   constructor(props) {
     super(props)
+<<<<<<< HEAD
     this.state = {
       username: '',
       password: '',
@@ -31,6 +40,14 @@ class App extends React.Component {
           password: userData.password
         }
         this.loginUser(loginData);
+=======
+  }
+
+  createUser(userData) {
+    axios.post('/signup', userData)
+      .then(resp => {
+        console.log(resp);
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
       })
       .catch(err => {
         console.log(err);
@@ -38,6 +55,7 @@ class App extends React.Component {
   }
 
   loginUser(userData) {
+<<<<<<< HEAD
     let self = this;
     axios.post('/serverlogin', userData)
       .then(resp => {
@@ -64,12 +82,18 @@ class App extends React.Component {
       .then(resp => {
         self.searchResults = resp;
         self.props.history.push('/listings');
+=======
+    axios.post('/login', userData)
+      .then(resp => {
+        console.log(resp);
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
       })
       .catch(err => {
         console.log(err);
       });
   }
 
+<<<<<<< HEAD
   updateBusiness(business) {
     this.setState({business: business})
     console.log(business);
@@ -100,8 +124,21 @@ class App extends React.Component {
           <Route path={`/business/${this.state.business.id}`} render={ () => <BusinessPage business={this.state.business}/> } />
         </Switch>
     </div>
+=======
+  render() {
+    return (
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" render={ () => <Login loginUser={this.loginUser.bind(this)} /> } />
+        <Route path="/signup" render={ () => <Signup createUser={this.createUser.bind(this)} /> } />
+      </Switch>
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
     )
   }
 }
 
+<<<<<<< HEAD
 export default withRouter(App);
+=======
+export default App;
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2

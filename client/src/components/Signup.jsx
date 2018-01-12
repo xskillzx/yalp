@@ -35,10 +35,17 @@ class Signup extends React.Component {
           </button>
         </Link>
         <form onSubmit={ this.getFormData.bind(this) } >
+<<<<<<< HEAD
           <input ref="name" className="name" type="text" placeholder="Name" />
           <input ref="email" className="email" type="text" placeholder="E-mail" />
           <input ref="username" className="username" type="text" placeholder="Username" />
           <input ref="password" className="password" type="password" placeholder="Password" />
+=======
+          <p>Name: <input ref="name" className="name" type="text" /></p>
+          <p>E-mail: <input ref="email" className="email" type="text" /></p>
+          <p>Username: <input ref="username" className="username" type="text" /></p>
+          <p>Password: <input ref="password" className="password" type="password" /></p>
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
           <input className='submitCreateForm' type="submit" value="Create Account" />
         </form>
       </div>
@@ -47,4 +54,8 @@ class Signup extends React.Component {
 }
 
 
+<<<<<<< HEAD
 export default Signup;
+=======
+export default Signup;
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2

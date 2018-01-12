@@ -7,7 +7,11 @@ class Search extends React.Component {
     super(props);
   }
 
+<<<<<<< HEAD
   render() { 
+=======
+  render() {
+>>>>>>> d5b87b84fbfab645b869c05ed01548cf21d592d2
     return (
       <div>
         <input ref="searchTerm" type="text" size="30" placeholder="What's nearby?" />
