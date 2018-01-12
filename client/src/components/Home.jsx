@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link, Route } from 'react-router-dom';
-import Signup from './Signup.jsx';
+import { Link } from 'react-router-dom';
+import Search from './Search.jsx';
+import axios from 'axios';
 
 class Home extends React.Component {
   constructor(props) {
@@ -11,17 +12,14 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1> Welcome to Yalp! </h1>
-        Username: <input id="username" type="text" /><br />
-        Password: <input id="password" type="password" /><br />
         <Link to="/login">
-          <button type="Login">
-            Login
+          <button type="Login" id="login-btn">
+            Log In
           </button>
         </Link>
         <Link to="/signup">
-          <button type="Signup">
-            Signup
+          <button type="Signup" id="signup-btn">
+            Sign Up
           </button>
         </Link>
       </div>

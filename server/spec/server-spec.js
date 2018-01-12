@@ -13,38 +13,38 @@ describe('loading express', function() {
     server.close();
   });
 
-  it('should respond to GET /', function() {
-    return request(server)
-      .get('/')
+  it('should respond to POST /login', function() {
+    request(server)
+      .post('/login')
       .set('Accept', 'application/json')
-      .expect(200)
-      .then(resp => {
-        expect(resp.body).to.equal('ok');
-      });
-  });
-
-  it('should respond to GET /users', function() {
-    return request(server)
-      .get('/users/username')
-      .set('Accept', 'application/json')
-      .expect(200)
-      .then(resp => {
-        expect(resp.body).to.equal('ok');
-      });
-  });
-
-  it('should respond to POST /users', function() {
-    return request(server)
-      .post('/users')
-      .set('Accept', 'application/json')
+      .send({
+        username: 'connorchen',
+        password: 'connorchen'
+      })
       .expect(201)
       .then(resp => {
-        expect(resp.body).to.equal('ok');
+        expect(resp.body).to.eql([]);
+      });
+  });
+
+  it('should respond to POST /signup', function() {
+    request(server)
+      .post('/signup')
+      .set('Accept', 'application/json')
+      .send({
+        name: 'abc',
+        username: 'abc',
+        password: 'abc',
+        email: 'abc'
+      })
+      .expect(201)
+      .then(resp => {
+        expect(resp.body.affectedRows).to.equal(1);
       });
   });
 
   it('should respond to POST /businesses/search', function() {
-    return request(server)
+    request(server)
       .post('/businesses/search')
       .set('Accept', 'application/json')
       .expect(201)
@@ -54,7 +54,7 @@ describe('loading express', function() {
   });
 
   it('should respond to GET /businesses/id', function() {
-    return request(server)
+    request(server)
       .get('/businesses/id')
       .set('Accept', 'application/json')
       .expect(200)
@@ -64,7 +64,7 @@ describe('loading express', function() {
   });
 
   it('should respond to GET /profiles/id', function() {
-    return request(server)
+    request(server)
       .get('/profiles/id')
       .set('Accept', 'application/json')
       .expect(200)
