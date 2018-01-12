@@ -7,6 +7,7 @@ import Signup from './Signup.jsx';
 import Search from './Search.jsx';
 import BusinessList from './BusinessList.jsx';
 import BusinessPage from './BusinessPage.jsx';
+import config from '../../../config.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -60,7 +61,8 @@ class App extends React.Component {
 
   getBusinesses(search) {
     let self = this;
-    axios.get('/server/search')
+    console.log(search)
+    axios.get(`/server/search/${search}`)
       .then(resp => {
         self.searchResults = resp;
         self.props.history.push('/listings');
@@ -79,7 +81,11 @@ class App extends React.Component {
   getBusinessInfo(businessId) {
     console.log('gettingInfo');
     let self = this;
-    axios.get(`/server/business/${businessId}`)
+    axios.get(`/server/business/${businessId}`, {
+      params: {
+        Authorization: `Bearer ${config.YELP_API_KEY}`
+      }
+    })
       .then(resp => {
         console.log(resp)
       })

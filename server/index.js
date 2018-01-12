@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const db = require('../database/index.js');
 const api = require('../client/helper/yelpHelpers.js')
+const config = require('../config.js')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,20 +34,26 @@ app.post('/server/signup', (req, res) => {
 });
 
 // when user search
-app.get('/server/search', (req, res) => {
-  // api.searchBusinesses(req.body, data => {
-  //   res.end(data)
-  // })
-  // use below for test
-  db.tempSearch(req.body, (err, results) => {
+app.get('/server/search/:query', (req, res) => {
+  console.log(req.params.query)
+  api.searchBusinesses(req.params.query, (err, results) => {
     if (err) {
       res.status(400);
       res.end('Failed to Search.');
     } else {
-      //using fake data object mirroring API
-      res.status(201).json(api.fakeData);
+      res.status(201).json(results);
     }
   })
+  // use below for test
+  // db.tempSearch(req.body, (err, results) => {
+  //   if (err) {
+  //     res.status(400);
+  //     res.end('Failed to Search.');
+  //   } else {
+  //     //using fake data object mirroring API
+  //     res.status(201).json(api.fakeData);
+  //   }
+  // })
 });
 
 // when user clicks on a business
