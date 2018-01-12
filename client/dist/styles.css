@@ -101,3 +101,9 @@ a {
   margin: 5%;
   background: white;
 }
+.businessInfo {
+  margin: 0;
+  width: 30%;
+  height: 40%;
+  border: 3px solid red;
+}

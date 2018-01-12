@@ -58,6 +58,7 @@ class App extends React.Component {
         console.log(err);
       });
   }
+
   logoutUser() {
     this.setState({loggedIn: false})
   }
