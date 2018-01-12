@@ -1,4 +1,5 @@
-import axios from 'axios';
+const axios = require('axios');
+const config = require('../../config.js); 
 /**
  * two functions
  * 
@@ -10,16 +11,24 @@ import axios from 'axios';
  */
 
  const getBusiness = (business, cb) => {
-   axios.get(`https://api.yelp.com/v3/businesses/${business}`)
-   .then(response => cb(response))
-   .catch(error => console.log('error:', error))
- }
+    axios.get(`https://api.yelp.com/v3/businesses/${business}`, {
+        params: {
+            Authorization: `Bearer ${config.YELP_API_KEY}`
+        }
+    })
+        .then(response => cb(response))
+        .catch(error => console.log('error:', error))
+}
 
- const searchBusinesses = (query, cb) => {
-     axios.get(`https://api.yelp.com/v3/businesses/search?term=${query}`)
-     .then(response => cb(response))
-     .catch(error => console.log('error:', error))
- }
+const searchBusinesses = (query, cb) => {
+    axios.get(`https://api.yelp.com/v3/businesses/search?term=${query}`, {
+        params: {
+            Authorization: `Bearer ${config.YELP_API_KEY}`
+        }
+    })
+        .then(response => cb(response))
+        .catch(error => console.log('error:', error))
+}
 
 module.exports = {
     getBusiness,
