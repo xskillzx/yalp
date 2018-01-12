@@ -4,7 +4,6 @@ body {
   background-size: 100%;
   background-repeat: no-repeat;
   font-size: 24px;
-  color: white;
 }
 #topnav {
   background-color: #FF0000;
@@ -51,4 +50,29 @@ button {
 .logoLink {
   text-decoration: none;
   color: white;
+}
+.businessEntry {
+  background: white;
+  margin: 20px;
+  width: 80%;
+  border: solid 1px black;
+  border-radius: 4px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  overflow: auto;
+}
+.address {
+  margin-right: 15px;
+  margin-left: auto;
+  margin-top: 6px;
+}
+.address span {
+  font-size: 16px
+}
+.businessLogo {
+  margin: 10px;
+}
+.rating {
+  margin: 3px;
 }

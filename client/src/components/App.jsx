@@ -15,11 +15,12 @@ class App extends React.Component {
       password: '',
       loggedIn: false
     }
+    this.searchResults = {};
   }
 
   createUser(userData) {
     let self = this;
-    axios.post('/signup', userData)
+    axios.post('/serversignup', userData)
       .then(resp => {
         console.log(resp);
         let loginData = {
@@ -35,7 +36,7 @@ class App extends React.Component {
 
   loginUser(userData) {
     let self = this;
-    axios.post('/login', userData)
+    axios.post('/serverlogin', userData)
       .then(resp => {
         if (resp.data.length) {
           console.log('Rendering..')
@@ -56,9 +57,9 @@ class App extends React.Component {
 
   getBusinesses(search) {
     let self = this;
-    axios.get('/search')
+    axios.get('/serversearch')
       .then(resp => {
-        console.log(resp);
+        self.searchResults = resp;
         self.props.history.push('/listings');
       })
       .catch(err => {
@@ -76,7 +77,7 @@ class App extends React.Component {
           </Link> : 'YALP' }
         </div>
         <Switch>
-          <Route path="/listings" render={ () => <div id="listings"><BusinessList getBusinesses={this.getBusinesses.bind(this)}/></div> } />
+          <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults }/></div> } />
           <Route exact path="/" render={ () => <div id="form-background"><div id="form"><Home /></div></div> }/>
           <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search getBusinesses={this.getBusinesses.bind(this)}/></div></div> }/>
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
