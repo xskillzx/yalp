@@ -6,6 +6,7 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import Search from './Search.jsx';
 import BusinessList from './BusinessList.jsx';
+import BusinessPage from './BusinessPage.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,8 +14,10 @@ class App extends React.Component {
     this.state = {
       username: '',
       password: '',
-      loggedIn: false
+      loggedIn: false,
+      business: {}
     }
+    this.business = {};
     this.searchResults = {};
   }
 
@@ -67,21 +70,34 @@ class App extends React.Component {
       });
   }
 
+  updateBusiness(business) {
+    this.setState({business: business})
+    console.log(business);
+  }
+
 
   render() {
     return (
       <div>
         <div id="topnav">
-          {this.state.loggedIn ? <Link to="/search" className="logoLink">
-            YALP
-          </Link> : 'YALP' }
+          {this.state.loggedIn ? 
+            <Link to="/search" className="logoLink">
+              <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
+              YALP!
+            </Link> : 
+            <div>
+              <img className="logo" src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
+              YALP!
+            </div> 
+          }
         </div>
         <Switch>
-          <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults }/></div> } />
           <Route exact path="/" render={ () => <div id="form-background"><div id="form"><Home /></div></div> }/>
           <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search getBusinesses={this.getBusinesses.bind(this)}/></div></div> }/>
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
+          <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} /></div> } />
+          <Route path={`/business/${this.state.business.id}`} render={ () => <BusinessPage business={this.state.business}/> } />
         </Switch>
     </div>
     )
