@@ -113,3 +113,30 @@ a {
   border: 3px solid red;
   font-size: 18px;
 }
+
+.addReview {
+  background-color: lightblue;
+  padding: 20px;
+  width: 60%
+}
+.rate-btn {
+  height: 30px;
+  padding: 4px;
+  margin: 0;
+  border: 1px solid white;
+}
+#review-text {
+  width: 90%;
+  height: 75px;
+  border: none;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.review-submit {
+  margin: 0;
+  height: 30px;
+  padding: 4px;
+  font-size: 12px;
+  display: block;
+  border: 1px solid white;
+}
