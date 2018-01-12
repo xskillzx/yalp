@@ -7,6 +7,7 @@ import Signup from './Signup.jsx';
 import Search from './Search.jsx';
 import BusinessList from './BusinessList.jsx';
 import BusinessPage from './BusinessPage.jsx';
+import config from '../../../config.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends React.Component {
 
   createUser(userData) {
     let self = this;
-    axios.post('/serversignup', userData)
+    axios.post('/server/signup', userData)
       .then(resp => {
         console.log(resp);
         let loginData = {
@@ -39,7 +40,7 @@ class App extends React.Component {
 
   loginUser(userData) {
     let self = this;
-    axios.post('/serverlogin', userData)
+    axios.post('/server/login', userData)
       .then(resp => {
         if (resp.data.length) {
           console.log('Rendering..')
@@ -57,10 +58,14 @@ class App extends React.Component {
         console.log(err);
       });
   }
+  logoutUser() {
+    this.setState({loggedIn: false})
+  }
 
   getBusinesses(search) {
     let self = this;
-    axios.get('/serversearch')
+    console.log(search)
+    axios.get(`/server/search/${search}`)
       .then(resp => {
         self.searchResults = resp;
         self.props.history.push('/listings');
@@ -71,8 +76,25 @@ class App extends React.Component {
   }
 
   updateBusiness(business) {
-    this.setState({business: business})
-    console.log(business);
+    getBusinessInfo(business.id)
+    // this.setState({business: business})
+    // console.log(business);
+  }
+
+  getBusinessInfo(businessId) {
+    console.log('gettingInfo');
+    let self = this;
+    axios.get(`/server/business/${businessId}`, {
+      params: {
+        Authorization: `Bearer ${config.YELP_API_KEY}`
+      }
+    })
+      .then(resp => {
+        console.log(resp)
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
 
@@ -81,10 +103,15 @@ class App extends React.Component {
       <div>
         <div id="topnav">
           {this.state.loggedIn ? 
-            <Link to="/search" className="logoLink">
-              <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
-              YALP!
-            </Link> : 
+            <div>
+              <Link to="/search" className="logoLink">
+                <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
+                YALP!
+              </Link>
+              <Link to="/" className="logout">
+                <div onClick={this.logoutUser.bind(this)}>Log Out</div>
+              </Link>
+            </div> : 
             <div>
               <img className="logo" src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
               YALP!
@@ -97,7 +124,7 @@ class App extends React.Component {
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} /></div> } />
-          <Route path={`/business/${this.state.business.id}`} render={ () => <BusinessPage business={this.state.business}/> } />
+          <Route path={`/business/${this.state.business.id}`} render={ () => <BusinessPage business={this.state.business} getBusinessInfo={this.getBusinessInfo.bind(this)} getBusinesses={this.getBusinesses.bind(this)} /> } />
         </Switch>
     </div>
     )

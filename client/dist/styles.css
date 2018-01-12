@@ -27,7 +27,6 @@ body {
 }
 #form input {
   width: 80%;
-  width: 80%;
   display: inline;
   padding: 12px 20px;
   margin: 8px 0;
@@ -38,10 +37,10 @@ input[type=submit] {
   background-color: #f00;
   color: #fff;
   border: none;
-  display: inline;
 }
 button {
-  margin: 8px 8px;
+  display: block;
+  margin: 8px 0;
   padding: 12px 20px;
   background-color: red;
   color: #fff;
@@ -50,10 +49,25 @@ button {
 }
 button[type=Search] {
   display: inline;
+  border: 2px solid red;
+}
+a {
+  text-decoration: none;
 }
 .logoLink {
-  text-decoration: none;
   color: white;
+}
+.logout {
+  float: right;
+}
+.logout div {
+  text-decoration: none;
+  background-color: rgb(243, 209, 77);
+  color: white;
+  display: inline;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px;
 }
 .businessEntry {
   background: white;
@@ -83,13 +97,7 @@ button[type=Search] {
 .logo {
   width: 2.5%;
 }
-
-.businessInfo {
-  margin: 0;
-  width: 30%;
-  height: 40%;
-  border: 3px solid red;
-}
 .businessPage {
-  margin: 0 100px;
+  margin: 5%;
+  background: white;
 }
