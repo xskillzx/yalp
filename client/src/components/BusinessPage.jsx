@@ -5,11 +5,11 @@ import BusinessInfo from './BusinessInfo.jsx';
 import PhotoFeed from './PhotoFeed.jsx';
 import Reviews from './Reviews.jsx';
 
+//props.business = business obj
 class BusinessPage extends React.Component {
   constructor(props) {
     super(props)
   }
-
 
   render() {
     return (
@@ -18,15 +18,15 @@ class BusinessPage extends React.Component {
             <Search />
         </div>
         <div className="businessInfo">
-            <BusinessInfo /> 
+            <BusinessInfo business={this.props.business}/>
         </div>
         <div className="PhotoFeed">
           <PhotoFeed />
         </div>
         <div className="reviews">
-          <Reviews />  
-        </div> 
-        <div> 
+          <Reviews />
+        </div>
+        <div>
         </div>
       </div>
     )
