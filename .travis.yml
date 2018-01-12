@@ -5,13 +5,12 @@ cache:
   directories:
   - node-modules
 services:
-  - mysql
+- mysql
 before_script:
-  - npm run build:database
-  - npm run postinstall
-# Travis CI automatically runs: npm install, npm start, npm test
+- npm run build:database
+- npm run postinstall
 deploy:
   provider: heroku
   api_key:
-    secure: nBVpXXkJcI2UU8Ll0UganmAV+t1TR673TBGlWQotbqj/FfmhbnI5Sa1cZMPyWrPsR4xgLy0zLwkIAFzn/2z/gfxbg/gDt0q3pmgn//yUtWIy6hlL6tN9lvKJl+wMqh8RcEJBd2d+y3kAPBPLWy0BKd7L+GwQQ565UZKllnh+7aDgQ4o9Os8DdTR4OxuV/zxjINh4XC81SfVpNaxV8qHbu3ntYewCJ0dG/rbDEspxTjnTxdpC+EQ3+vqScwbxloSgMSGhPUOBZVJ4N9dShR6+BbZRJKjGqCjtKN+Ellt48VOAixQPVg9Dz7KAPQJ4W+uwulxbshN0Tqv80BVQZLoQU2zEvoScgsAuIhOAyJrmppwVi23r86mOZKIXH3Lv7cDEogNMkFWCcGKDKh9DzWh8zKuYIfxWyo2daCEV+4lm45wWeCngT7OnyGJlsUUBKB2dWmtJjfGWXJrkuhRiVpyHCmam2u4pX2mOHDl+Mt4l5fcgubyqlnBfaW+hRSh48W7NkGSUfCwNLBNLatMGLUaTgrGZvV7ffz1N6g5QpcKGRe1nqNRBF3+i4n+ufXjiK6lQHDcemRzwnRgTUtKQulX5j99lfVY9PrMylyKS51950X4QuJfeheIuO16r131CYZkNTYTH3gb164YHzYcqsP6M9G0D0EcTmTYZ6ua/ELawOpw=
+    secure: eHoM+6aJDOGFk6g/dKS2/SStn3QGfkhJhiOYXzIoM7oErsc81UkaNjgwRjsbiyQiL+KW/rn30hSNSawZOpGlsA0G/fO3ZyqDJ4nO6zV5LleHLk6P25J77tz6jl7JkqppeXR2nJVjejxeZF7PLq2CarYdzTVtH1mKi2ij9XLqtu63mEmH9R9B3SQZHpF5Yy2oOTFjbF8UERmTMSVYpztZJWDm/sXC7q3Bl/WOkXP8xKI4nMubGk8WYMY0Km9N3CLAnQDhKv4tklvPpm546t7G1eE2P+rEJb9OXeQeS0pGMZW/cN+UjE+jELOoG3VcK9Qlhafda1YU+Ohf8GtRh9rDR0z7JS5qrWi+tjSPRqASs1CljnB9m6GiZm/V9hn/2tChys+qAxm6aLCjkqve45MIxVbiyRNf0+b8MAh2YNTUodo2uInDJDZOxq+Ctkk0qGyCyk2PC6Hfs84lNcKLsOcWthE77Lnly8Ct68YTZafudopPrsk1Rb9lUI2qVGK9iKGKlwtPfFpXGYz07chZURC6PSqFS1LXlphadZar+YqMK8BhuL2h/6s1toi9ScUIWdTO30wiw9jLLXiHVDSWXSF6YK6LiWzy24P64FdUQGf01cmmXHunoKtbHNy5G7dADyHo6gsSHYiBsYUSt2x5mh8Rj90U5dlNq3kG/ol4F/70oZo=
   app: yalp
