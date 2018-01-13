@@ -64,7 +64,6 @@ class App extends React.Component {
 
   getBusinesses(search) {
     let self = this;
-    console.log(search)
     axios.get(`/server/search/${search}`)
       .then(resp => {
         self.searchResults = resp;
@@ -75,28 +74,22 @@ class App extends React.Component {
       });
   }
 
-  updateBusiness(business) {
-    getBusinessInfo(business.id)
-    // this.setState({business: business})
-    // console.log(business);
+  updateBusiness(e, business) {
+    e.preventDefault()
+    this.getBusinessInfo(business.reference)
   }
 
-  // getBusinessInfo(businessId) {
-  //   console.log('gettingInfo');
-  //   let self = this;
-  //   axios.get(`/server/business/${businessId}`, {
-  //     params: {
-  //       Authorization: `Bearer ${config.YELP_API_KEY}`
-  //     }
-  //   })
-  //     .then(resp => {
-  //       console.log(resp)
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
+  getBusinessInfo(businessRef) {
+    let self = this;
+    axios.get(`/server/business/${businessRef}`)
+      .then(resp => {
+        this.setState({business: resp.data});
+        this.props.history.push(`/business/${resp.data.name}`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -124,7 +117,7 @@ class App extends React.Component {
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} /></div> } />
-          <Route path={`/business/${this.state.business.id}`} render={ () => <BusinessPage business={this.state.business} getBusinessInfo={this.getBusinessInfo.bind(this)} getBusinesses={this.getBusinesses.bind(this)} /> } />
+          <Route path={`/business/${this.state.business.name}`} render={ () => <BusinessPage business={this.state.business} getBusinessInfo={this.getBusinessInfo.bind(this)} getBusinesses={this.getBusinesses.bind(this)} /> } />
         </Switch>
     </div>
     )
