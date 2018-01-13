@@ -4,41 +4,28 @@ import BusinessInfo from './BusinessInfo.jsx';
 import BusinessMap from './BusinessMap.jsx'
 import PhotoFeed from './PhotoFeed.jsx';
 import Reviews from './Reviews.jsx';
-import config from '../../../config.js'
+import AddReview from './AddReview.jsx';
 
 class BusinessPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      mapData: {}
+      friendReviews: [],
+      nonFriendReviews: []
     }
-  }
-
-  componendDidMount() {
-    getMap(this.props.business.geometry.location);
-  }
-
-  getMap(location, cb) {
-  axios.get(`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
-    &markers=color:blue%7Clabel:S%7C${location.lat}, ${location.lng}
-    &key=${config.GOOGLE_API_KEY}`
-  )
-    .then(response => console.log(response) )
-    .catch(error => console.log('error:', error))
-  }
 
   render() {
     return (
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>
-        <BusinessInfo business={this.props.business}/> 
-        
-        <div onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Check In</div>
+        <BusinessInfo business={this.props.business}/>
+        <div id="businessMap"><BusinessMap business={this.props.business}/></div>
         <PhotoFeed />
+        <div className="addReview">
+          <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
+        </div>
         <div className="reviews">
-          <Reviews />  
-        </div> 
-        <div> 
+          <Reviews username={this.props.username} userId={this.props.userId} />
         </div>
       </div>
     )
