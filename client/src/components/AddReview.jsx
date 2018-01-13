@@ -25,18 +25,22 @@ class AddReview extends React.Component {
   submitReview() {
     this.setState({ reviewed: true }) //rerender comp to thank you
     //add review to db (user, rating, text, business)
-    axios.post('/review', {
-      rating: this.state.rating,
-      text: this.state.text,
-      userID: this.props.userId,
-      businessID: this.props.businessId
-    })
-    .then(function(response) {
-      console.log(response)
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
+    //TODO: check text appropriateness before submitting
+    if (this.state.text.length) {
+      console.log('submitting review')
+      axios.post('/review', {
+        rating: this.state.rating,
+        text: this.state.text,
+        userID: this.props.userId,
+        businessID: this.props.business.id
+      })
+      .then(function(response) {
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+    }
   }
 
   render() {

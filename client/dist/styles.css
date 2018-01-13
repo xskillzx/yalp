@@ -126,7 +126,7 @@ a {
   border: 1px solid white;
   display: inline;
 }
-#review-text {
+.new-review-text {
   width: 90%;
   height: 75px;
   border: none;

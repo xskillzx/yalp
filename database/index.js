@@ -58,7 +58,7 @@ const getUserByUsername = function (user, cb) {
     })
 }
 
-//get business by id 
+//get business by id
 
 const getBusinessById = function (id, cb) {
 
@@ -101,6 +101,23 @@ const getStrangersReviews = function (userID, businessID, cb) {
     })
 }
 
+//submit review
+
+const addNewReview = function(userId, businessId, review, cb) {
+    let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
+    let params = [userId, businessId, review.rating, review.text];
+
+    console.log(params)
+    connection.query(query, params, (err, results) => {
+        if (err) {
+          console.log(err)
+          cb(err)
+        } else {
+          cb(null, results)
+        }
+    })
+}
+
 //temp function for searches, using mock data
 
 const tempSearch = function (search, cb) {
@@ -136,7 +153,7 @@ const tempSearch = function (search, cb) {
 // INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
 // INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
 
-//Reviews 
+//Reviews
 //user_id, business_id, text
 
 // INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
@@ -217,5 +234,6 @@ module.exports = {
     getBusinessById,
     tempSearch,
     getStrangersReviews,
-    getFriendsReviews
+    getFriendsReviews,
+    addNewReview
 }
