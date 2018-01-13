@@ -58,6 +58,18 @@ app.get('/server/business/:reference', (req, res) => {
   // res.status(200).json('ok');
 });
 
+// when user clicks on checkin button on business page
+app.post('/server/profile/checkins', (req, res) => {
+  console.log(req.body)
+  let userId = req.body.userId;
+  let businessId = req.body.business.id;
+  console.log(userId);
+  //call db
+  db.addCheckIn(userId, businessId, resp => {
+    console.log(resp)
+    res.status(201).json(resp);
+  })
+})
 //when user submits a review for a business
 app.post('/review', (req, res) => {
   console.log(req.body);
@@ -80,6 +92,17 @@ app.post('/review', (req, res) => {
 app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
 });
+
+app.get('/server/profile/checkins', (req, res) => {
+  let userId = req.body.userId;
+  let business = req.body.business.id;
+  db.checkCheckIn(userId, businessId, resp => {
+    console.log(resp);
+    res.status(201).json(resp)
+
+  })
+
+})
 
 const server = app.listen(process.env.PORT || 3000, () => {
   var port = server.address().port;

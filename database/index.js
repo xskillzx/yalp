@@ -3,19 +3,19 @@ const mysql = require('mysql');
 let connection;
 
 if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection({
-        host: 'lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-        user: 'ybr7ph732nxw8g1g',
-        password: 'cmk1cc2z3q81thtz',
-        database: 'e36d84um3m6uotkz'
-    })
+  connection = mysql.createConnection({
+    host: 'lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'ybr7ph732nxw8g1g',
+    password: 'cmk1cc2z3q81thtz',
+    database: 'e36d84um3m6uotkz'
+  })
 } else {
-    connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'yalp'
-    })
+  connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'yalp'
+  })
 }
 
 const getUser = function (user, cb) {
@@ -23,200 +23,198 @@ const getUser = function (user, cb) {
     let query = `SELECT * FROM users;`
 
     connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
+      if (err) {
+        cb(err)
+      } else {
+        cb(null, results)
+      }
     })
-}
+  }
 
-const postUser = function (user, cb) {
+  const postUser = function (user, cb) {
 
     let test = connection.query(`SELECT * FROM users WHERE users.name = ${user.name}`);
 
     if (test.length) {
-        cb(false)
+      cb(false)
     } else {
-        let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
+      let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
 
-        connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
-            if (err) {
-                cb(err, null);
-            } else {
-                cb(null, results);
-            }
-            return;
-        })
+      connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
+        if (err) {
+          cb(err, null);
+        } else {
+          cb(null, results);
+        }
+        return;
+      })
     }
-}
+  }
 
 //get user by id
 
 const getUserByUsername = function (user, cb) {
-    
-    let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?;`
 
-    connection.query(query, [user.username, user.password], (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+  let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?;`
+
+  connection.query(query, [user.username, user.password], (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
 }
 
 //get business by id
 
 const getBusinessById = function (id, cb) {
 
-    let query = `SELECT businesses.name FROM businesses WHERE businesses.id = ${id};`
+  let query = `SELECT businesses.name FROM businesses WHERE businesses.id = ${id};`
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
 }
 
 const getFriendsReviews = function (userID, businessID, cb) {
 
-    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id AND reviews.business_id = ${businessID};`
+  let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id AND reviews.business_id = ${businessID};`
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
 }
 
 //get non-friends' reviews for a specific business
 
 const getStrangersReviews = function (userID, businessID, cb) {
 
-    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id) AND reviews.business_id = ${businessID};`
+  let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id) AND reviews.business_id = ${businessID};`
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
 }
 
 const checkFavorite = function (userID, businessID, cb) {
 
-    let query = `SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`
+  let query = `SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            if (results.length) {
-                cb(null, true)
-            } else {
-                cb(null, false)
-            }
-        }
-    })
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      if (results.length) {
+        cb(null, true)
+      } else {
+        cb(null, false)
+      }
+    }
+  })
 }
 
 const addFavorite = function (userID, businessID, cb) {
-
-    let test = connection.query(`SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`);
-
-    if (test.length) {
-        cb(false)
+  checkFavorite(userID, businessID, (err, bool) => {
+    if (bool) {
+      cb(false)
     } else {
-        let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+      let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
 
-        connection.query(query, (err, results) => {
-            if (err) {
-                cb(err)
-            } else {
-                cb(null, results)
-            }
-        })
+      connection.query(query, (err, results) => {
+        if (err) {
+          cb(err)
+        } else {
+          cb(null, results)
+        }
+      })
     }
+
+  })
 }
 
 
 const checkCheckIn = function (userID, businessID, cb) {
 
-    let query = `SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = ${businessID};`
+  let query = `SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = "${businessID}";`
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            if (results.length) {
-                cb(null, true)
-            } else {
-                cb(null, false)
-            }
-        }
-    })
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      if (results.length) {
+        cb(null, true)
+      } else {
+        cb(null, false)
+      }
+    }
+  })
 }
 
 const addCheckIn = function (userID, businessID, cb) {
-
-    let test = connection.query(`SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = ${businessID};`);
-
-    if (test.length) {
-        cb(false)
+    checkCheckIn(userID, businessID, (err, bool) => {
+      if (bool) {
+      cb(false)
     } else {
-        let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, ${businessID});`
+      let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, "${businessID}");`
 
-        connection.query(query, (err, results) => {
-            if (err) {
-                cb(err)
-            } else {
-                cb(null, results)
-            }
-        })
+      connection.query(query, (err, results) => {
+        if (err) {
+          cb(err)
+        } else {
+          cb(null, results)
+        }
+      })
     }
+  })
 }
 
 //temp function for searches, using mock data
 
 const tempSearch = function (search, cb) {
-    let query = `SELECT * FROM businesses;`
+  let query = `SELECT * FROM businesses;`
 
-    connection.query(query, (err, results) => {
-        console.log(results)
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
 }
 
 const addNewReview = function (userId, businessId, review, cb) {
 
-    let test = connection.query(`SELECT * FROM reviews WHERE reviews.user_id = ${userId} AND reviews.business_id = ${businessId};`);
+  let test = connection.query(`SELECT * FROM reviews WHERE reviews.user_id = ${userId} AND reviews.business_id = ${businessId};`);
 
-    if (test.length) {
-        cb(false)
-    } else {
-        let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
-        let params = [userId, businessId, review.rating, review.text];
+  if (test.length) {
+    cb(false)
+  } else {
+    let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
+    let params = [userId, businessId, review.rating, review.text];
 
-        console.log(params)
-        connection.query(query, params, (err, results) => {
-            if (err) {
-                console.log(err)
-                cb(err)
-            } else {
-                cb(null, results)
-            }
-        })
-    }
+    console.log(params)
+    connection.query(query, params, (err, results) => {
+      if (err) {
+        console.log(err)
+        cb(err)
+      } else {
+        cb(null, results)
+      }
+    })
+  }
 }
 
 //MYSQL QUERIES FOR:
@@ -313,17 +311,17 @@ const addNewReview = function (userId, businessId, review, cb) {
 //connection.queries
 
 module.exports = {
-    connection,
-    getUser,
-    postUser,
-    getUserByUsername,
-    getBusinessById,
-    tempSearch,
-    getStrangersReviews,
-    getFriendsReviews,
-    addFavorite,
-    addCheckIn,
-    checkCheckIn,
-    checkFavorite,
-    addNewReview
+  connection,
+  getUser,
+  postUser,
+  getUserByUsername,
+  getBusinessById,
+  tempSearch,
+  getStrangersReviews,
+  getFriendsReviews,
+  addFavorite,
+  addCheckIn,
+  checkCheckIn,
+  checkFavorite,
+  addNewReview
 }
