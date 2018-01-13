@@ -12,6 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: '',
       username: '',
       password: '',
       loggedIn: false,
@@ -44,6 +45,7 @@ class App extends React.Component {
         if (resp.data.length) {
           console.log('Rendering..')
           this.setState({
+            id: resp.data[0].id,
             username: resp.data[0].username,
             password: resp.data[0].password,
             loggedIn: true
@@ -95,7 +97,7 @@ class App extends React.Component {
 
   checkIn(business) {
     let userBusinessObj = {
-      username: this.state.username,
+      userId: this.state.id,
       business: business
     }
     axios.post('/server/profile/checkins', userBusinessObj)

@@ -151,7 +151,7 @@ const checkCheckIn = function (userID, businessID, cb) {
 
 const addCheckIn = function (userID, businessID, cb) {
 
-    let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, ${businessID});`
+    let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, "${businessID}");`
 
     connection.query(query, (err, results) => {
         if (err) {

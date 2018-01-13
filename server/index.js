@@ -61,10 +61,11 @@ app.get('/server/business/:reference', (req, res) => {
 // when user clicks on checkin button on business page
 app.post('/server/profile/checkins', (req, res) => {
   console.log(req.body)
-  let username = req.body.username;
+  let userId = req.body.userId;
   let businessId = req.body.business.id;
+  console.log(userId);
   //call db
-  db.addCheckIn(username, businessId, resp => {
+  db.addCheckIn(userId, businessId, resp => {
     console.log(resp)
     res.status(201).json(resp);
   })
