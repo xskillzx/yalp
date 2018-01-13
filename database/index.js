@@ -32,21 +32,29 @@ const getUser = function (user, cb) {
 }
 
 const postUser = function (user, cb) {
-    let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
 
-    connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
-        if (err) {
-            cb(err, null);
-        } else {
-            cb(null, results);
-        }
-        return;
-    })
+    let test = connection.query(`SELECT * FROM users WHERE users.name = ${user.name}`);
+
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
+
+        connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(null, results);
+            }
+            return;
+        })
+    }
 }
 
 //get user by id
 
 const getUserByUsername = function (user, cb) {
+    
     let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?;`
 
     connection.query(query, [user.username, user.password], (err, results) => {
@@ -120,15 +128,21 @@ const checkFavorite = function (userID, businessID, cb) {
 
 const addFavorite = function (userID, businessID, cb) {
 
-    let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+    let test = connection.query(`SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`);
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+
+        connection.query(query, (err, results) => {
+            if (err) {
+                cb(err)
+            } else {
+                cb(null, results)
+            }
+        })
+    }
 }
 
 
@@ -151,15 +165,21 @@ const checkCheckIn = function (userID, businessID, cb) {
 
 const addCheckIn = function (userID, businessID, cb) {
 
-    let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, ${businessID});`
+    let test = connection.query(`SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = ${businessID};`);
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, ${businessID});`
+
+        connection.query(query, (err, results) => {
+            if (err) {
+                cb(err)
+            } else {
+                cb(null, results)
+            }
+        })
+    }
 }
 
 //temp function for searches, using mock data
@@ -178,18 +198,25 @@ const tempSearch = function (search, cb) {
 }
 
 const addNewReview = function (userId, businessId, review, cb) {
-  let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
-  let params = [userId, businessId, review.rating, review.text];
 
-  console.log(params)
-  connection.query(query, params, (err, results) => {
-      if (err) {
-        console.log(err)
-        cb(err)
-      } else {
-        cb(null, results)
-      }
-  })
+    let test = connection.query(`SELECT * FROM reviews WHERE reviews.user_id = ${userId} AND reviews.business_id = ${businessId};`);
+
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
+        let params = [userId, businessId, review.rating, review.text];
+
+        console.log(params)
+        connection.query(query, params, (err, results) => {
+            if (err) {
+                console.log(err)
+                cb(err)
+            } else {
+                cb(null, results)
+            }
+        })
+    }
 }
 
 //MYSQL QUERIES FOR:
