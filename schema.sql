@@ -19,6 +19,7 @@ CREATE TABLE `reviews` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER NOT NULL DEFAULT 0,
   `business_id` INTEGER NOT NULL DEFAULT 0,
+  `rating` INTEGER NOT NULL DEFAULT 0,
   `text` MEDIUMTEXT NOT NULL,
   `rating` INTEGER NOT NULL DEFAULT 0,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -55,7 +56,7 @@ CREATE TABLE `friends` (
 );
 
 DROP TABLE IF EXISTS `searches`;
-        
+
 CREATE TABLE `searches` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` MEDIUMTEXT NOT NULL,
@@ -108,4 +109,3 @@ INSERT INTO friends (user_id1, user_id2) VALUES (3, 5);
 INSERT INTO friends (user_id1, user_id2) VALUES (3, 6);
 INSERT INTO friends (user_id1, user_id2) VALUES (4, 6);
 INSERT INTO friends (user_id1, user_id2) VALUES (5, 6);
-
