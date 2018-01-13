@@ -58,6 +58,7 @@ CREATE TABLE `favorites` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `user_id` integer NOT NULL,
   `business_id` integer NOT NULL,
+  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
