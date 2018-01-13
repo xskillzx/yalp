@@ -124,6 +124,7 @@ a {
   padding: 4px;
   margin: 0;
   border: 1px solid white;
+  display: inline;
 }
 #review-text {
   width: 90%;

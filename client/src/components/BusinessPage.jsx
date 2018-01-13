@@ -24,10 +24,11 @@ class BusinessPage extends React.Component {
         <BusinessInfo business={this.props.business}/>
         <div id="businessMap"><BusinessMap business={this.props.business}/></div>
         <PhotoFeed />
+        <div className="addReview">
+          <AddReview />
+        </div>
         <div className="reviews">
           <Reviews />
-        </div>
-        <div>
         </div>
       </div>
     )
