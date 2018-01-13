@@ -177,6 +177,21 @@ const tempSearch = function (search, cb) {
     })
 }
 
+const addNewReview = function (userId, businessId, review, cb) {
+  let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
+  let params = [userId, businessId, review.rating, review.text];
+
+  console.log(params)
+  connection.query(query, params, (err, results) => {
+      if (err) {
+        console.log(err)
+        cb(err)
+      } else {
+        cb(null, results)
+      }
+  })
+}
+
 //MYSQL QUERIES FOR:
 
 // Businesses
@@ -282,5 +297,6 @@ module.exports = {
     addFavorite,
     addCheckIn,
     checkCheckIn,
-    checkFavorite
+    checkFavorite,
+    addNewReview
 }
