@@ -63,7 +63,7 @@ CREATE TABLE `favorites` (
 );
 
 DROP TABLE IF EXISTS `searches`;
-        
+
 CREATE TABLE `searches` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` MEDIUMTEXT NOT NULL,
@@ -146,4 +146,3 @@ INSERT INTO friends (user_id1, user_id2) VALUES (3, 5);
 INSERT INTO friends (user_id1, user_id2) VALUES (3, 6);
 INSERT INTO friends (user_id1, user_id2) VALUES (4, 6);
 INSERT INTO friends (user_id1, user_id2) VALUES (5, 6);
-
