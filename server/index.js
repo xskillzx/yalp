@@ -58,14 +58,28 @@ app.get('/server/business/:reference', (req, res) => {
   // res.status(200).json('ok');
 });
 
-// when user clicks on his/her profile
+// when user clicks on checkin button on business page
 app.post('/server/profile/checkins', (req, res) => {
   console.log(req.body)
   let username = req.body.username;
-  let business = req.body.business;
+  let businessId = req.body.business.id;
   //call db
-  res.status(200).json('ok');
+  db.addCheckIn(username, businessId, resp => {
+    console.log(resp)
+    res.status(201).json(resp);
+  })
 });
+
+app.get('/server/profile/checkins', (req, res) => {
+  let username = req.body.username;
+  let business = req.body.business.id;
+  db.checkCheckIn(username, businessId, resp => {
+    console.log(resp);
+    res.status(201).json(resp)
+
+  })
+
+})
 
 const server = app.listen(process.env.PORT || 3000, () => {
   var port = server.address().port;
