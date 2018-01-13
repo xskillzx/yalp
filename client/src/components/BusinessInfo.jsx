@@ -10,11 +10,11 @@ const BusinessInfo = (props) => {
   }
   return (
     <div className="businessInfo">
-      <div>{props.business.name}</div>
+      <div className="businessTitle">{props.business.name}</div>
       <div className="rating">{imgArr}</div>
       <div>{props.business.formatted_address}</div>
       <div>{props.business.formatted_phone_number}</div>
-      <div>{props.business.website}</div>
+      <a href={props.business.website} >{props.business.website}</a>
     </div>
   )
 }

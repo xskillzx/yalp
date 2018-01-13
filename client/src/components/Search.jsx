@@ -10,7 +10,7 @@ class Search extends React.Component {
   render() { 
     return (
       <div>
-        <input ref="searchTerm" type="text" size="30" placeholder="What's nearby?" />
+        <input className="searchBar" ref="searchTerm" type="text" size="30" placeholder="What's nearby?" />
           <button type="Search" onClick={e => this.props.getBusinesses(this.refs.searchTerm.value)}>
             Search!
           </button>
