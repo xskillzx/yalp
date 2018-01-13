@@ -22,6 +22,9 @@ class BusinessPage extends React.Component {
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>
         <BusinessInfo business={this.props.business}/>
+        <div>
+          <button>Check-In</button>
+        </div>
         <div id="businessMap"><BusinessMap business={this.props.business}/></div>
         <PhotoFeed />
         <div className="addReview">
