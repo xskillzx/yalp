@@ -16,7 +16,8 @@ class App extends React.Component {
       username: '',
       password: '',
       loggedIn: false,
-      business: {}
+      business: {},
+      userID: 0
     }
     this.business = {};
     this.searchResults = {};
@@ -48,6 +49,7 @@ class App extends React.Component {
             id: resp.data[0].id,
             username: resp.data[0].username,
             password: resp.data[0].password,
+            userID: resp.data[0].id,
             loggedIn: true
           });
           self.props.history.push('/search');
@@ -110,7 +112,7 @@ class App extends React.Component {
     return (
       <div>
         <div id="topnav">
-          {this.state.loggedIn ? 
+          {this.state.loggedIn ?
             <div>
               <Link to="/search" className="logoLink">
                 <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
@@ -119,11 +121,14 @@ class App extends React.Component {
               <Link to="/" className="logout">
                 <div onClick={this.logoutUser.bind(this)}>Log Out</div>
               </Link>
-            </div> : 
+              <Link to="/profile" className="profile">
+                <div onClick={this.logoutUser.bind(this)}>Profile</div>
+              </Link>
+            </div> :
             <div>
               <img className="logo" src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
               YALP!
-            </div> 
+            </div>
           }
         </div>
         <Switch>
@@ -132,6 +137,7 @@ class App extends React.Component {
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} /></div> } />
+<<<<<<< HEAD
           <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 
@@ -140,6 +146,9 @@ class App extends React.Component {
               /> 
             } 
           />
+=======
+          <Route path={`/business/${this.state.business.name}`} render={ () => <BusinessPage business={this.state.business} getBusinessInfo={this.getBusinessInfo.bind(this)} getBusinesses={this.getBusinesses.bind(this)} username={this.state.username} userId={this.state.userID}/> } />
+>>>>>>> c288a1d27d77d61dcb2a0684225fa45f6551c21f
         </Switch>
     </div>
     )

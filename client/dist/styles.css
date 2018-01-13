@@ -57,10 +57,10 @@ a {
 .logoLink {
   color: white;
 }
-.logout {
+.logout, .profile {
   float: right;
 }
-.logout div {
+.logout div, .profile div {
   text-decoration: none;
   background-color: rgb(243, 209, 77);
   color: white;
@@ -122,4 +122,32 @@ a {
   font-size: 20px;
   margin: 10px 9%;
   padding: 12px 20px;
+}
+
+.addReview {
+  background-color: lightblue;
+  padding: 20px;
+  width: 60%
+}
+.rate-btn {
+  height: 30px;
+  padding: 4px;
+  margin: 0;
+  border: 1px solid white;
+  display: inline;
+}
+.new-review-text {
+  width: 90%;
+  height: 75px;
+  border: none;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.review-submit {
+  margin: 0;
+  height: 30px;
+  padding: 4px;
+  font-size: 12px;
+  display: block;
+  border: 1px solid white;
 }

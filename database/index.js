@@ -32,21 +32,29 @@ const getUser = function (user, cb) {
 }
 
 const postUser = function (user, cb) {
-    let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
 
-    connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
-        if (err) {
-            cb(err, null);
-        } else {
-            cb(null, results);
-        }
-        return;
-    })
+    let test = connection.query(`SELECT * FROM users WHERE users.name = ${user.name}`);
+
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
+
+        connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(null, results);
+            }
+            return;
+        })
+    }
 }
 
 //get user by id
 
 const getUserByUsername = function (user, cb) {
+    
     let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?;`
 
     connection.query(query, [user.username, user.password], (err, results) => {
@@ -58,7 +66,7 @@ const getUserByUsername = function (user, cb) {
     })
 }
 
-//get business by id 
+//get business by id
 
 const getBusinessById = function (id, cb) {
 
@@ -120,15 +128,21 @@ const checkFavorite = function (userID, businessID, cb) {
 
 const addFavorite = function (userID, businessID, cb) {
 
-    let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+    let test = connection.query(`SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`);
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+
+        connection.query(query, (err, results) => {
+            if (err) {
+                cb(err)
+            } else {
+                cb(null, results)
+            }
+        })
+    }
 }
 
 
@@ -151,15 +165,25 @@ const checkCheckIn = function (userID, businessID, cb) {
 
 const addCheckIn = function (userID, businessID, cb) {
 
+<<<<<<< HEAD
     let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, "${businessID}");`
+=======
+    let test = connection.query(`SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = ${businessID};`);
+>>>>>>> c288a1d27d77d61dcb2a0684225fa45f6551c21f
 
-    connection.query(query, (err, results) => {
-        if (err) {
-            cb(err)
-        } else {
-            cb(null, results)
-        }
-    })
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, ${businessID});`
+
+        connection.query(query, (err, results) => {
+            if (err) {
+                cb(err)
+            } else {
+                cb(null, results)
+            }
+        })
+    }
 }
 
 //temp function for searches, using mock data
@@ -175,6 +199,28 @@ const tempSearch = function (search, cb) {
             cb(null, results)
         }
     })
+}
+
+const addNewReview = function (userId, businessId, review, cb) {
+
+    let test = connection.query(`SELECT * FROM reviews WHERE reviews.user_id = ${userId} AND reviews.business_id = ${businessId};`);
+
+    if (test.length) {
+        cb(false)
+    } else {
+        let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
+        let params = [userId, businessId, review.rating, review.text];
+
+        console.log(params)
+        connection.query(query, params, (err, results) => {
+            if (err) {
+                console.log(err)
+                cb(err)
+            } else {
+                cb(null, results)
+            }
+        })
+    }
 }
 
 //MYSQL QUERIES FOR:
@@ -197,7 +243,7 @@ const tempSearch = function (search, cb) {
 // INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
 // INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
 
-//Reviews 
+//Reviews
 //user_id, business_id, text
 
 // INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
@@ -282,5 +328,6 @@ module.exports = {
     addFavorite,
     addCheckIn,
     checkCheckIn,
-    checkFavorite
+    checkFavorite,
+    addNewReview
 }
