@@ -101,6 +101,40 @@ const getStrangersReviews = function (userID, businessID, cb) {
     })
 }
 
+const checkFavorite = function (userID, businessID, cb) {
+
+    let query = `SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            if (results.length) {
+                cb(null, true)
+            } else {
+                cb(null, false)
+            }
+        }
+    })
+}
+
+const checkCheckIn = function (userID, businessID, cb) {
+
+    let query = `SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = ${businessID};`
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            if (results.length) {
+                cb(null, true)
+            } else {
+                cb(null, false)
+            }
+        }
+    })
+}
+
 //temp function for searches, using mock data
 
 const tempSearch = function (search, cb) {
