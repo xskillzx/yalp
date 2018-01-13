@@ -73,9 +73,9 @@ const getBusinessById = function (id, cb) {
     })
 }
 
-const getFriendsReviews = function (userID, cb) {
+const getFriendsReviews = function (userID, businessID, cb) {
 
-    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id`;
+    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id AND reviews.business_id = ${businessID};`
 
     connection.query(query, (err, results) => {
         if (err) {
@@ -88,9 +88,9 @@ const getFriendsReviews = function (userID, cb) {
 
 //get non-friends' reviews for a specific business
 
-const getStrangersReviews = function (userID, cb) {
+const getStrangersReviews = function (userID, businessID, cb) {
 
-    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id)`;
+    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id) AND reviews.business_id = ${businessID};`
 
     connection.query(query, (err, results) => {
         if (err) {

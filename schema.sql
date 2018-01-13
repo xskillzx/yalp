@@ -20,7 +20,7 @@ CREATE TABLE `reviews` (
   `user_id` INTEGER NOT NULL DEFAULT 0,
   `business_id` INTEGER NOT NULL DEFAULT 0,
   `text` MEDIUMTEXT NOT NULL,
-  `rating` INTEGER NOT NULL,
+  `rating` INTEGER NOT NULL DEFAULT 0,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
@@ -78,12 +78,12 @@ INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.c
 INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
 
 
-INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
-INSERT INTO reviews (user_id, business_id, text) VALUES (2, 2, "this place sucks ass");
-INSERT INTO reviews (user_id, business_id, text) VALUES (3, 3, "this place could use better service");
-INSERT INTO reviews (user_id, business_id, text) VALUES (4, 4, "this place is pretty mediocre");
-INSERT INTO reviews (user_id, business_id, text) VALUES (5, 5, "this place is pretty good");
-INSERT INTO reviews (user_id, business_id, text) VALUES (6, 6, "this place is utter trash");
+INSERT INTO reviews (user_id, business_id, text, rating) VALUES (1, 1, "this place is really tasty", 1);
+INSERT INTO reviews (user_id, business_id, text, rating) VALUES (2, 2, "this place sucks ass", 2);
+INSERT INTO reviews (user_id, business_id, text, rating) VALUES (3, 3, "this place could use better service", 2);
+INSERT INTO reviews (user_id, business_id, text, rating) VALUES (4, 4, "this place is pretty mediocre", 3);
+INSERT INTO reviews (user_id, business_id, text, rating) VALUES (5, 5, "this place is pretty good", 4);
+INSERT INTO reviews (user_id, business_id, text, rating) VALUES (6, 6, "this place is utter trash", 2);
 
 
 
