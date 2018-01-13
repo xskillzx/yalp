@@ -64,8 +64,10 @@ class App extends React.Component {
 
   getBusinesses(search) {
     let self = this;
+    console.log('click')
     axios.get(`/server/search/${search}`)
       .then(resp => {
+        console.log(resp);
         self.searchResults = resp;
         self.props.history.push('/listings');
       })
