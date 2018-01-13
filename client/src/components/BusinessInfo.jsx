@@ -10,11 +10,11 @@ const BusinessInfo = (props) => {
   }
   return (
     <div className="businessInfo">
-      <div>Business Name</div>
+      <div>{props.business.name}</div>
       <div className="rating">{imgArr}</div>
-      <div>Location</div>
-      <div>Description</div>
-      <div>Hours</div>
+      <div>{props.business.formatted_address}</div>
+      <div>{props.business.formatted_phone_number}</div>
+      <div>{props.business.website}</div>
     </div>
   )
 }

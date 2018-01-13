@@ -9,9 +9,9 @@ class BusinessList extends React.Component {
   }
 
   render() {
-    console.log(this.props.businesses.data.businesses)
+    console.log(this.props.businesses.data)
     return (
-      this.props.businesses.data.businesses.map(business => 
+      this.props.businesses.data.map(business => 
         <Link key={business.id} to={`/business/${business.id}`} onClick={(e) => this.props.updateBusiness(e, business)} style={{ textDecoration: 'none' }}>
         <BusinessEntry business={business} key={business.id} />
         </Link> 
