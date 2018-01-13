@@ -13,13 +13,15 @@ class BusinessPage extends React.Component {
       friendReviews: [],
       nonFriendReviews: []
     }
+  }
 
   render() {
     return (
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>
         <BusinessInfo business={this.props.business}/>
-        <div id="businessMap"><BusinessMap business={this.props.business}/></div>
+        {this.props.checkedIn ? <div onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Already Checked In!</div> :
+          <div onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Check In</div> }
         <PhotoFeed />
         <div className="addReview">
           <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />

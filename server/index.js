@@ -58,7 +58,6 @@ app.get('/server/business/:reference', (req, res) => {
   // res.status(200).json('ok');
 });
 
-<<<<<<< HEAD
 // when user clicks on checkin button on business page
 app.post('/server/profile/checkins', (req, res) => {
   console.log(req.body)
@@ -70,7 +69,7 @@ app.post('/server/profile/checkins', (req, res) => {
     console.log(resp)
     res.status(201).json(resp);
   })
-=======
+})
 //when user submits a review for a business
 app.post('/review', (req, res) => {
   console.log(req.body);
@@ -92,13 +91,12 @@ app.post('/review', (req, res) => {
 // when user clicks on his/her profile
 app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
->>>>>>> c288a1d27d77d61dcb2a0684225fa45f6551c21f
 });
 
 app.get('/server/profile/checkins', (req, res) => {
-  let username = req.body.username;
+  let userId = req.body.userId;
   let business = req.body.business.id;
-  db.checkCheckIn(username, businessId, resp => {
+  db.checkCheckIn(userId, businessId, resp => {
     console.log(resp);
     res.status(201).json(resp)
 

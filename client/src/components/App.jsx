@@ -12,12 +12,12 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: '',
       username: '',
       password: '',
       loggedIn: false,
       business: {},
-      userID: 0
+      userID: 0,
+      checkedIn: false
     }
     this.business = {};
     this.searchResults = {};
@@ -46,7 +46,7 @@ class App extends React.Component {
         if (resp.data.length) {
           console.log('Rendering..')
           this.setState({
-            id: resp.data[0].id,
+            userId: resp.data[0].id,
             username: resp.data[0].username,
             password: resp.data[0].password,
             userID: resp.data[0].id,
@@ -90,6 +90,7 @@ class App extends React.Component {
     axios.get(`/server/business/${businessRef}`)
       .then(resp => {
         this.setState({business: resp.data});
+
         this.props.history.push(`/business/${resp.data.name}`);
       })
       .catch(err => {
@@ -99,12 +100,13 @@ class App extends React.Component {
 
   checkIn(business) {
     let userBusinessObj = {
-      userId: this.state.id,
+      userId: this.state.userId,
       business: business
     }
     axios.post('/server/profile/checkins', userBusinessObj)
       .then(resp => {
         console.log(resp)
+        this.setState({checkedIn: true})
       })
   }
 
@@ -137,18 +139,17 @@ class App extends React.Component {
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} /></div> } />
-<<<<<<< HEAD
           <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 
               getBusinesses={this.getBusinesses.bind(this)}
               checkIn={this.checkIn.bind(this)}
+              username={this.state.username} 
+              userId={this.state.userID}
+              checkedIn={this.state.checkedIn}
               /> 
             } 
           />
-=======
-          <Route path={`/business/${this.state.business.name}`} render={ () => <BusinessPage business={this.state.business} getBusinessInfo={this.getBusinessInfo.bind(this)} getBusinesses={this.getBusinesses.bind(this)} username={this.state.username} userId={this.state.userID}/> } />
->>>>>>> c288a1d27d77d61dcb2a0684225fa45f6551c21f
         </Switch>
     </div>
     )
