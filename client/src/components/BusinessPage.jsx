@@ -13,9 +13,7 @@ class BusinessPage extends React.Component {
   render() {
     return (
       <div className="businessPage">
-        <div id="form">
-            <Search getBusinesses={this.props.getBusinesses}/>
-        </div>
+        <Search getBusinesses={this.props.getBusinesses}/>
         <BusinessInfo business={this.props.business}/> 
         <PhotoFeed />
         <div className="reviews">
