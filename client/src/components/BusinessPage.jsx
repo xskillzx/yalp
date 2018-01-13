@@ -25,10 +25,10 @@ class BusinessPage extends React.Component {
         <div id="businessMap"><BusinessMap business={this.props.business}/></div>
         <PhotoFeed />
         <div className="addReview">
-          <AddReview />
+          <AddReview username={this.props.username} userId={this.props.userId} />
         </div>
         <div className="reviews">
-          <Reviews />
+          <Reviews username={this.props.username} userId={this.props.userId} />
         </div>
       </div>
     )

@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+
+//props.businessId = business ID
 
 class AddReview extends React.Component {
   constructor(props) {
@@ -22,6 +25,18 @@ class AddReview extends React.Component {
   submitReview() {
     this.setState({ reviewed: true }) //rerender comp to thank you
     //add review to db (user, rating, text, business)
+    axios.post('/review', {
+      rating: this.state.rating,
+      text: this.state.text,
+      userID: this.props.userId,
+      businessID: this.props.businessId
+    })
+    .then(function(response) {
+      console.log(response)
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
   }
 
   render() {
@@ -58,7 +73,7 @@ class AddReview extends React.Component {
           <button className="rate-btn" onClick={() => this.updateRating(1)}>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
           </button>
-          <textarea id="review-text" type="text" placeholder="What'd you think?" onChange={this.updateReviewText}></textarea>
+          <textarea className="new-review-text" type="text" placeholder="What'd you think?" onChange={this.updateReviewText}></textarea>
           <button className="review-submit" onClick={this.submitReview}>Submit</button>
         </div>
       )

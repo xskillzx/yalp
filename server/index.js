@@ -58,6 +58,10 @@ app.get('/server/business/:reference', (req, res) => {
   // res.status(200).json('ok');
 });
 
+app.post('/review', (req, res) => {
+  let 
+})
+
 // when user clicks on his/her profile
 app.get('/profiles/:id', (req, res) => {
   res.status(200).json('ok');
