@@ -59,7 +59,11 @@ app.get('/server/business/:reference', (req, res) => {
 });
 
 // when user clicks on his/her profile
-app.get('/profiles/:id', (req, res) => {
+app.post('/server/profile/checkins', (req, res) => {
+  console.log(req.body)
+  let username = req.body.username;
+  let business = req.body.business;
+  //call db
   res.status(200).json('ok');
 });
 
