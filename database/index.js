@@ -20,7 +20,7 @@ if (process.env.JAWSDB_URL) {
 
 const getUser = function (user, cb) {
     //user obj contain username & pw for authentication
-    let query = `SELECT * FROM users`
+    let query = `SELECT * FROM users;`
 
     connection.query(query, (err, results) => {
         if (err) {
@@ -32,7 +32,7 @@ const getUser = function (user, cb) {
 }
 
 const postUser = function (user, cb) {
-    let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?)`
+    let query = `INSERT INTO users (name, email, password, username) VALUES (?, ?, ?, ?);`
 
     connection.query(query, [user.name, user.email, user.password, user.username], (err, results) => {
         if (err) {
@@ -47,7 +47,7 @@ const postUser = function (user, cb) {
 //get user by id
 
 const getUserByUsername = function (user, cb) {
-    let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?`
+    let query = `SELECT * FROM users WHERE users.username = ? AND users.password = ?;`
 
     connection.query(query, [user.username, user.password], (err, results) => {
         if (err) {
@@ -62,7 +62,7 @@ const getUserByUsername = function (user, cb) {
 
 const getBusinessById = function (id, cb) {
 
-    let query = `SELECT businesses.name FROM businesses WHERE businesses.id = ${id}`
+    let query = `SELECT businesses.name FROM businesses WHERE businesses.id = ${id};`
 
     connection.query(query, (err, results) => {
         if (err) {
@@ -101,10 +101,71 @@ const getStrangersReviews = function (userID, businessID, cb) {
     })
 }
 
+const checkFavorite = function (userID, businessID, cb) {
+
+    let query = `SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            if (results.length) {
+                cb(null, true)
+            } else {
+                cb(null, false)
+            }
+        }
+    })
+}
+
+const addFavorite = function (userID, businessID, cb) {
+
+    let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            cb(null, results)
+        }
+    })
+}
+
+
+const checkCheckIn = function (userID, businessID, cb) {
+
+    let query = `SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = ${businessID};`
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            if (results.length) {
+                cb(null, true)
+            } else {
+                cb(null, false)
+            }
+        }
+    })
+}
+
+const addCheckIn = function (userID, businessID, cb) {
+
+    let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, ${businessID});`
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err)
+        } else {
+            cb(null, results)
+        }
+    })
+}
+
 //temp function for searches, using mock data
 
 const tempSearch = function (search, cb) {
-    let query = `SELECT * FROM businesses`
+    let query = `SELECT * FROM businesses;`
 
     connection.query(query, (err, results) => {
         console.log(results)
@@ -217,5 +278,9 @@ module.exports = {
     getBusinessById,
     tempSearch,
     getStrangersReviews,
-    getFriendsReviews
+    getFriendsReviews,
+    addFavorite,
+    addCheckIn,
+    checkCheckIn,
+    checkFavorite
 }
