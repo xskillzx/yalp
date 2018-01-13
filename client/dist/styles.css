@@ -115,9 +115,9 @@ a {
 }
 
 .addReview {
-  background-color: lightblue;
+  background-color: #fff;
   padding: 20px;
-  width: 60%
+  width: 60%;
 }
 .rate-btn {
   height: 30px;
@@ -129,7 +129,6 @@ a {
 .new-review-text {
   width: 90%;
   height: 75px;
-  border: none;
   font-size: 12px;
   margin-top: 4px;
 }
@@ -140,4 +139,13 @@ a {
   font-size: 12px;
   display: block;
   border: 1px solid white;
+}
+.friendReviews, .otherReviews {
+  background: #fff;
+  width: 60%;
+  padding: 20px;
+
+}
+.review {
+
 }

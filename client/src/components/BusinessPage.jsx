@@ -28,7 +28,7 @@ class BusinessPage extends React.Component {
           <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>
         <div className="reviews">
-          <Reviews username={this.props.username} userId={this.props.userId} />
+          <Reviews business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>
       </div>
     )
