@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory, withRouter , Redirect, Switch, Route, Link } from 'react-router-dom';
+import { withRouter, Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Home from './Home.jsx';
 import Login from './Login.jsx';

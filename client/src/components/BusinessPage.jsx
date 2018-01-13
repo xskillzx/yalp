@@ -1,7 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import Search from './Search.jsx'
 import BusinessInfo from './BusinessInfo.jsx';
+import BusinessMap from './BusinessMap.jsx'
 import PhotoFeed from './PhotoFeed.jsx';
 import Reviews from './Reviews.jsx';
 
@@ -15,6 +15,7 @@ class BusinessPage extends React.Component {
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>
         <BusinessInfo business={this.props.business}/> 
+        <div id="businessMap"><BusinessMap business={this.props.business}/></div>
         <PhotoFeed />
         <div className="reviews">
           <Reviews />  
