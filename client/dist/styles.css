@@ -175,8 +175,8 @@ a {
 .review-text {
   font-size: 16px;
 }
-.friendActivity {
-  border: 1px solid black;
+#friend-activity {
+  border: 1px solid #ddd;
   width: 30%;
   float: right;
 }
