@@ -15,14 +15,17 @@ const searchBusinesses = (query, cb) => {
     .catch(error => console.log('error:', error))
 }
 
-const getPhoto = (ref, cb) => {
-    axios.get(`${googleAPI}photo?maxwidth=175&photoreference=${ref}&key=${GOOGLE_API_KEY}`)
-    .then(response = cb(response))
-    .catch(error => console.log('error:', error))
+const getPhotos = (ref, cb) => {
+  return `${googleAPI}photo?maxwidth=175&photoreference=${ref}&key=${GOOGLE_API_KEY}`
 }
 
 module.exports = {
   getBusinessInfo,
   searchBusinesses,
+<<<<<<< HEAD
   getPhoto
 }
+=======
+  getPhotos
+}
+>>>>>>> (feat) Implemented photos for business
