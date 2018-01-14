@@ -22,10 +22,5 @@ const getPhotos = (ref, cb) => {
 module.exports = {
   getBusinessInfo,
   searchBusinesses,
-<<<<<<< HEAD
-  getPhoto
-}
-=======
   getPhotos
 }
->>>>>>> (feat) Implemented photos for business

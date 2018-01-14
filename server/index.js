@@ -52,26 +52,29 @@ app.get('/server/search/:query', (req, res) => {
 // when user clicks on a business
 app.get('/server/business/:reference', (req, res) => {
   let businessRef = req.params.reference;
-  api.getBusinessInfo(businessRef, data => {
-    res.json(data.data.result)
+  api.getBusinessInfo(businessRef, resp => {
+    res.json(resp.data.result)
   })
+});
+
+app.get('/server/business/photos/:photoRef', (req, res) => {
+  let photoRef = req.params.photoRef;
+  let photos = api.getPhotos(photoRef);
+  res.status(201).json(photos)
   // res.status(200).json('ok');
 });
 
 // when user clicks on checkin button on business page
 app.post('/server/profile/checkins', (req, res) => {
-  console.log(req.body)
   let userId = req.body.userId;
   let businessId = req.body.business.id;
-  console.log(userId);
-  //call db
   db.addCheckIn(userId, businessId, resp => {
-    console.log(resp)
     res.status(201).json(resp);
   })
 })
 //when user submits a review for a business
 app.post('/review', (req, res) => {
+  console.log(req.body);
   let review = {
     rating: req.body.rating,
     text: req.body.text
@@ -83,41 +86,6 @@ app.post('/review', (req, res) => {
     } else {
       console.log(results);
       res.status(201).json(results);
-    }
-  })
-});
-
-//when business page reviews render
-app.get('/server/reviews/friends', (req, res) => {
-  db.getFriendsReviews(req.query.userId, req.query.businessId, (err, results) => {
-    if (err) {
-      res.status(400);
-      res.end('Unable to retrieve friend reviews');
-    } else {
-      res.status(201).json(results);
-    }
-  })
-})
-//when business page reviews render
-app.get('/server/reviews/others', (req, res) => {
-  db.getStrangersReviews(req.query.userId, req.query.businessId, (err, results) => {
-    if (err) {
-      res.status(400);
-      res.end('Unable to retrieve others reviews');
-    } else {
-      res.status(201).json(results);
-    }
-  })
-})
-
-app.get('/server/user', (req, res) => {
-  db.getUsernameById(req.query.userId, (err, results) => {
-    if (err) {
-      res.send(400)
-      res.end('Unable to retrieve username from id')
-    } else {
-      console.log(results);
-      res.status(201).json(results)
     }
   })
 })

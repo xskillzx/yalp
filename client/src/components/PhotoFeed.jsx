@@ -4,7 +4,7 @@ const PhotoFeed = (props) => {
   console.log(props.photos)
   return (
     props.photos.map(photo => (
-        <img src={photo} key={photo}/>
+        <img src={photo} />
     ))
   )
 }
