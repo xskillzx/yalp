@@ -5,6 +5,7 @@ import BusinessMap from './BusinessMap.jsx'
 import PhotoFeed from './PhotoFeed.jsx';
 import Reviews from './Reviews.jsx';
 import AddReview from './AddReview.jsx';
+import FriendActivity from './FriendActivity.jsx';
 
 class BusinessPage extends React.Component {
   constructor(props) {
@@ -32,6 +33,9 @@ class BusinessPage extends React.Component {
         </div>
         <div className="reviews">
           <Reviews username={this.props.username} userId={this.props.userId} />
+        </div>
+        <div className="friendActivity">
+          <FriendActivity/>
         </div>
       </div>
     )
