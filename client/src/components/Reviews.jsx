@@ -43,9 +43,7 @@ class Reviews extends React.Component {
       }
     })
       .then(response => {
-        console.log(response);
         this.setState({ otherReviews: response.data })
-        console.log(response.data[0])
       })
       .catch(err => {
         if (err) { console.log(err) }

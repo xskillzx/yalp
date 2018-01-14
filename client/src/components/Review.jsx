@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 //props: review (userId, rating, text), businessId, username, userId
 //need to get username from userId
@@ -10,8 +11,26 @@ class Review extends React.Component {
     }
   }
 
-  getUsernameOfReview() {
+  componentWillMount() {
+    this.getUsernameOfReview();
+  }
 
+  getUsernameOfReview() {
+    //using this.props.userID
+    axios.get('/server/user', {
+      params: {
+        userId: this.props.userId
+      }
+    })
+      .then(response => {
+        console.log('username response', response.data[0].username);
+        this.setState({
+          username: response.data[0].username
+        })
+      })
+      .catch(err => {
+        if (err) { console.log(err) }
+      })
   }
 
   render() {
@@ -24,7 +43,7 @@ class Review extends React.Component {
 
     return (
       <div className="review">
-        <div className="review-author"></div>
+        <div className="review-author">{this.state.username}</div>
         <div className="review-rating">{imgArr}</div>
         <div className="review-text">{this.props.review.text}</div>
       </div>
