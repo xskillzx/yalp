@@ -23,9 +23,6 @@ class BusinessPage extends React.Component {
         <BusinessInfo business={this.props.business}/>
         {this.props.checkedIn ? <button className="checkIn">Checked In!</button> : <button className="checkIn" onClick={() => this.props.checkIn(this.props.business)}>Check In</button>}
 
-        <div>
-          <PhotoFeed photos={this.props.photos} />
-        </div>
         <div className="addReview">
           <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>
@@ -33,7 +30,10 @@ class BusinessPage extends React.Component {
           <Reviews business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>
         <div id="friend-activity">
-          <FriendActivity/>
+          <FriendActivity business={this.props.business} username={this.props.username} userId={this.props.userId}/>
+        </div>
+        <div className="photoFeed">
+          <PhotoFeed photos={this.props.photos} />
         </div>
       </div>
     )
