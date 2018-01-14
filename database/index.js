@@ -198,27 +198,19 @@ const tempSearch = function (search, cb) {
 
 const addNewReview = function (userId, businessId, review, cb) {
 
-  connection.query(query, params, (err, results) => {
-
-  let test = connection.query(`SELECT * FROM reviews WHERE reviews.user_id = ${userId} AND reviews.business_id = ${businessId};`);
-
-  if (test.length) {
-    cb(false)
-  } else {
     let query = 'INSERT INTO reviews (user_id, business_id, rating, text) VALUES (?, ?, ?, ?)';
     let params = [userId, businessId, review.rating, review.text];
 
-    console.log(params)
     connection.query(query, params, (err, results) => {
-      if (err) {
-        console.log(err)
-        cb(err)
-      } else {
-        cb(null, results)
-      }
+        if (err) {
+          console.log(err)
+          cb(err)
+        } else {
+          cb(null, results)
+        }
     })
-  }
 }
+
 
 const getUsernameById = function(userId, cb) {
   console.log('getting username by id')
