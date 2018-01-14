@@ -131,6 +131,7 @@ class App extends React.Component {
     axios.get(`/profile/favorites/${userID}`)
       .then(resp => {
         let { favorites } = this.state;
+        console.log(resp.data);
         resp.data.forEach((favorite) => {
           favorites[favorite.business_id] = true;
         })
