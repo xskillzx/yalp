@@ -56,7 +56,7 @@ class Reviews extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="reviews">
         Top Reviews
         <div className="friendReviews">
           <ul>
