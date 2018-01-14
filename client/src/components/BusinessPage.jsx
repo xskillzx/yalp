@@ -22,12 +22,7 @@ class BusinessPage extends React.Component {
         <Search getBusinesses={this.props.getBusinesses}/>
         <BusinessInfo business={this.props.business}/>
         {this.props.checkedIn ? <div onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Already Checked In!</div> :
-          <div onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Check In</div> }
-        <div>
-          <button>Check-In</button>
-          <button>Favorite</button>
-        </div>
-        <PhotoFeed />
+
         <div className="addReview">
           <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>
