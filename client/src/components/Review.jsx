@@ -46,6 +46,7 @@ class Review extends React.Component {
       <div className="review">
         <div className="review-author">{this.state.username}</div>
         <div className="review-rating">{imgArr}</div>
+        <div className="review-date">{this.props.review.createdAt}</div>
         <div className="review-text">{this.props.review.text}</div>
       </div>
     )
