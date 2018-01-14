@@ -140,6 +140,21 @@ app.get('/server/profile/checkins', (req, res) => {
 
 })
 
+app.post('/profile/favorites', (req, res) => {
+  const { userId, businessId } = req.body;
+  db.addFavorite(userId, businessId, (err, result) => {
+    console.log('Server: ', result);
+    res.status(201).json(result);
+  })
+})
+
+app.get('/profile/favorites/:userId', (req, res) => {
+  const { userId } = req.params;
+  db.getFavorite(parseInt(userId), (err, result) => {
+      res.status(200).json(result);
+  });
+});
+
 const server = app.listen(process.env.PORT || 3000, () => {
   var port = server.address().port;
   console.log('Listening at port %s', port);
