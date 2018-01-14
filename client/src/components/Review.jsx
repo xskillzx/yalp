@@ -16,8 +16,6 @@ class Review extends React.Component {
   }
 
   getUsernameOfReview() {
-    //using this.props.userID
-
     axios.get('/server/user', {
       params: {
         userId: this.props.review.user_id
