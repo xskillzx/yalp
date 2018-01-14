@@ -57,10 +57,10 @@ a {
 .logoLink {
   color: white;
 }
-.logout {
+.logout, .profile {
   float: right;
 }
-.logout div {
+.logout div, .profile div {
   text-decoration: none;
   background-color: rgb(243, 209, 77);
   color: white;
@@ -107,14 +107,23 @@ a {
   font-weight: bold;
 }
 .businessInfo {
-  margin: 0;
+  margin: 15px 0px 5px 0px;
   width: 40%;
   height: 40%;
   border: 3px solid red;
   font-size: 18px;
+  display: inline-block;
 }
-
-.addReview {
+.checkIn {
+  float: right;
+  background-color: rgb(243, 209, 77);
+  color: white;
+  border-radius: 5px;
+  font-size: 20px;
+  margin: 10px 9%;
+  padding: 12px 20px;
+}
+.addReview, .friendActivity {
   background-color: #fff;
   padding: 20px;
   width: 60%;
