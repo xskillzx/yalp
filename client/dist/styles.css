@@ -147,5 +147,15 @@ a {
 
 }
 .review {
-
+  border-top: 1px solid #ddd;
+  padding: 10px;
+}
+.review-author {
+  font-size: 16px;
+}
+.review-rating {
+  font-size: 16px;
+}
+.review-text {
+  font-size: 16px;
 }

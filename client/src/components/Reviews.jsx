@@ -57,7 +57,7 @@ class Reviews extends React.Component {
   render() {
     return (
       <div>
-        Reviews
+        Top Reviews
         <div className="friendReviews">
           <ul>
             {this.state.friendReviews.map((review, index) => {
