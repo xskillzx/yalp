@@ -123,11 +123,10 @@ a {
   margin: 10px 9%;
   padding: 12px 20px;
 }
-
 .addReview, .friendActivity {
-  background-color: lightblue;
+  background-color: #fff;
   padding: 20px;
-  width: 60%
+  width: 60%;
 }
 .rate-btn {
   height: 30px;
@@ -139,7 +138,6 @@ a {
 .new-review-text {
   width: 90%;
   height: 75px;
-  border: none;
   font-size: 12px;
   margin-top: 4px;
 }
@@ -150,4 +148,23 @@ a {
   font-size: 12px;
   display: block;
   border: 1px solid white;
+}
+.friendReviews, .otherReviews {
+  background: #fff;
+  width: 60%;
+  padding: 20px;
+
+}
+.review {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+}
+.review-author {
+  font-size: 16px;
+}
+.review-rating {
+  font-size: 16px;
+}
+.review-text {
+  font-size: 16px;
 }
