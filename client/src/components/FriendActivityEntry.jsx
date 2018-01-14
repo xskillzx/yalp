@@ -8,12 +8,11 @@ class FriendActivityEntry extends React.Component {
   render() {
     const { username, timeAgo } = this.props.activity;
     return (
-      <li>
-        <span>{username}</span>
-        <br />
-        <span>{timeAgo}</span>
-      </li>
-    );
+      <div>
+        <span className="activity-user">{username}</span>
+        <span className="activity-time">{timeAgo}</span>
+      </div>
+    )
   }
 }
 

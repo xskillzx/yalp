@@ -3,10 +3,13 @@ import FriendActivityEntry from './FriendActivityEntry.jsx';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
+//business obj, username, userId
+
 class FriendActivity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      friendCheckins: [],
       activities: [
         {
           id: 0,
@@ -54,10 +57,19 @@ class FriendActivity extends React.Component {
     return '';
   }
 
+  getFriendCheckins() {
+    // use userId and businessId to get all checkins
+    // query for username & createdAt for that business
+    // update friendCheckins state (friend username, createdAt)
+
+    // update ul below 
+  }
+
   render() {
     return (
       <div>
-        <div>Friends Activity</div>
+        <div className="activity-header">Your Friends' Recent Activity...</div>
+        <div className="check-in-header">Check-ins:</div>
         <ul>{this.getFriendActivityEntries()}</ul>
       </div>
     );
