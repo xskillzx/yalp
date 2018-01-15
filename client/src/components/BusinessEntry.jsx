@@ -17,9 +17,9 @@ class BusinessEntry extends React.Component {
     if (!imgArr.length) {
       imgArr.push(<span style={{fontSize: '14px'}} key='noRating'>No Rating...</span>)
     }
+    console.log(this.props.business)
     return (
         <div className="businessEntry">
-          <img className="businessLogo" src={this.props.business.image_url} width="60px" />
           <div className="rating">{imgArr}</div>
           <h5 className="title" >{this.props.business.name}</h5><br />
           <div className="address">

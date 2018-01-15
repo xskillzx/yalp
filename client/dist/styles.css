@@ -97,23 +97,22 @@ a {
 }
 .address {
   display: inline-block;
-  left: 200px;
+  left: 140px;
 }
 .favorite {
   right: 10px;
 }
-.businessLogo {
-  margin: 10px;
-}
 .rating {
-  margin: 3px;
+  margin: 3px 20px;
 }
 .logo {
+  float: left;
+  margin-top: 6px;
   width: 2.5%;
 }
 .title {
   position: absolute;
-  left: 200px;
+  left: 140px;
   margin: 6px 0px 0px 0px;
 }
 
