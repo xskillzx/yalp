@@ -42,7 +42,7 @@ class FriendActivity extends React.Component {
   }
 
   componentWillMount() {
-    this.getFriendCheckins()
+    // this.getFriendCheckins()
   }
 
   createDate(createdAt) {
