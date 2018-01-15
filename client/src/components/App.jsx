@@ -17,7 +17,8 @@ class App extends React.Component {
       business: {},
       userID: 0,
       loggedIn: false,
-      checkedIn: false
+      checkedIn: false,
+      favorites: {}
     }
     this.photos = [];
     this.business = {};
@@ -51,8 +52,9 @@ class App extends React.Component {
             username: resp.data[0].username,
             password: resp.data[0].password,
             userID: resp.data[0].id,
-            loggedIn: true
+            loggedIn: true,
           });
+          this.getFavorite()
           self.props.history.push('/search');
         } else {
           console.log('INVALID USER');
@@ -90,6 +92,7 @@ class App extends React.Component {
     axios.get(`/server/business/${business.reference}`)
       .then(resp => {
         this.photos = [];
+        console.log(this.photos)
         resp.data.photos.map(photo => {
           this.getBusinessPhotos(photo.photo_reference, data => {
             this.setState({business: resp.data});
@@ -124,6 +127,38 @@ class App extends React.Component {
       })
   }
 
+  getFavorite() {
+    const { userID } = this.state;
+    axios.get(`/profile/favorites/${userID}`)
+      .then(resp => {
+        let { favorites } = this.state;
+        console.log(resp.data);
+        resp.data.forEach((favorite) => {
+          favorites[favorite.business_id] = true;
+        })
+        this.setState({favorites});
+      });
+  }
+
+  favoriteIn(business) {
+    let userBusinessObj = {
+      userId: this.state.userId,
+      businessId: business.id
+    }
+    axios.post('/profile/favorites', userBusinessObj)
+      .then(result => {
+        let { favorites } = this.state;
+        let { data } = result;
+        favorites[business.id] = data;
+        this.setState({ favorites });
+      })
+  }
+
+  getBusinessFav(businessId) {
+    console.log('App.jsx #getBusinessFav: ', businessId);
+    return this.state.favorites[businessId] ? true : false;
+  }
+
   render() {
     return (
       <div>
@@ -152,19 +187,21 @@ class App extends React.Component {
           <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search getBusinesses={this.getBusinesses.bind(this)}/></div></div> }/>
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
-          <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} /></div> } />
+          <Route path="/listings" render={ () => <div id="listings"><BusinessList businesses={ this.searchResults } updateBusiness={this.updateBusiness.bind(this)} favorites={this.state.favorites} /></div> } />
           <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 
               getBusinesses={this.getBusinesses.bind(this)}
+              getFavoriteInfo={this.getBusinessFav.bind(this)}
               checkIn={this.checkIn.bind(this)}
-              username={this.state.username} 
+              username={this.state.username}
               userId={this.state.userID}
               checkedIn={this.state.checkedIn}
               getBusinessPhotos={this.getBusinessPhotos.bind(this)}
               photos={this.photos}
+              favoriteIn={this.favoriteIn.bind(this)}
               /> 
-            } 
+            }
           />
         </Switch>
     </div>
