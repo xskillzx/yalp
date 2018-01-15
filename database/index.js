@@ -33,7 +33,7 @@ const getUser = function (user, cb) {
 
   const postUser = function (user, cb) {
 
-    let test = connection.query(`SELECT * FROM users WHERE users.name = ${user.name}`);
+    let test = connection.query(`SELECT * FROM users WHERE users.name = "${user.name}"`);
 
     if (test.length) {
       cb(false)
