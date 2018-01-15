@@ -165,7 +165,7 @@ const checkCheckIn = function (userId, businessId, cb) {
 
 //for a particular business, return all checkins of friends
   //requires two separate checkin functions (getCheckins1 & getCheckins2), since friends table operates in two directions.
-const getCheckins1 = function(userId, businessId, cb) {
+const getFriendsCheckins1 = function(userId, businessId, cb) {
 
   let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id1 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id2 = checkins.user_id;`;
 
@@ -178,7 +178,33 @@ const getCheckins1 = function(userId, businessId, cb) {
   })
 }
 
-const getCheckins2 = function(userId, businessId, cb) {
+const getFriendsCheckins2 = function(userId, businessId, cb) {
+
+  let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id2 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id1 = checkins.user_id;`;
+  
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
+const getFriendsFavorites1 = function(userId, businessId, cb) {
+
+  let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id1 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id2 = checkins.user_id;`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
+const getFriendsFavorites2 = function(userId, businessId, cb) {
 
   let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id2 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id1 = checkins.user_id;`;
   
@@ -373,6 +399,6 @@ module.exports = {
     addNewReview,
     getUsernameById,
     getFavorite,
-    getCheckins1,
-    getCheckins2
+    getFriendsCheckins1,
+    getFriendsCheckins2,
 }
