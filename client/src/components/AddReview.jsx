@@ -23,7 +23,6 @@ class AddReview extends React.Component {
       this.lastSelectedRating.style.background = 'red';
     }
     this.lastSelectedRating = e.currentTarget;
-    console.log(this.lastSelectedRating)
      if (e.currentTarget.style.background === 'yellow') {
       e.currentTarget.style.background = 'red';
       for (let i = 0; i < e.currentTarget.children.length; i++) {
@@ -31,7 +30,6 @@ class AddReview extends React.Component {
       }
      } else {
       e.currentTarget.style.background = 'yellow';
-      console.log(e.currentTarget.children)
       for (let j = 0; j < e.currentTarget.children.length; j++) {
         e.currentTarget.children[j].background = 'yellow';
       }

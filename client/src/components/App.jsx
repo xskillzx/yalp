@@ -135,7 +135,6 @@ class App extends React.Component {
     axios.get(`/profile/favorites/${userID}`)
       .then(resp => {
         let { favorites } = this.state;
-        console.log(resp.data);
         if (resp.data) {
           resp.data.forEach((favorite) => {
             favorites[favorite.business_id] = true;
@@ -150,7 +149,6 @@ class App extends React.Component {
       userId: this.state.userId,
       businessId: business.id
     }
-    console.log('#favoriteIn: ', userBusinessObj);
     axios.post('/profile/favorites', userBusinessObj)
       .then(result => {
         console.log('#favoriteIn: ', result);
@@ -162,7 +160,6 @@ class App extends React.Component {
   }
 
   getBusinessFav(businessId) {
-    console.log('App.jsx #getBusinessFav: ', businessId, this.state.favorites[businessId]);
     return this.state.favorites[businessId] ? true : false;
   }
 

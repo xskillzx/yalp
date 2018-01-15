@@ -22,7 +22,6 @@ class Review extends React.Component {
       }
     })
       .then(response => {
-        console.log('username response', response.data[0].username);
         this.setState({
           username: response.data[0].username
         })
