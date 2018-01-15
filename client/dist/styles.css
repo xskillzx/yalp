@@ -13,6 +13,10 @@ body {
   margin: -10px -10px 0 -10px;
   padding: 10px;
 }
+
+
+/* HOME/LOGIN/SIGNUP  */
+
 #form-background {
   height: 500px;
   width: 50%;
@@ -69,24 +73,33 @@ a {
   font-size: 20px;
   padding: 5px;
 }
+
+
+/* BUSINESS LISTINGS PAGE */
+
 .businessEntry {
   background: white;
-  margin: 20px;
+  margin: 0 auto;
   width: 80%;
-  border: solid 1px black;
+  height: 50px;
+  border: solid 1px #ddd;
   border-radius: 4px;
   display: flex;
   justify-content: left;
   align-items: left;
   overflow: auto;
+  position: relative;
 }
 .address, .favorite {
-  margin-right: 15px;
-  margin-left: auto;
-  margin-top: 6px;
+  margin-top: 10px;
+  position: absolute;
+  font-size: 16px;
 }
-.address span, .favorite {
-  font-size: 16px
+.address {
+  left: 500px;
+}
+.favorite {
+  right: 10px;
 }
 .businessLogo {
   margin: 10px;
@@ -97,6 +110,10 @@ a {
 .logo {
   width: 2.5%;
 }
+
+
+/* BUSINESS PAGE */
+
 .businessPage {
   margin: 5%;
   background: white;
@@ -110,19 +127,30 @@ a {
 .businessInfo {
   margin: 15px 0px 5px 0px;
   width: 60%;
-  height: 200px;
+  /* height: 200px; */
   font-size: 18px;
   display: inline-block;
 }
+.business-page-btns {
+  width: 60%;
+  margin: 5px;
+  float: left;
+}
 .checkIn, .favoriteIn {
-  float: right;
   background-color: rgb(243, 209, 77);
   color: white;
   border-radius: 5px;
   font-size: 20px;
-  margin: 10px 9%;
   padding: 12px 20px;
+  margin-right: 5px;
+  display: inline;
 }
+.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Add Review Section */
 .addReview {
   background-color: #fff;
   padding: 20px;
@@ -151,12 +179,14 @@ a {
   display: block;
   border: 1px solid white;
 }
-#reviews {
+
+/* Reviews Section */
+.reviews {
   width: 60%;
+  float: left;
   padding: 20px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  float: left;
 }
 .friendReviews, .otherReviews {
   background: #fff;
@@ -174,22 +204,17 @@ a {
 .review-text {
   font-size: 16px;
 }
-#friend-activity {
+
+/* Friend Activity Section */
+.friend-activity {
   border: 1px solid #ddd;
   width: 30%;
   float: right;
   font-size: 14px;
+  padding: 5px;
 }
 .activity-header {
   font-size: 20px;
-}
-.photoFeed {
-  width: 30%;
-  float: right;
-}
-.business-photo {
-  height: 100px;
-  border: 1px solid #fff;
 }
 .activity-user {
   font-weight: bold;
@@ -198,7 +223,13 @@ a {
 .activity-time {
   font-style: italic;
 }
-.disabled {
-  opacity: 0.65; 
-  cursor: not-allowed;
+
+/* Photo Feed Section */
+.photoFeed {
+  width: 30%;
+  float: right;
+}
+.business-photo {
+  height: 100px;
+  border: 1px solid #fff;
 }

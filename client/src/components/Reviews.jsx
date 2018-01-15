@@ -50,13 +50,9 @@ class Reviews extends React.Component {
       })
   }
 
-  getUsernameFromUserId() {
-    //to render usernames for each review
-  }
-
   render() {
     return (
-      <div id="reviews">
+      <div>
         Top Reviews
         <div className="friendReviews">
           <ul>
