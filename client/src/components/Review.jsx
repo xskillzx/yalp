@@ -7,12 +7,14 @@ class Review extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: ''
+      username: '',
+      friend: false
     }
   }
 
   componentWillMount() {
     this.getUsernameOfReview();
+    this.checkIfFriend();
   }
 
   getUsernameOfReview() {
@@ -31,6 +33,13 @@ class Review extends React.Component {
       })
   }
 
+  checkIfFriend() {
+    //check if the current review author is a friend
+  }
+  addFriend() {
+    //takes current user and review user and adds to friend list
+  }
+
   render() {
     let imgArr = [];
     for (let i = 0; i < this.props.review.rating; i++) {
@@ -40,7 +49,15 @@ class Review extends React.Component {
     }
     return (
       <div className="review">
-        <div className="review-author">{this.state.username}</div>
+        <span className="review-author">{this.state.username}</span>
+        <span>
+          {this.state.friend ?
+            <button>Your Friend</button> :
+            <button className="friend-btn">Add {this.state.username} as Friend</button>
+          }
+
+
+        </span>
         <div className="review-rating">{imgArr}</div>
         <div className="review-date">{this.props.review.createdAt}</div>
         <div className="review-text">{this.props.review.text}</div>
