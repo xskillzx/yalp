@@ -19,10 +19,10 @@ class Review extends React.Component {
 
   getUsernameOfReview() {
     axios.get('/server/user', {
-      params: {
-        userId: this.props.review.user_id
-      }
-    })
+        params: {
+          userId: this.props.review.user_id
+        }
+      })
       .then(response => {
         this.setState({
           username: response.data[0].username
@@ -38,6 +38,21 @@ class Review extends React.Component {
   }
   addFriend() {
     //takes current user and review user and adds to friend list
+    //props.review.userId == friend to be added
+
+    axios.get('/server/addfriend', {
+        params: {
+          userId: this.props.userId,
+          friendId: this.props.review.userId
+        }
+      })
+      .then(response => {
+        console.log('Friend added:', this.state.username)
+        this.setState({ friend: true })
+      })
+      .catch(err => {
+        if (err) { console.log(err) }
+      })
   }
 
   render() {
@@ -53,7 +68,7 @@ class Review extends React.Component {
         <span>
           {this.state.friend ?
             <button>Your Friend</button> :
-            <button className="friend-btn">Add {this.state.username} as Friend</button>
+            <button className="friend-btn" onClick={this.addFriend.bind(this)}>Add {this.state.username} as Friend</button>
           }
 
 
