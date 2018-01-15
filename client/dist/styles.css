@@ -131,10 +131,21 @@ a {
   font-size: 18px;
   display: inline-block;
 }
+<<<<<<< HEAD
 .business-page-btns {
   width: 60%;
   margin: 5px;
   float: left;
+=======
+.backBtn{
+  display: inline-block;
+  background-color: rgb(243, 209, 77);
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  padding: 6px 10px;
+>>>>>>> (feat) Added a back to search button on business page, no functionality yet
 }
 .checkIn, .favoriteIn {
   background-color: rgb(243, 209, 77);
