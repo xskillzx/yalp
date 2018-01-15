@@ -112,13 +112,25 @@ app.get('/server/reviews/others', (req, res) => {
   })
 })
 
+//to get username using user id
 app.get('/server/user', (req, res) => {
   db.getUsernameById(req.query.userId, (err, results) => {
     if (err) {
       res.send(400)
       res.end('Unable to retrieve username from id')
     } else {
-      console.log(results);
+      res.status(201).json(results)
+    }
+  })
+})
+
+//to get checkins for particular business/user
+app.get('/server/business/checkins', (req, res) => {
+  db.getCheckins(req.query.businessId, (err, results) => {
+    if (err) {
+      res.send(400)
+      res.end('Unable to retrieve checkins')
+    } else {
       res.status(201).json(results)
     }
   })

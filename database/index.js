@@ -164,6 +164,18 @@ const checkCheckIn = function (userID, businessID, cb) {
   })
 }
 
+//for a particular business, return all checkins of friends 
+const getCheckins = function(businessId, cb) {
+  let query;
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
 const addCheckIn = function (userID, businessID, cb) {
     checkCheckIn(userID, businessID, (err, bool) => {
       if (bool) {
