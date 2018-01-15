@@ -127,21 +127,27 @@ a {
 .businessInfo {
   margin: 15px 0px 5px 0px;
   width: 60%;
-  height: 200px;
+  /* height: 200px; */
   font-size: 18px;
   display: inline-block;
 }
+.business-page-btns {
+  width: 60%;
+  margin: 5px;
+  float: left;
+}
 .checkIn, .favoriteIn {
-  float: right;
   background-color: rgb(243, 209, 77);
   color: white;
   border-radius: 5px;
   font-size: 20px;
-  margin: 10px 9%;
   padding: 12px 20px;
+  margin-right: 5px;
+  display: inline;
 }
-.business-page-btns {
-  background-color: lightblue;
+.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 /* Add Review Section */
@@ -175,12 +181,12 @@ a {
 }
 
 /* Reviews Section */
-#reviews {
+.reviews {
   width: 60%;
+  float: left;
   padding: 20px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  float: left;
 }
 .friendReviews, .otherReviews {
   background: #fff;
@@ -200,11 +206,12 @@ a {
 }
 
 /* Friend Activity Section */
-#friend-activity {
+.friend-activity {
   border: 1px solid #ddd;
   width: 30%;
   float: right;
   font-size: 14px;
+  padding: 5px;
 }
 .activity-header {
   font-size: 20px;
@@ -225,15 +232,4 @@ a {
 .business-photo {
   height: 100px;
   border: 1px solid #fff;
-}
-.activity-user {
-  font-weight: bold;
-  padding-right: 5px;
-}
-.activity-time {
-  font-style: italic;
-}
-.disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
 }
