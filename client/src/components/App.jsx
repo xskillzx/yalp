@@ -92,7 +92,6 @@ class App extends React.Component {
     axios.get(`/server/business/${business.reference}`)
       .then(resp => {
         this.photos = [];
-        console.log(this.photos)
         resp.data.photos.map(photo => {
           this.getBusinessPhotos(photo.photo_reference, data => {
             this.setState({business: resp.data});
