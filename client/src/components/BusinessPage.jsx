@@ -17,7 +17,6 @@ class BusinessPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.getFavoriteInfo(this.props.business.id));
     return (
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>

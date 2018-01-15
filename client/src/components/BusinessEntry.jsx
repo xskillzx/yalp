@@ -17,7 +17,6 @@ class BusinessEntry extends React.Component {
     if (!imgArr.length) {
       imgArr.push(<span style={{fontSize: '14px'}} key='noRating'>No Rating...</span>)
     }
-    console.log(this.props.business)
     return (
         <div className="businessEntry">
           <div className="rating">{imgArr}</div>
