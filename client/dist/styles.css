@@ -197,7 +197,7 @@ a {
 }
 .activity-time {
   font-style: italic;
-
+}
 .disabled {
   opacity: 0.65; 
   cursor: not-allowed;
