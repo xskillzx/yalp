@@ -1,7 +1,7 @@
 const axios = require('axios');
 const googleAPI = `https://maps.googleapis.com/maps/api/place/`;
 const location = `location=37.7749,-122.4194`;
-const GOOGLE_API_KEY = 'AIzaSyCPs4gYhMLG4JretGmwVhodqPoBIF54tMA'
+const GOOGLE_API_KEY = 'AIzaSyDg85ZgHKCnbfqn4zaaJwoLdEOLXDM8epI'
 
 const getBusinessInfo = (businessRef, cb) => {
   axios.get(`${googleAPI}details/json?reference=${businessRef}&key=${GOOGLE_API_KEY}`)
