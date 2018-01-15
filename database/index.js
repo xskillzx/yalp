@@ -112,11 +112,11 @@ const getStrangersReviews = function (userID, businessID, cb) {
 
 const checkFavorite = function (userID, businessID, cb) {
 
-  let query = `SELECT * FROM favorites WHERE favorites.user_id = ${userID} AND favorites.business_id = ${businessID};`
+  let query = `SELECT * FROM favorites WHERE favorites.user_id = ? AND favorites.business_id = ?;`
 
-  connection.query(query, (err, results) => {
+  connection.query(query, [userID, businessID], (err, results) => {
     if (err) {
-      cb(err)
+      cb(err, false);
     } else {
       if (results.length) {
         cb(null, true)
@@ -130,15 +130,15 @@ const checkFavorite = function (userID, businessID, cb) {
 const addFavorite = function (userID, businessID, cb) {
   checkFavorite(userID, businessID, (err, bool) => {
     if (bool) {
-      cb(false)
+      cb(null, false)
     } else {
-      let query = `INSERT INTO favorites (user_id, business_id) VALUES (${userID}, ${businessID});`
+      let query = `INSERT INTO favorites (user_id, business_id) VALUES (?, ?);`
 
-      connection.query(query, (err, results) => {
+      connection.query(query, [userID, businessID], (err, results) => {
         if (err) {
-          cb(err)
+          cb(err, false)
         } else {
-          cb(null, results)
+          cb(null, true)
         }
       })
     }
@@ -237,6 +237,18 @@ const getUsernameById = function(userId, cb) {
     }
   })
 }
+
+const getFavorite = function(userId, cb) {
+    let query = 'SELECT * from favorites where favorites.user_id = userId';
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            cb(err, null);
+        } else {
+            cb(null, results);
+        }
+    });
+};
 
 //MYSQL QUERIES FOR:
 
@@ -345,5 +357,6 @@ module.exports = {
     checkCheckIn,
     checkFavorite,
     addNewReview,
-    getUsernameById
+    getUsernameById,
+    getFavorite
 }
