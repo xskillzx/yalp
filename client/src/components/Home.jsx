@@ -17,6 +17,7 @@ class Home extends React.Component {
             Log In
           </button>
         </Link>
+        <br />
         <Link to="/signup">
           <button type="Signup" id="signup-btn">
             Sign Up
