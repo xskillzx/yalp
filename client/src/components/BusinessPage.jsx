@@ -1,7 +1,6 @@
 import React from 'react';
 import Search from './Search.jsx'
 import BusinessInfo from './BusinessInfo.jsx';
-import BusinessMap from './BusinessMap.jsx'
 import PhotoFeed from './PhotoFeed.jsx';
 import Reviews from './Reviews.jsx';
 import AddReview from './AddReview.jsx';
@@ -15,7 +14,6 @@ class BusinessPage extends React.Component {
       nonFriendReviews: []
     }
   }
-
   render() {
     return (
       <div className="businessPage">
