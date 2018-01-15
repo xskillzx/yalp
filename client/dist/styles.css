@@ -131,30 +131,27 @@ a {
   font-size: 18px;
   display: inline-block;
 }
-<<<<<<< HEAD
 .business-page-btns {
   width: 60%;
   margin: 5px;
   float: left;
-=======
+}
+.checkIn, .favoriteIn {
+  display: inline;
+  background-color: rgb(243, 209, 77);
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 12px 20px;
+}
 .backBtn{
   display: inline-block;
   background-color: rgb(243, 209, 77);
   color: white;
   font-size: 14px;
   border-radius: 5px;
-  margin: 10px 0px;
   padding: 6px 10px;
->>>>>>> (feat) Added a back to search button on business page, no functionality yet
-}
-.checkIn, .favoriteIn {
-  background-color: rgb(243, 209, 77);
-  color: white;
-  border-radius: 5px;
-  font-size: 20px;
-  padding: 12px 20px;
-  margin-right: 5px;
-  display: inline;
 }
 .disabled {
   opacity: 0.65;
