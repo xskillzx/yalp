@@ -32,7 +32,6 @@ class BusinessPage extends React.Component {
             : <button className="favoriteIn" onClick={e => {this.props.favoriteIn(this.props.business)}}>Favorite</button>
           }
         </div>
-        <PhotoFeed />
         <div className="addReview">
           <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>
