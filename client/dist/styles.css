@@ -18,7 +18,6 @@ body {
 /* HOME/LOGIN/SIGNUP  */
 
 #form-background {
-  height: 500px;
   width: 50%;
   margin: 0 auto;
   margin-top: 100px;
@@ -43,8 +42,8 @@ input[type=submit] {
   border: none;
 }
 button {
-  display: block;
-  margin: 8px 0;
+  display: inline-block;
+  margin: 3px 0;
   padding: 12px 20px;
   background-color: red;
   color: #fff;
@@ -62,6 +61,7 @@ a {
   color: white;
 }
 .logout, .profile {
+  margin-right: 5px;
   float: right;
 }
 .logout div, .profile div {
@@ -142,7 +142,7 @@ a {
 }
 .checkIn, .favoriteIn {
   display: inline;
-  background-color: rgb(243, 209, 77);
+  background-color: red;
   color: white;
   font-size: 20px;
   border-radius: 5px;
@@ -151,7 +151,7 @@ a {
 }
 .backBtn{
   display: inline-block;
-  background-color: rgb(243, 209, 77);
+  background-color: red;
   color: white;
   font-size: 14px;
   border-radius: 5px;
