@@ -81,9 +81,9 @@ const getBusinessById = function (id, cb) {
   })
 }
 
-const getFriendsReviews = function (userID, businessID, cb) {
+const getFriendsReviews = function (userId, businessId, cb) {
 
-    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id AND reviews.business_id = "${businessID}";`
+    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userId} AND friends.user_id2 = reviews.user_id AND reviews.business_id = "${businessId}";`
 
     connection.query(query, (err, results) => {
         if (err) {
@@ -97,9 +97,9 @@ const getFriendsReviews = function (userID, businessID, cb) {
 
 //get non-friends' reviews for a specific business
 
-const getStrangersReviews = function (userID, businessID, cb) {
+const getStrangersReviews = function (userId, businessId, cb) {
 
-    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userID} AND friends.user_id2 = reviews.user_id) AND reviews.business_id = "${businessID}";`
+    let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userId} AND friends.user_id2 = reviews.user_id) AND reviews.business_id = "${businessId}";`
 
   connection.query(query, (err, results) => {
     if (err) {
@@ -110,7 +110,7 @@ const getStrangersReviews = function (userID, businessID, cb) {
   })
 }
 
-const checkFavorite = function (userID, businessID, cb) {
+const checkFavorite = function (userId, businessId, cb) {
 
   let query = `SELECT * FROM favorites WHERE favorites.user_id = ? AND favorites.business_id = ?;`
 
@@ -127,8 +127,8 @@ const checkFavorite = function (userID, businessID, cb) {
   })
 }
 
-const addFavorite = function (userID, businessID, cb) {
-  checkFavorite(userID, businessID, (err, bool) => {
+const addFavorite = function (userId, businessId, cb) {
+  checkFavorite(userId, businessId, (err, bool) => {
     if (bool) {
       cb(null, false)
     } else {
@@ -146,10 +146,9 @@ const addFavorite = function (userID, businessID, cb) {
   })
 }
 
+const checkCheckIn = function (userId, businessId, cb) {
 
-const checkCheckIn = function (userID, businessID, cb) {
-
-  let query = `SELECT * FROM checkins WHERE checkins.user_id = ${userID} AND checkins.business_id = "${businessID}";`
+  let query = `SELECT * FROM checkins WHERE checkins.user_id = ${userId} AND checkins.business_id = "${businessId}";`
 
   connection.query(query, (err, results) => {
     if (err) {
@@ -164,9 +163,12 @@ const checkCheckIn = function (userID, businessID, cb) {
   })
 }
 
-//for a particular business, return all checkins of friends 
-const getCheckins = function(businessId, cb) {
-  let query;
+//for a particular business, return all checkins of friends
+  //requires two separate checkin functions (getCheckins1 & getCheckins2), since friends table operates in two directions.
+const getCheckins1 = function(userId, businessId, cb) {
+
+  let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id1 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id2 = checkins.user_id;`;
+
   connection.query(query, (err, results) => {
     if (err) {
       cb(err)
@@ -176,12 +178,25 @@ const getCheckins = function(businessId, cb) {
   })
 }
 
-const addCheckIn = function (userID, businessID, cb) {
-    checkCheckIn(userID, businessID, (err, bool) => {
+const getCheckins2 = function(userId, businessId, cb) {
+
+  let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id2 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id1 = checkins.user_id;`;
+  
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
+const addCheckIn = function (userId, businessId, cb) {
+    checkCheckIn(userId, businessId, (err, bool) => {
       if (bool) {
       cb(false)
     } else {
-      let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userID}, "${businessID}");`
+      let query = `INSERT INTO checkins (user_id, business_id) VALUES (${userId}, "${businessId}");`
 
       connection.query(query, (err, results) => {
         if (err) {
@@ -357,5 +372,7 @@ module.exports = {
     checkFavorite,
     addNewReview,
     getUsernameById,
-    getFavorite
+    getFavorite,
+    getCheckins1,
+    getCheckins2
 }
