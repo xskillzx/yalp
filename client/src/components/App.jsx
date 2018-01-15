@@ -92,12 +92,17 @@ class App extends React.Component {
     axios.get(`/server/business/${business.reference}`)
       .then(resp => {
         this.photos = [];
-        resp.data.photos.map(photo => {
-          this.getBusinessPhotos(photo.photo_reference, data => {
-            this.setState({business: resp.data});
-            this.props.history.push(`/business/${resp.data.name}`);
+        if (resp.data.photos) {
+          resp.data.photos.map(photo => {
+            this.getBusinessPhotos(photo.photo_reference, data => {
+              this.setState({business: resp.data, checkedIn: false});
+              this.props.history.push(`/business/${resp.data.name}`);
+            })
           })
-        })
+        } else {
+          this.setState({business: resp.data, checkedIn: false});
+          this.props.history.push(`/business/${resp.data.name}`);
+        }
       })
       .catch(err => {
         console.log(err);
