@@ -114,7 +114,7 @@ const checkFavorite = function (userId, businessId, cb) {
 
   let query = `SELECT * FROM favorites WHERE favorites.user_id = ? AND favorites.business_id = ?;`
 
-  connection.query(query, [userID, businessID], (err, results) => {
+  connection.query(query, [userId, businessId], (err, results) => {
     if (err) {
       cb(err, false);
     } else {
@@ -134,7 +134,7 @@ const addFavorite = function (userId, businessId, cb) {
     } else {
       let query = `INSERT INTO favorites (user_id, business_id) VALUES (?, ?);`
 
-      connection.query(query, [userID, businessID], (err, results) => {
+      connection.query(query, [userId, businessId], (err, results) => {
         if (err) {
           cb(err, false)
         } else {

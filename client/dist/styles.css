@@ -79,9 +79,9 @@ a {
 
 .businessEntry {
   background: white;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 80%;
-  height: 50px;
+  height: 80px;
   border: solid 1px #ddd;
   border-radius: 4px;
   display: flex;
@@ -96,7 +96,8 @@ a {
   font-size: 16px;
 }
 .address {
-  left: 500px;
+  display: inline-block;
+  left: 200px;
 }
 .favorite {
   right: 10px;
@@ -110,7 +111,11 @@ a {
 .logo {
   width: 2.5%;
 }
-
+.title {
+  position: absolute;
+  left: 200px;
+  margin: 6px 0px 0px 0px;
+}
 
 /* BUSINESS PAGE */
 

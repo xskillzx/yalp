@@ -17,8 +17,8 @@ class BusinessEntry extends React.Component {
     return (
         <div className="businessEntry">
           <img className="businessLogo" src={this.props.business.image_url} width="60px" />
-          <h5 style={{margin: '6px 0px 0px 0px'}}>{this.props.business.name}</h5><br />
           <div className="rating">{imgArr}</div>
+          <h5 className="title" >{this.props.business.name}</h5><br />
           <div className="address">
             <span>{this.props.business.formatted_address}</span>
           </div>

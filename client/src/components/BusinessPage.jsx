@@ -27,7 +27,7 @@ class BusinessPage extends React.Component {
           <span>
             {
               this.props.checkedIn ?
-              <button onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Already Checked In!</button> :
+              <button onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn disabled">Already Checked In!</button> :
               <button onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Check In</button>
             }
           </span>
