@@ -244,7 +244,7 @@ const getFriendsFavorites1 = function(userId, businessId, cb) {
 const getFriendsFavorites2 = function(userId, businessId, cb) {
 
   let query = `SELECT favorites.user_id, favorites.createdAt FROM favorites INNER JOIN friends ON friends.user_id2 = ${userId} AND favorites.business_id = ${businessId} AND friends.user_id1 = favorites.user_id;`;
-  
+
   connection.query(query, (err, results) => {
     if (err) {
       cb(err)
@@ -436,8 +436,8 @@ module.exports = {
   addNewReview,
   getUsernameById,
   getFavorite,
-  getCheckins1,
-  getCheckins2,
+  getFriendsCheckins1,
+  getFriendsCheckins2,
   addFriend,
   friendChecker
 }

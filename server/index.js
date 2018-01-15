@@ -144,6 +144,17 @@ app.get('/server/addfriend', (req, res) => {
   })
 })
 
+app.get('/server/checkfriend', (req, res) => {
+  db.friendChecker(req.query.userId, req.query.friendId, (err, results) => {
+    if (err) {
+      res.status(400);
+      res.end('Unable to add friend');
+    } else {
+      res.status(201).json(results);
+    }
+  })
+})
+
 app.get('/server/user', (req, res) => {
   db.getUsernameById(req.query.userId, (err, results) => {
     if (err) {
