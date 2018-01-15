@@ -411,5 +411,7 @@ module.exports = {
   getUsernameById,
   getFavorite,
   getCheckins1,
-  getCheckins2
+  getCheckins2,
+  addFriend,
+  friendChecker
 }
