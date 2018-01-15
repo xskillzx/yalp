@@ -64,6 +64,25 @@ app.get('/server/business/photos/:photoRef', (req, res) => {
   // res.status(200).json('ok');
 });
 
+// get all friend checkins for a particular business
+app.get('/server/business/checkins', (req, res) => {
+  db.getCheckins1(req.query.userId, req.query.businessId, (err, results1) => {
+    if (err) {
+      res.status(400);
+      res.end('Unable to retrieve checkins')
+    } else {
+      db.getCheckins2(req.query.userId, req.query.businessId, (err, results2) => {
+        if (err) {
+          res.status(400);
+          res.end('Unable to retreive checkins')
+        } else {
+          console.log('checkins results:', results1, results2)
+        }
+      })
+    }
+  })
+})
+
 // when user clicks on checkin button on business page
 app.post('/server/profile/checkins', (req, res) => {
   let userId = req.body.userId;

@@ -41,6 +41,10 @@ class FriendActivity extends React.Component {
     TimeAgo.locale(en);
   }
 
+  componentWillMount() {
+    this.getFriendCheckins()
+  }
+
   createDate(createdAt) {
     const timeAgo = new TimeAgo('en-US');
     return timeAgo.format(new Date(createdAt));
@@ -59,9 +63,7 @@ class FriendActivity extends React.Component {
   }
 
   getFriendCheckins() {
-
     // query for username & createdAt for that business
-
     axios.get('/server/business/checkins', {
       params: {
         businessId: this.props.business.id,
