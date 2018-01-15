@@ -225,7 +225,6 @@ const addNewReview = function (userId, businessId, review, cb) {
 
 
 const getUsernameById = function(userId, cb) {
-  console.log('getting username by id')
   let query = `SELECT username FROM users WHERE id=${userId}`;
 
   connection.query(query, (err, results) => {
@@ -239,9 +238,9 @@ const getUsernameById = function(userId, cb) {
 }
 
 const getFavorite = function(userId, cb) {
-    let query = 'SELECT * from favorites where favorites.user_id = userId';
+    let query = 'SELECT * from favorites where favorites.user_id = ?';
 
-    connection.query(query, (err, results) => {
+    connection.query(query, [userId], (err, results) => {
         if (err) {
             cb(err, null);
         } else {
