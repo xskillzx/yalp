@@ -33,7 +33,7 @@ const getUser = function (user, cb) {
 
 const postUser = function (user, cb) {
 
-  let test = connection.query(`SELECT * FROM users WHERE users.name = ${user.name}`);
+  let test = connection.query(`SELECT * FROM users WHERE users.name = "${user.name}"`);
 
   if (test.length) {
     cb(false)
@@ -151,7 +151,7 @@ const checkFavorite = function (userId, businessId, cb) {
 
   let query = `SELECT * FROM favorites WHERE favorites.user_id = ? AND favorites.business_id = ?;`
 
-  connection.query(query, [userID, businessID], (err, results) => {
+  connection.query(query, [userId, businessId], (err, results) => {
     if (err) {
       cb(err, false);
     } else {
@@ -171,7 +171,7 @@ const addFavorite = function (userId, businessId, cb) {
     } else {
       let query = `INSERT INTO favorites (user_id, business_id) VALUES (?, ?);`
 
-      connection.query(query, [userID, businessID], (err, results) => {
+      connection.query(query, [userId, businessId], (err, results) => {
         if (err) {
           cb(err, false)
         } else {
@@ -201,8 +201,8 @@ const checkCheckIn = function (userId, businessId, cb) {
 }
 
 //for a particular business, return all checkins of friends
-//requires two separate checkin functions (getCheckins1 & getCheckins2), since friends table operates in two directions.
-const getCheckins1 = function (userId, businessId, cb) {
+  //requires two separate checkin functions (getCheckins1 & getCheckins2), since friends table operates in two directions.
+const getFriendsCheckins1 = function(userId, businessId, cb) {
 
   let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id1 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id2 = checkins.user_id;`;
 
@@ -215,10 +215,36 @@ const getCheckins1 = function (userId, businessId, cb) {
   })
 }
 
-const getCheckins2 = function (userId, businessId, cb) {
+const getFriendsCheckins2 = function(userId, businessId, cb) {
 
   let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id2 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id1 = checkins.user_id;`;
 
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
+const getFriendsFavorites1 = function(userId, businessId, cb) {
+
+  let query = `SELECT favorites.user_id, favorites.createdAt FROM favorites INNER JOIN friends ON friends.user_id1 = ${userId} AND favorites.business_id = ${businessId} AND friends.user_id2 = favorites.user_id;`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
+const getFriendsFavorites2 = function(userId, businessId, cb) {
+
+  let query = `SELECT favorites.user_id, favorites.createdAt FROM favorites INNER JOIN friends ON friends.user_id2 = ${userId} AND favorites.business_id = ${businessId} AND friends.user_id1 = favorites.user_id;`;
+  
   connection.query(query, (err, results) => {
     if (err) {
       cb(err)

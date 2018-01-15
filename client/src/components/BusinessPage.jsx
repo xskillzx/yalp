@@ -17,7 +17,6 @@ class BusinessPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.getFavoriteInfo(this.props.business.id));
     return (
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>
@@ -27,14 +26,14 @@ class BusinessPage extends React.Component {
           <span>
             {
               this.props.checkedIn ?
-              <button onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Already Checked In!</button> :
+              <button onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn disabled">Checked In!</button> :
               <button onClick={e => {this.props.checkIn(this.props.business)}} className="checkIn">Check In</button>
             }
           </span>
           <span>
             {
               this.props.getFavoriteInfo(this.props.business.id) ?
-              <button className="favoriteIn disabled">Favorited</button> :
+              <button className="favoriteIn disabled">Favorited!</button> :
               <button className="favoriteIn" onClick={e => {this.props.favoriteIn(this.props.business)}}>Favorite</button>
             }
           </span>
