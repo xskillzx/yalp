@@ -14,6 +14,9 @@ class BusinessEntry extends React.Component {
         (<img className="ratingLogo" key={i} src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>)
       )
     }
+    if (!imgArr.length) {
+      imgArr.push(<span style={{fontSize: '14px'}} key='noRating'>No Rating...</span>)
+    }
     return (
         <div className="businessEntry">
           <img className="businessLogo" src={this.props.business.image_url} width="60px" />
