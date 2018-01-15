@@ -13,6 +13,10 @@ body {
   margin: -10px -10px 0 -10px;
   padding: 10px;
 }
+
+
+/* HOME/LOGIN/SIGNUP  */
+
 #form-background {
   height: 500px;
   width: 50%;
@@ -69,24 +73,33 @@ a {
   font-size: 20px;
   padding: 5px;
 }
+
+
+/* BUSINESS LISTINGS PAGE */
+
 .businessEntry {
   background: white;
-  margin: 20px;
+  margin: 0 auto;
   width: 80%;
-  border: solid 1px black;
+  height: 50px;
+  border: solid 1px #ddd;
   border-radius: 4px;
   display: flex;
   justify-content: left;
   align-items: left;
   overflow: auto;
+  position: relative;
 }
 .address, .favorite {
-  margin-right: 15px;
-  margin-left: auto;
-  margin-top: 6px;
+  margin-top: 10px;
+  position: absolute;
+  font-size: 16px;
 }
-.address span, .favorite {
-  font-size: 16px
+.address {
+  left: 500px;
+}
+.favorite {
+  right: 10px;
 }
 .businessLogo {
   margin: 10px;
@@ -97,6 +110,10 @@ a {
 .logo {
   width: 2.5%;
 }
+
+
+/* BUSINESS PAGE */
+
 .businessPage {
   margin: 5%;
   background: white;
@@ -123,6 +140,11 @@ a {
   margin: 10px 9%;
   padding: 12px 20px;
 }
+.business-page-btns {
+  background-color: lightblue;
+}
+
+/* Add Review Section */
 .addReview {
   background-color: #fff;
   padding: 20px;
@@ -151,6 +173,8 @@ a {
   display: block;
   border: 1px solid white;
 }
+
+/* Reviews Section */
 #reviews {
   width: 60%;
   padding: 20px;
@@ -174,6 +198,8 @@ a {
 .review-text {
   font-size: 16px;
 }
+
+/* Friend Activity Section */
 #friend-activity {
   border: 1px solid #ddd;
   width: 30%;
@@ -183,6 +209,15 @@ a {
 .activity-header {
   font-size: 20px;
 }
+.activity-user {
+  font-weight: bold;
+  padding-right: 5px;
+}
+.activity-time {
+  font-style: italic;
+}
+
+/* Photo Feed Section */
 .photoFeed {
   width: 30%;
   float: right;
@@ -199,6 +234,6 @@ a {
   font-style: italic;
 }
 .disabled {
-  opacity: 0.65; 
+  opacity: 0.65;
   cursor: not-allowed;
 }
