@@ -193,7 +193,7 @@ const getFriendsCheckins2 = function(userId, businessId, cb) {
 
 const getFriendsFavorites1 = function(userId, businessId, cb) {
 
-  let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id1 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id2 = checkins.user_id;`;
+  let query = `SELECT favorites.user_id, favorites.createdAt FROM favorites INNER JOIN friends ON friends.user_id1 = ${userId} AND favorites.business_id = ${businessId} AND friends.user_id2 = favorites.user_id;`;
 
   connection.query(query, (err, results) => {
     if (err) {
@@ -206,7 +206,7 @@ const getFriendsFavorites1 = function(userId, businessId, cb) {
 
 const getFriendsFavorites2 = function(userId, businessId, cb) {
 
-  let query = `SELECT checkins.user_id, checkins.createdAt FROM checkins INNER JOIN friends ON friends.user_id2 = ${userId} AND checkins.business_id = ${businessId} AND friends.user_id1 = checkins.user_id;`;
+  let query = `SELECT favorites.user_id, favorites.createdAt FROM favorites INNER JOIN friends ON friends.user_id2 = ${userId} AND favorites.business_id = ${businessId} AND friends.user_id1 = favorites.user_id;`;
   
   connection.query(query, (err, results) => {
     if (err) {
@@ -401,4 +401,6 @@ module.exports = {
     getFavorite,
     getFriendsCheckins1,
     getFriendsCheckins2,
+    getFriendsFavorites1,
+    getFriendsFavorites2
 }
