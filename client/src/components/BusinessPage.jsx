@@ -21,8 +21,8 @@ class BusinessPage extends React.Component {
     return (
       <div className="businessPage">
         <Search getBusinesses={this.props.getBusinesses}/>
+        <div onClick={e => {this.props.backToResults()}} className="backBtn">{"<"} Search Results</div><br />
         <BusinessInfo business={this.props.business}/>
-
         <div className="business-page-btns">
           <span>
             {
@@ -39,7 +39,6 @@ class BusinessPage extends React.Component {
             }
           </span>
         </div>
-
         <div className="addReview">
           <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
         </div>

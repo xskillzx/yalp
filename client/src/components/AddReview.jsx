@@ -16,7 +16,26 @@ class AddReview extends React.Component {
     this.submitReview = this.submitReview.bind(this);
   }
 
-  updateRating(val) {
+  updateRating(val, e) {
+    console.log(this.lastSelectedRating)
+    if (this.lastSelectedRating) {
+      console.log('found last rating element', this.lastSelectedRating)
+      this.lastSelectedRating.style.background = 'red';
+    }
+    this.lastSelectedRating = e.currentTarget;
+    console.log(this.lastSelectedRating)
+     if (e.currentTarget.style.background === 'yellow') {
+      e.currentTarget.style.background = 'red';
+      for (let i = 0; i < e.currentTarget.children.length; i++) {
+        e.currentTarget.children[i].background = 'red';
+      }
+     } else {
+      e.currentTarget.style.background = 'yellow';
+      console.log(e.currentTarget.children)
+      for (let j = 0; j < e.currentTarget.children.length; j++) {
+        e.currentTarget.children[j].background = 'yellow';
+      }
+     }
     this.setState({ rating: val })
   }
   updateReviewText(e) {
@@ -52,29 +71,29 @@ class AddReview extends React.Component {
       return (
         <div>
           <div>Leave a Review</div>
-          <button className="rate-btn" onClick={() => this.updateRating(5)}>
+          <button className="rate-btn" onClick={e => this.updateRating(5, e)}>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
           </button>
-          <button className="rate-btn" onClick={() => this.updateRating(4)}>
+          <button className="rate-btn" onClick={e => this.updateRating(4, e)}>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
           </button>
-          <button className="rate-btn" onClick={() => this.updateRating(3)}>
+          <button className="rate-btn" onClick={e => this.updateRating(3, e)}>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
           </button>
-          <button className="rate-btn" onClick={() => this.updateRating(2)}>
+          <button className="rate-btn" onClick={e => this.updateRating(2, e)}>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
           </button>
-          <button className="rate-btn" onClick={() => this.updateRating(1)}>
+          <button className="rate-btn" onClick={e => this.updateRating(1, e)}>
             <img className="ratingLogo" src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>
           </button>
           <textarea className="new-review-text" type="text" placeholder="What'd you think?" onChange={this.updateReviewText}></textarea>

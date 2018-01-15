@@ -137,13 +137,21 @@ a {
   float: left;
 }
 .checkIn, .favoriteIn {
+  display: inline;
   background-color: rgb(243, 209, 77);
   color: white;
-  border-radius: 5px;
   font-size: 20px;
-  padding: 12px 20px;
+  border-radius: 5px;
   margin-right: 5px;
-  display: inline;
+  padding: 12px 20px;
+}
+.backBtn{
+  display: inline-block;
+  background-color: rgb(243, 209, 77);
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 6px 10px;
 }
 .disabled {
   opacity: 0.65;

@@ -14,7 +14,6 @@ class BusinessEntry extends React.Component {
         (<img className="ratingLogo" key={i} src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>)
       )
     }
-    console.log(this.props.favorite);
     return (
         <div className="businessEntry">
           <img className="businessLogo" src={this.props.business.image_url} width="60px" />
