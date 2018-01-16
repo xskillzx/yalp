@@ -1,7 +1,7 @@
 {
   "name": "yalp",
-  "version": "1.0.0",
-  "description": "Hack Reactor Greenfield - Group 6 - YALP",
+  "version": "2.0.0",
+  "description": "HR Legacy - Group 1 - YALP v2",
   "main": "index.js",
   "engines": {
     "node": ">=6.11.5",
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/teamyalp/yalp.git"
+    "url": "git+https://github.com/team-number-one/yalp.git"
   },
-  "author": "",
+  "author": "team-number-one",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/teamyalp/yalp/issues"
+    "url": "https://github.com/team-number-one/yalp/issues"
   },
-  "homepage": "https://github.com/teamyalp/yalp#readme",
+  "homepage": "https://github.com/team-number-one/yalp#readme",
   "dependencies": {
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
