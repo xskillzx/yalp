@@ -13,7 +13,7 @@ class Reviews extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getFriendReviews();
     this.getOtherReviews();
   }
@@ -27,8 +27,10 @@ class Reviews extends React.Component {
       }
     })
       .then(response => {
-        console.log(response);
-        this.setState({ friendReviews: response.data })
+        console.log('FRIEND REVIEWS:', response.data);
+        this.setState({
+          friendReviews: response.data
+        })
       })
       .catch(err => {
         if (err) { console.log(err) }
@@ -43,6 +45,7 @@ class Reviews extends React.Component {
       }
     })
       .then(response => {
+        console.log('OTHER REVIEWS:', response.data);
         this.setState({ otherReviews: response.data })
       })
       .catch(err => {

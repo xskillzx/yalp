@@ -64,6 +64,25 @@ app.get('/server/business/photos/:photoRef', (req, res) => {
   // res.status(200).json('ok');
 });
 
+// get all friend checkins for a particular business
+app.get('/server/business/checkins', (req, res) => {
+  db.getFriendsCheckins1(req.query.userId, req.query.businessId, (err, results1) => {
+    if (err) {
+      res.status(400);
+      res.end('Unable to retrieve checkins')
+    } else {
+      db.getFriendsCheckins2(req.query.userId, req.query.businessId, (err, results2) => {
+        if (err) {
+          res.status(400);
+          res.end('Unable to retreive checkins')
+        } else {
+          console.log('checkins results:', results1, results2)
+        }
+      })
+    }
+  })
+})
+
 // when user clicks on checkin button on business page
 app.post('/server/profile/checkins', (req, res) => {
   let userId = req.body.userId;
@@ -100,12 +119,36 @@ app.get('/server/reviews/friends', (req, res) => {
     }
   })
 })
+
 //when business page reviews render
 app.get('/server/reviews/others', (req, res) => {
   db.getStrangersReviews(req.query.userId, req.query.businessId, (err, results) => {
     if (err) {
       res.status(400);
       res.end('Unable to retrieve others reviews');
+    } else {
+      res.status(201).json(results);
+    }
+  })
+})
+
+// when user clicks add review author as friend on business page
+app.get('/server/addfriend', (req, res) => {
+  db.addFriend(req.query.userId, req.query.friendId, (err, results) => {
+    if (err) {
+      res.status(400);
+      res.end('Unable to add friend');
+    } else {
+      res.status(201).json(results);
+    }
+  })
+})
+
+app.get('/server/checkfriend', (req, res) => {
+  db.friendChecker(req.query.userId, req.query.friendId, (err, results) => {
+    if (err) {
+      res.status(400);
+      res.end('Unable to add friend');
     } else {
       res.status(201).json(results);
     }
