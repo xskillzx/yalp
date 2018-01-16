@@ -7,7 +7,11 @@ class BusinessList extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  componentWillMount() {
+    document.body.style.background = "url('wood.jpg')";
+    document.body.style.backgroundSize = "100%";
+    document.body.style.backgroundRepeat = "repeat-y";
+  }
   getBusinessEntries() {
     const { favorites } = this.props;
     return this.props.businesses.data.map(business => 

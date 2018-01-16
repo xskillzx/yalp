@@ -2,7 +2,6 @@ body {
   font-family: 'avenir';
   background-image: url("beer.jpg");
   background-size: 100%;
-  background-repeat: no-repeat;
   font-size: 24px;
 }
 #topnav {
@@ -80,7 +79,8 @@ a {
 .businessEntry {
   background: white;
   margin: 10px auto;
-  width: 80%;
+  padding: 5px 15px;
+  width: 75%;
   height: 80px;
   border: solid 1px #ddd;
   border-radius: 4px;
@@ -103,7 +103,7 @@ a {
   right: 10px;
 }
 .rating {
-  margin: 3px 20px;
+  margin: 3px 0px;
 }
 .logo {
   float: left;

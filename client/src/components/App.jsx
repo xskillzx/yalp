@@ -19,7 +19,7 @@ class App extends React.Component {
       userID: 0,
       loggedIn: false,
       checkedIn: false,
-      favorites: {}
+      favorites: {},
     }
     this.photos = [];
     this.searchResults = {};
@@ -174,7 +174,10 @@ class App extends React.Component {
       <div>
         <div id="topnav">
           {this.state.loggedIn ?
-            <div>
+            <div onClick={e => {
+              document.body.style.background = "url('beer.jpg')";
+              document.body.style.backgroundSize = "100%";
+            }}>
               <Link to="/search" className="logoLink">
                 <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
                 YALP!
