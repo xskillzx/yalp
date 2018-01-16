@@ -155,8 +155,8 @@ app.get('/server/checkfriend', (req, res) => {
   })
 })
 
-app.get('/server/user', (req, res) => {
-  db.getUsernameById(req.query.userId, (err, results) => {
+app.get('/server/user/:id', (req, res) => {
+  db.getUsernameById(req.params.id, (err, results) => {
     if (err) {
       res.send(400)
       res.end('Unable to retrieve username from id')
@@ -195,8 +195,31 @@ app.get('/profile/favorites/:userId', (req, res) => {
   console.log(req.params);
   const { userId } = req.params;
   db.getFavorite(parseInt(userId), (err, result) => {
-      console.log('Server: ', result);
       res.status(200).json(result);
+  });
+});
+
+app.get('/user/friends/:id', (req, res) => {
+  db.getFriends(parseInt(req.params.id), (err, result) => {
+    res.status(200).json(result);
+  });
+});
+
+app.get('/user/checkins/:id', (req, res) => {
+  db.getCheckins(parseInt(req.params.id), (err, result) => {
+    res.status(200).json(result);
+  });
+});
+
+app.get('/user/reviews/:id', (req, res) => {
+  db.getReviews(parseInt(req.params.id), (err, result) => {
+    res.status(200).json(result);
+  });
+});
+
+app.get('/user/favorites/:id', (req, res) => {
+  db.getFavorites(parseInt(req.params.id), (err, result) => {
+    res.status(200).json(result);
   });
 });
 
