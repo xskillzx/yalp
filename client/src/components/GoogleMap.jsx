@@ -1,5 +1,5 @@
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import {GOOGLE_MAPS_API_KEY} from '../../config/yelp.js';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { GOOGLE_MAPS_API_KEY } from '../../config/yelp.js';
 import React from 'react'; 
  
 export class MapContainer extends React.Component {
@@ -43,7 +43,7 @@ export class MapContainer extends React.Component {
       height: '55vh'
     }
     return (
-      <Map google={this.props.google} zoom={14} style={style}>
+      <Map google={this.props.google} zoom={14} center={} style={style}>
 
         {this.state.businesses.map( result => (
           <Marker onClick = {this.onMarkerClick}

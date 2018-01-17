@@ -28,7 +28,7 @@ class BusinessList extends React.Component {
     return (
       <div>
         {this.getBusinessEntries()}
-        <MapContainer style={} businesses={this.props.businesses.data}/>
+        <MapContainer businesses={this.props.businesses.data}/>
       </div>
     )
   }
