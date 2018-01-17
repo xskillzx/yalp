@@ -25,7 +25,7 @@ class BusinessEntry extends React.Component {
           <div className="address">
             <span>{this.props.business.formatted_address}</span>
           </div>
-          <div className="favorite">{this.props.favorite ? 'Favorite' : 'Not Favorite'}</div>
+          {/* <div className="favorite">{this.props.favorite ? 'Favorite' : 'Not Favorite'}</div> */}
         </div>
     )
   }
