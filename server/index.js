@@ -51,17 +51,7 @@ app.get('/server/search/:query/:loc', (req, res) => {
   let params = req.params.loc ? [req.params.query, req.params.loc.slice(1, -1)] : [req.params.query];
   api.searchBusinesses(params, results => {
     res.status(201).json(results.data.results);
-  })
-  // use below for test
-  // db.tempSearch(req.body, (err, results) => {
-  //   if (err) {
-  //     res.status(400);
-  //     res.end('Failed to Search.');
-  //   } else {
-  //     //using fake data object mirroring API
-  //     res.status(201).json(api.fakeData);
-  //   }
-  // })
+  });
 });
 
 // when user clicks on a business
