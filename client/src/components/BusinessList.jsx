@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BusinessEntry from './BusinessEntry.jsx';
 import { Link } from 'react-router-dom';
+import MapContainer from './GoogleMap.jsx';
 
 class BusinessList extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class BusinessList extends React.Component {
     return (
       <div>
         {this.getBusinessEntries()}
+        <MapContainer style={} businesses={this.props.businesses.data}/>
       </div>
     )
   }
