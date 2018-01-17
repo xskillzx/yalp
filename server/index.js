@@ -200,7 +200,7 @@ app.get('/server/profile/checkins', (req, res) => {
 app.post('/profile/favorites', (req, res) => {
   const { userId, businessId } = req.body;
   console.log(userId, businessId)
-  db.addFavorite(userId, businessId, (err, result) => {
+  db.toggleFavorite(userId, businessId, (err, result) => {
     res.status(201).json(result);
   })
 })

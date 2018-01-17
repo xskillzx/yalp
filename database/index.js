@@ -52,8 +52,7 @@ const postUser = function (name, email, hw, username, cb) {
   })
 }
 
-//get user by id
-
+//get hashword
 
 let getHW = function(username, cb) {
   connection.query(`SELECT password FROM users WHERE username = '${username}'`, (err, results) => {
@@ -64,7 +63,6 @@ let getHW = function(username, cb) {
     }
   });
 };
-
 
 const getUserInfo = function (username, cb) {
   let query = `SELECT id, name, username, email FROM users WHERE username = '${username}'`
@@ -176,11 +174,20 @@ const checkFavorite = function (userId, businessId, cb) {
   })
 }
 
-const addFavorite = function (userId, businessId, cb) {
+const toggleFavorite = function (userId, businessId, cb) {
   checkFavorite(userId, businessId, (err, bool) => {
-    if (bool) {
-      cb(null, false)
-    } else {
+    if (bool === true) {
+      let query = `DELETE FROM favorites WHERE user_id = '${userId}' AND business_id = '${businessId}';`
+
+      connection.query(query, [userId, businessId], (err, results) => {
+        if (err) {
+          cb(err, false)
+        } else {
+          cb(null, false)
+        }
+      })      
+    } 
+    else if (bool === false) {
       let query = `INSERT INTO favorites (user_id, business_id) VALUES (?, ?);`
 
       connection.query(query, [userId, businessId], (err, results) => {
@@ -490,7 +497,7 @@ module.exports = {
   tempSearch,
   getStrangersReviews,
   getFriendsReviews,
-  addFavorite,
+  toggleFavorite,
   addCheckIn,
   checkCheckIn,
   checkFavorite,

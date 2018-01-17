@@ -162,7 +162,6 @@ class App extends React.Component {
     }
     axios.post('/profile/favorites', userBusinessObj)
       .then(result => {
-        console.log('#favoriteIn: ', result);
         let { favorites } = this.state;
         let { data } = result;
         favorites[business.id] = data;
