@@ -79,17 +79,17 @@ class App extends React.Component {
     this.setState({loggedIn: false})
   }
 
-  getBusinesses(search, loc) {
-    let url = loc ? `/server/search/${search}/${loc}` : `/server/search/${search}`;
-    axios.get(url)
-      .then(resp => {
-        console.log(resp);
-        this.searchResults = resp;
-        this.props.history.push('/listings');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  getBusinesses(search) {
+    let self = this;
+    axios.get(`/server/search/${search}`)
+    .then(resp => {
+      console.log(resp);
+      self.searchResults = resp;
+      self.props.history.push('/listings');
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   updateBusiness(e, business) {
@@ -100,23 +100,23 @@ class App extends React.Component {
   getBusinessInfo(business) {
     let self = this;
     axios.get(`/server/business/${business.reference}`)
-      .then(resp => {
-        this.photos = [];
-        if (resp.data.photos) {
-          resp.data.photos.map(photo => {
-            this.getBusinessPhotos(photo.photo_reference, data => {
-              this.setState({business: resp.data, checkedIn: false});
-              this.props.history.push(`/business/${resp.data.name}`);
-            })
+    .then(resp => {
+      this.photos = [];
+      if (resp.data.photos) {
+        resp.data.photos.map(photo => {
+          this.getBusinessPhotos(photo.photo_reference, data => {
+            this.setState({business: resp.data, checkedIn: false});
+            this.props.history.push(`/business/${resp.data.name}`);
           })
-        } else {
-          this.setState({business: resp.data, checkedIn: false});
-          this.props.history.push(`/business/${resp.data.name}`);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        })
+      } else {
+        this.setState({business: resp.data, checkedIn: false});
+        this.props.history.push(`/business/${resp.data.name}`);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   checkIn(business) {
@@ -125,41 +125,41 @@ class App extends React.Component {
       business: business
     }
     axios.post('/server/profile/checkins', userBusinessObj)
-      .then(resp => {
-        this.setState({checkedIn: true});
-      })
+    .then(resp => {
+      this.setState({checkedIn: true});
+    });
   }
 
   getBusinessPhotos(photoRef, cb) {
     axios.get(`/server/business/photos/${photoRef}`)
-      .then(resp => {
-        this.photos.push(resp.data);
-        cb();
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    .then(resp => {
+      this.photos.push(resp.data);
+      cb();
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   getFavorite() {
     const { userId } = this.state;
     axios.get(`/profile/favorites/${userId}`)
-      .then(resp => {
-        let { favorites } = this.state;
-        if (resp.data) {
-          resp.data.forEach((favorite) => {
-            favorites[favorite.business_id] = true;
-          })
-          this.setState({favorites});
-        }
-      });
+    .then(resp => {
+      let { favorites } = this.state;
+      if (resp.data) {
+        resp.data.forEach((favorite) => {
+          favorites[favorite.business_id] = true;
+        })
+        this.setState({favorites});
+      }
+    });
   }
 
   favoriteIn(business) {
     let userBusinessObj = {
       userId: this.state.userId,
       businessId: business.id
-    }
+    };
     axios.post('/profile/favorites', userBusinessObj)
       .then(result => {
         let { favorites } = this.state;
@@ -209,10 +209,11 @@ class App extends React.Component {
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ 
-            () => <BusinessList 
-              businesses={this.searchResults} 
-              updateBusiness={this.updateBusiness.bind(this)}
-              favorites={this.state.favorites} /> } />
+            (props) => <div id="listings"><BusinessList location={props.location}
+              // businesses={this.searchResults} 
+              // updateBusiness={this.updateBusiness.bind(this)}
+              // favorites={this.state.favorites} /></div> } />
+          /></div>}/>
           <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 
