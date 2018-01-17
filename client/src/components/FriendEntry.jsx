@@ -7,13 +7,19 @@ const renderButtons = (id, is_pending, is_receiver, deleteHandler, acceptHandler
   if (is_pending && is_receiver) {
     return (
       <div>
+        <div>PENDING REQUEST</div>
         <button onClick={e => acceptHandler(id)}>Accept</button>
         <button onClick={e => deleteHandler(id)}>No thx bro</button>
       </div>
     );
   }
   if (is_pending) {
-    return <button onClick={e => deleteHandler(id)}>Cancel request</button>;
+    return (
+      <div>
+        <div>PENDING REQUEST</div>
+        <button onClick={e => deleteHandler(id)}>Cancel request</button>
+      </div>
+    );
   }
   return <button onClick={e => deleteHandler(id)}>Remove friend</button>;
 };
