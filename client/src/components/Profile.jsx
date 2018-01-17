@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import FriendList from './FriendList.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -87,17 +88,11 @@ class Profile extends React.Component {
   }
 
   renderFriends() {
-    const { friends } = this.state;
+    const friends = this.state.friends;
     if (friends.length) {
-      return friends.map(friend => {
-        return (
-          <div key={friend.id}>
-            {friend.username + '  ' + this.createDate(friend.createdAt)}
-          </div>
-        );
-      });
+      return <FriendList friends={friends} userId={this.state.user.id}/>
     }
-    return '';
+    return <span>No friends</span>;
   }
 
   renderCheckins() {
