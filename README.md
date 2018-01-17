@@ -14,6 +14,8 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
+1. [Roadmap](#roadmap)
+1. [Trello](#trello)
 1. [Contributing](#contributing)
 
 
@@ -21,7 +23,7 @@
 
 - Node
 - Nodemon
-- Postgresql
+- MySQL
 
 ## Development
 
