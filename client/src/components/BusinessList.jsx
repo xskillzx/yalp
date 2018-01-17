@@ -16,26 +16,31 @@ class BusinessList extends React.Component {
     document.body.style.backgroundRepeat = "repeat-y";
   }
 
-  getBusinesses(search) {
-    axios.get(`/server/search/${search}`)
+  getBusinesses(search, loc = `37.7749,-122.4194`) {
+    let url = `/server/search/${search}/${loc}`;
+    axios.get(url)
     .then(resp => {
-      console.log(resp);
       this.setState({searchResults: resp.data});
-    }).catch(err => console.error(err));
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   componentDidMount() {
-    let searchQuery = this.props.location.search.slice(8);
-    this.getBusinesses(searchQuery);
+    let obj = (this.props.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+    this.getBusinesses(obj.search, obj.location);
   }
 
   getBusinessEntries() {
     const { favorites } = this.props;
     return this.state.searchResults.map(business => 
       <Link key={business.id} to={`/business/${business.id}`} onClick={(e) => this.props.updateBusiness(e, business)} style={{ textDecoration: 'none' }}>
-      <BusinessEntry business={business}
-                     key={business.id}
-                     favorite={favorites[business.id] ? true : false} />
+      <BusinessEntry 
+        business={business}
+        key={business.id}
+        // favorite={favorites[business.id] ? true : false}
+      />
       </Link> 
     )
   }
