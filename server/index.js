@@ -148,15 +148,22 @@ app.get('/server/reviews/others', (req, res) => {
 
 // when user clicks add review author as friend on business page
 app.get('/server/addfriend', (req, res) => {
-  db.addFriend(req.query.userId, req.query.friendId, (err, results) => {
-    if (err) {
-      res.status(400);
-      res.end('Unable to add friend');
-    } else {
-      res.status(201).json(results);
-    }
+  db.addFriend(req.query.sender_id, req.query.receiver_id, (err, results) => {
+    err ? res.status(400).end('Unable to add friend') : res.status(201).json(results);
   })
 })
+
+app.get('/server/removefriend', (req, res) => {
+  db.removeFriend(req.query.userId, req.query.userId2, (err, results) => {
+    err ? res.status(400).end('Unable to remove friend') : res.status(200).json(results);
+  });
+});
+
+app.get('/server/acceptfriend', (req, res) => {
+  db.acceptFriend(req.query.sender_id, req.query.receiver_id, (err, results) => {
+    err ? res.status(400).end('Unable to remove friend') : res.status(200).json(results);
+  });
+});
 
 app.get('/server/checkfriend', (req, res) => {
   db.friendChecker(req.query.userId, req.query.friendId, (err, results) => {
@@ -214,7 +221,7 @@ app.get('/profile/favorites/:userId', (req, res) => {
 });
 
 app.get('/user/friends/:id', (req, res) => {
-  db.getFriends(parseInt(req.params.id), (err, result) => {
+  db.getFriends(req.params.id, (err, result) => {
     res.status(200).json(result);
   });
 });

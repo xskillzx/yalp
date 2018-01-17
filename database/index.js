@@ -91,20 +91,6 @@ const getBusinessById = function (id, cb) {
   })
 }
 
-const addFriend = function (userId, friendId, cb) {
-
-  let query = `INSERT INTO friends (user_id1, user_id2) VALUES (${userId}, ${friendId});`;
-
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.log(err)
-      cb(err)
-    } else {
-      cb(null, results)
-    }
-  })
-}
-
 const friendChecker = function (userId, friendId, cb) {
 
   let query1 = `SELECT friends.user_id2 FROM friends WHERE friends.user_id1 = ${userId} AND friends.user_id2 = ${friendId};`;
@@ -345,17 +331,41 @@ const getFavorite = function (userId, cb) {
   });
 };
 
+// New version
 const getFriends = function(userId, cb) {
-    let query = 'select users.* from (select * from friends where user_id1 = ?) a left join users on a.user_id2 = users.id;';
-
-    connection.query(query, [userId], (err, results) => {
-        if (err) {
-            cb(err, null);
-        } else {
-            cb(null, results);
-        }
-    });
+  let query = `SELECT users.*, friends.is_pending, IF(friends.sender_id = ${userId}, 0, 1) AS is_receiver
+    FROM users, friends
+    WHERE (friends.sender_id = ${userId} AND users.id = friends.receiver_id)
+    OR (friends.receiver_id = ${userId} AND users.id = friends.sender_id)`;
+  connection.query(query, (err, results) => {
+    err ? cb(err) : cb(null, results);
+  });
 };
+
+// New version
+const addFriend = function(senderId, receiverId, cb) {
+  let query = `INSERT INTO friends (sender_id, receiver_id) VALUES (${senderId}, ${receiverId});`;
+  connection.query(query, (err, results) => {
+    err ? cb(err) : cb(null, results);
+  });
+}
+
+// Brand new folks
+const removeFriend = function(userId, userId2, cb) {
+  let query = `DELETE FROM friends 
+    WHERE (sender_id = ${userId} AND receiver_id = ${userId2})
+    OR (sender_id = ${userId2} AND receiver_id = ${userId})`;
+  connection.query(query, (err, results) => {
+    err ? cb(err) : cb(null, results);
+  });
+};
+
+const acceptFriend = function(senderId, receiverId, cb) {
+  let query = `UPDATE friends SET is_pending = 0 WHERE sender_id = ${senderId} AND receiver_id = ${receiverId}`;
+  connection.query(query, (err, results) => {
+    err ? cb(err) : cb(null, results);
+  });
+}
 
 const getCheckins = function(userId, cb) {
     let query = 'select a.id, businesses.name, a.createdAt from (select * from checkins where checkins.user_id = ?) a left join businesses on businesses.id = a.business_id;';
@@ -507,6 +517,8 @@ module.exports = {
   getFriendsCheckins1,
   getFriendsCheckins2,
   addFriend,
+  removeFriend,
+  acceptFriend,
   friendChecker,
   getFriends,
   getCheckins,
