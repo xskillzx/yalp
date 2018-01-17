@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
 const db = require('../database/index.js');
 const api = require('../client/helper/yelpHelpers.js');
@@ -242,6 +243,11 @@ app.get('/user/favorites/:id', (req, res) => {
   db.getFavorites(parseInt(req.params.id), (err, result) => {
     res.status(200).json(result);
   });
+});
+
+// For refreshing react router
+app.get('*', function response(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 const server = app.listen(process.env.PORT || 3000, () => {
