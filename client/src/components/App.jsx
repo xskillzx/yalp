@@ -79,17 +79,8 @@ class App extends React.Component {
     this.setState({loggedIn: false})
   }
 
-  getBusinesses(search, loc) {
-    let url = loc ? `/server/search/${search}/${loc}` : `/server/search/${search}`;
-    axios.get(url)
-    .then(resp => {
-      console.log(resp);
-      this.searchResults = resp;
-      this.props.history.push('/listings');
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  pushToListings(search, loc) {
+    loc ? this.props.history.push(`/listings?search=${search}&location=${loc}`) : this.props.history.push(`/listings?search=${search}`);
   }
 
   updateBusiness(e, business) {
@@ -205,7 +196,7 @@ class App extends React.Component {
         </div>
         <Switch>
           <Route exact path="/" render={ () => <div id="form-background"><div id="form"><Home /></div></div> }/>
-          <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search getBusinesses={this.getBusinesses.bind(this)}/></div></div> }/>
+          <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search goToListings={this.pushToListings.bind(this)}/></div></div> }/>
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ 
