@@ -199,12 +199,7 @@ class App extends React.Component {
           <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search goToListings={this.pushToListings.bind(this)}/></div></div> }/>
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
-          <Route path="/listings" render={ 
-            (props) => <div id="listings"><BusinessList location={props.location}
-              // businesses={this.searchResults} 
-              // updateBusiness={this.updateBusiness.bind(this)}
-              // favorites={this.state.favorites} /></div> } />
-          /></div>}/>
+          <Route path="/listings" render={(props) => <div id="listings"><BusinessList location={props.location}/></div>}/>
           <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 
@@ -217,7 +212,7 @@ class App extends React.Component {
               getBusinessPhotos={this.getBusinessPhotos.bind(this)}
               photos={this.photos}
               favoriteIn={this.favoriteIn.bind(this)}
-              backToResults={this.backToResults.bind(this)} 
+              backToResults={this.backToResults.bind(this)}
               /> 
             }
           />
