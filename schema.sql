@@ -49,8 +49,9 @@ CREATE TABLE `bookmarks` (
 
 CREATE TABLE `friends` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `user_id1` integer NOT NULL,
-  `user_id2` integer NOT NULL,
+  `sender_id` INTEGER NOT NULL,
+  `receiver_id` INTEGER NOT NULL,
+  `is_pending` INTEGER NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 );
 
@@ -134,15 +135,15 @@ INSERT INTO favorites (user_id, business_id) VALUES (6, '1e');
 INSERT INTO favorites (user_id, business_id) VALUES (6, '1f');
 
 
-INSERT INTO friends (user_id1, user_id2) VALUES (1, 2);
-INSERT INTO friends (user_id1, user_id2) VALUES (1, 3);
-INSERT INTO friends (user_id1, user_id2) VALUES (1, 4);
-INSERT INTO friends (user_id1, user_id2) VALUES (1, 6);
-INSERT INTO friends (user_id1, user_id2) VALUES (2, 3);
-INSERT INTO friends (user_id1, user_id2) VALUES (2, 5);
-INSERT INTO friends (user_id1, user_id2) VALUES (2, 6);
-INSERT INTO friends (user_id1, user_id2) VALUES (3, 4);
-INSERT INTO friends (user_id1, user_id2) VALUES (3, 5);
-INSERT INTO friends (user_id1, user_id2) VALUES (3, 6);
-INSERT INTO friends (user_id1, user_id2) VALUES (4, 6);
-INSERT INTO friends (user_id1, user_id2) VALUES (5, 6);
+INSERT INTO friends (sender_id, receiver_id, is_pending) VALUES (1, 2, 0);
+INSERT INTO friends (sender_id, receiver_id, is_pending) VALUES (1, 3, 0);
+INSERT INTO friends (sender_id, receiver_id, is_pending) VALUES (1, 4, 0);
+INSERT INTO friends (sender_id, receiver_id) VALUES (1, 6);
+INSERT INTO friends (sender_id, receiver_id) VALUES (2, 3);
+INSERT INTO friends (sender_id, receiver_id) VALUES (2, 5);
+INSERT INTO friends (sender_id, receiver_id) VALUES (2, 6);
+INSERT INTO friends (sender_id, receiver_id) VALUES (3, 4);
+INSERT INTO friends (sender_id, receiver_id) VALUES (3, 5);
+INSERT INTO friends (sender_id, receiver_id) VALUES (3, 6);
+INSERT INTO friends (sender_id, receiver_id) VALUES (4, 6);
+INSERT INTO friends (sender_id, receiver_id) VALUES (5, 6);
