@@ -142,7 +142,6 @@ class App extends React.Component {
   }
 
   getFavorite() {
-    console.log('getting favorites')
     const { userId } = this.state;
     axios.get(`/profile/favorites/${userId}`)
       .then(resp => {
