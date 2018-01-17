@@ -35,14 +35,11 @@ class BusinessList extends React.Component {
   getBusinessEntries() {
     const { favorites } = this.props;
     return this.state.searchResults.map(business => 
-      <Link key={business.id} to={`/business/${business.id}`} onClick={(e) => this.props.updateBusiness(e, business)} style={{ textDecoration: 'none' }}>
-      <BusinessEntry 
+      <BusinessEntry
         business={business}
         key={business.id}
-        // favorite={favorites[business.id] ? true : false}
       />
-      </Link> 
-    )
+    );
   }
 
   render() {
