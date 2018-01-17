@@ -79,13 +79,13 @@ class App extends React.Component {
     this.setState({loggedIn: false})
   }
 
-  getBusinesses(search) {
-    let self = this;
-    axios.get(`/server/search/${search}`)
+  getBusinesses(search, loc) {
+    let url = loc ? `/server/search/${search}/${loc}` : `/server/search/${search}`;
+    axios.get(url)
       .then(resp => {
         console.log(resp);
-        self.searchResults = resp;
-        self.props.history.push('/listings');
+        this.searchResults = resp;
+        this.props.history.push('/listings');
       })
       .catch(err => {
         console.log(err);
