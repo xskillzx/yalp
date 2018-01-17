@@ -31,7 +31,7 @@ class BusinessPage extends React.Component {
           <span>
             {
               this.props.getFavoriteInfo(this.props.business.id) ?
-              <button className="favoriteIn disabled">Favorited!</button> :
+              <button className="favoriteIn" onClick={e => {this.props.favoriteIn(this.props.business)}}>Unfavorite</button> :
               <button className="favoriteIn" onClick={e => {this.props.favoriteIn(this.props.business)}}>Favorite</button>
             }
           </span>
