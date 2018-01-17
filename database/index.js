@@ -183,7 +183,7 @@ const toggleFavorite = function (userId, businessId, cb) {
         if (err) {
           cb(err, false)
         } else {
-          cb(null, true)
+          cb(null, false)
         }
       })      
     } 
