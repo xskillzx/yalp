@@ -88,28 +88,6 @@ class App extends React.Component {
     this.getBusinessInfo(business)
   }
 
-  getBusinessInfo(business) {
-    let self = this;
-    axios.get(`/server/business/${business.reference}`)
-    .then(resp => {
-      this.photos = [];
-      if (resp.data.photos) {
-        resp.data.photos.map(photo => {
-          this.getBusinessPhotos(photo.photo_reference, data => {
-            this.setState({business: resp.data, checkedIn: false});
-            this.props.history.push(`/business/${resp.data.name}`);
-          })
-        })
-      } else {
-        this.setState({business: resp.data, checkedIn: false});
-        this.props.history.push(`/business/${resp.data.name}`);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
-
   checkIn(business) {
     let userBusinessObj = {
       userId: this.state.userId,
@@ -118,17 +96,6 @@ class App extends React.Component {
     axios.post('/server/profile/checkins', userBusinessObj)
     .then(resp => {
       this.setState({checkedIn: true});
-    });
-  }
-
-  getBusinessPhotos(photoRef, cb) {
-    axios.get(`/server/business/photos/${photoRef}`)
-    .then(resp => {
-      this.photos.push(resp.data);
-      cb();
-    })
-    .catch(err => {
-      console.log(err);
     });
   }
 
@@ -195,12 +162,12 @@ class App extends React.Component {
           }
         </div>
         <Switch>
-          <Route exact path="/" render={ () => <div id="form-background"><div id="form"><Home /></div></div> }/>
-          <Route path="/search" render={ () => <div id="form-background"><div id="form"><Search goToListings={this.pushToListings.bind(this)}/></div></div> }/>
-          <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
-          <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
+          <Route exact path="/" render={() => <div id="form-background"><div id="form"><Home /></div></div>}/>
+          <Route path="/search" render={() => <div id="form-background"><div id="form"><Search goToListings={this.pushToListings.bind(this)}/></div></div>}/>
+          <Route path="/login" render={() => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div>}/>
+          <Route path="/signup" render={() => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div>}/>
           <Route path="/listings" render={(props) => <div id="listings"><BusinessList location={props.location}/></div>}/>
-          <Route path={`/business/${this.state.business.name}`} render={ 
+          {/* <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 
               getBusinesses={this.getBusinesses.bind(this)}
@@ -215,8 +182,9 @@ class App extends React.Component {
               backToResults={this.backToResults.bind(this)}
               /> 
             }
-          />
-          <Route path="/profile" render={ () => <div><Profile profileId={this.state.userId} /></div>}/>
+          /> */}
+          <Route path="/business/:id" render={(props) => <BusinessPage history={props.history} businessPlaceId={props.match.params.id}/>}/>
+          <Route path="/profile" render={() => <div><Profile profileId={this.state.userId} /></div>}/>
         </Switch>
     </div>
     )
