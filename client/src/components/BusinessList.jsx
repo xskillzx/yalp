@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Filters from './Filters.jsx';
 import BusinessEntry from './BusinessEntry.jsx';
-import { Link } from 'react-router-dom';
 import MapContainer from './GoogleMap.jsx';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class BusinessList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {searchResults: [], initLocation: {}};
+    this.state = {
+      searchResults: [],
+      initLocation: {},
+      filterBy: null,
+      filteredResults: []
+    };
   }
   componentWillMount() {
     document.body.style.background = "url('wood.jpg')";
@@ -48,14 +54,23 @@ class BusinessList extends React.Component {
     );
   }
 
+  handleFilter() {
+
+  }
+
   render() {
     return (
-      <div id="businesses&map">
-        <div id="businesses">
-          {this.getBusinessEntries()}
+      <div id="search-results">
+        <div id="filters">
+          <Filters handleFilter={this.handleFilter.bind(this)}/>
         </div>
-        <div id="map-container">
-          {this.state.searchResults.length > 0 && <MapContainer initLocation={this.state.initLocation.lat ? this.state.initLocation : {lat: '37.7749', lng: '-122.4194'}} businesses={this.state.searchResults}/>}
+        <div id="businesses&map">
+          <div id="businesses">
+            {this.getBusinessEntries()}
+          </div>
+          <div id="map-container">
+            {this.state.searchResults.length > 0 && <MapContainer initLocation={this.state.initLocation.lat ? this.state.initLocation : {lat: '37.7749', lng: '-122.4194'}} businesses={this.state.searchResults}/>}
+          </div>
         </div>
       </div>
     )

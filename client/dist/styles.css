@@ -40,7 +40,7 @@ input[type=submit] {
   color: #fff;
   border: none;
 }
-button {
+/* button {
   cursor: pointer;
   display: inline-block;
   margin: 3px 0;
@@ -49,7 +49,7 @@ button {
   color: #fff;
   font-size: 20px;
   border: none;
-}
+} */
 button[type=Search] {
   display: inline;
   border: 2px solid red;
@@ -277,6 +277,13 @@ a {
   background: rgba(255, 255, 255, 0.822);
 }
 
+
+/* ANTD */
+@import 'antd/dist/antd.css';
+
+.ant-btn-group {
+  margin-right: 8px;
+}
 
 
 fieldset, label { margin: 0; padding: 0; }
