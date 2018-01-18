@@ -9,6 +9,12 @@ const getBusinessInfo = (businessRef, cb) => {
     .catch(error => console.log('error:', error))
 }
 
+const getBusinessInfoByPlaceId = (businessPlaceId, cb) => {
+  axios.get(`${googleAPI}details/json?placeid=${businessPlaceId}&key=${GOOGLE_API_KEY}`)
+    .then(response => cb(response))
+    .catch(error => console.log('error:', error))
+}
+
 const searchBusinesses = (query, cb) => {
   axios.get(`${googleAPI}textsearch/json?query=${query[0]}&location=${query[1] || location}&key=${GOOGLE_API_KEY}`)
     .then(response => cb(response))
@@ -21,6 +27,7 @@ const getPhotos = (ref, cb) => {
 
 module.exports = {
   getBusinessInfo,
+  getBusinessInfoByPlaceId,
   searchBusinesses,
   getPhotos
 }
