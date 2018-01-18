@@ -68,7 +68,7 @@ const BusinessInfo = (props) => {
             {
               props.reviewCount === 0 ?
               <td>{yalpMessage}</td> :
-              <td>{yalpStarRating}</td>
+              <td>{yalpStarRating} ({props.reviewCount})</td>
             }
           </tr>
         </tbody>
