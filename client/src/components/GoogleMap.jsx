@@ -9,16 +9,11 @@ export class MapContainer extends React.Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      businesses: []
+      businesses: props.businesses
     }
     
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({businesses: this.props.businesses});
   }
 
   onMarkerClick(props, marker, e) {
@@ -43,19 +38,19 @@ export class MapContainer extends React.Component {
       height: '100%',
       position: "sticky"
     }
-    return ( //add center={location} to map
-      <Map google={this.props.google} zoom={14} style={style}> 
-
-        {this.state.businesses.map( result => (
-          <Marker onClick = {this.onMarkerClick}
-                  name = {result.name}
-                  img = {result.icon}
-                  title = {'I am the title!'} 
-                  position = {result.geometry.location}
-                  formatted_address = {result.formatted_address}
-                  price_level = {result.price_level}
-                  />
-        ))}
+    return (
+      <Map google={this.props.google} zoom={14} style={style} initialCenter={this.props.initLocation}> 
+        {this.state.businesses.map(result => {
+          return (<Marker 
+            key={result.id}
+            onClick={this.onMarkerClick}
+            name={result.name}
+            img={result.icon}
+            position={result.geometry.location}
+            formatted_address={result.formatted_address}
+            price_level={result.price_level}
+          />);
+        })}
 
         <InfoWindow onClose={this.onInfoWindowClose}
           marker={this.state.activeMarker}

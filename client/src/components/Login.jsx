@@ -30,7 +30,7 @@ class Login extends React.Component {
         <form onSubmit={ this.getFormData.bind(this) }>
           <input ref="username" id="username" type="text" placeholder="Username" />
           <input ref="password" id="password" type="password" placeholder="Password" />
-          <input type="submit" value="Log In" />
+          <input style={{cursor: 'pointer'}} type="submit" value="Log In" />
         </form>
       </div>
     )

@@ -41,6 +41,7 @@ input[type=submit] {
   border: none;
 }
 button {
+  cursor: pointer;
   display: inline-block;
   margin: 3px 0;
   padding: 12px 20px;
@@ -271,4 +272,8 @@ a {
 .business-photo {
   height: 100px;
   border: 1px solid #fff;
+}
+/* FriendList Component */
+.friendList {
+  background: rgba(255, 255, 255, 0.822);
 }

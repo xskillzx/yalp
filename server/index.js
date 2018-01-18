@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
 const db = require('../database/index.js');
 const api = require('../client/helper/yelpHelpers.js');
@@ -50,23 +51,13 @@ app.get('/server/search/:query/:loc', (req, res) => {
   let params = req.params.loc ? [req.params.query, req.params.loc.slice(1, -1)] : [req.params.query];
   api.searchBusinesses(params, results => {
     res.status(201).json(results.data.results);
-  })
-  // use below for test
-  // db.tempSearch(req.body, (err, results) => {
-  //   if (err) {
-  //     res.status(400);
-  //     res.end('Failed to Search.');
-  //   } else {
-  //     //using fake data object mirroring API
-  //     res.status(201).json(api.fakeData);
-  //   }
-  // })
+  });
 });
 
 // when user clicks on a business
-app.get('/server/business/:reference', (req, res) => {
-  let businessRef = req.params.reference;
-  api.getBusinessInfo(businessRef, resp => {
+app.get('/server/business/:placeid', (req, res) => {
+  let businessPlaceId = req.params.placeid;
+  api.getBusinessInfoByPlaceId(businessPlaceId, resp => {
     res.json(resp.data.result)
   })
 });
@@ -116,7 +107,6 @@ app.post('/review', (req, res) => {
       res.status(400);
       res.end('Unable to submit new review');
     } else {
-      console.log(results);
       res.status(201).json(results);
     }
   })
@@ -148,15 +138,22 @@ app.get('/server/reviews/others', (req, res) => {
 
 // when user clicks add review author as friend on business page
 app.get('/server/addfriend', (req, res) => {
-  db.addFriend(req.query.userId, req.query.friendId, (err, results) => {
-    if (err) {
-      res.status(400);
-      res.end('Unable to add friend');
-    } else {
-      res.status(201).json(results);
-    }
+  db.addFriend(req.query.sender_id, req.query.receiver_id, (err, results) => {
+    err ? res.status(400).end('Unable to add friend') : res.status(201).json(results);
   })
 })
+
+app.get('/server/removefriend', (req, res) => {
+  db.removeFriend(req.query.userId, req.query.userId2, (err, results) => {
+    err ? res.status(400).end('Unable to remove friend') : res.status(200).json(results);
+  });
+});
+
+app.get('/server/acceptfriend', (req, res) => {
+  db.acceptFriend(req.query.sender_id, req.query.receiver_id, (err, results) => {
+    err ? res.status(400).end('Unable to remove friend') : res.status(200).json(results);
+  });
+});
 
 app.get('/server/checkfriend', (req, res) => {
   db.friendChecker(req.query.userId, req.query.friendId, (err, results) => {
@@ -175,7 +172,6 @@ app.get('/server/user/:id', (req, res) => {
       res.send(400)
       res.end('Unable to retrieve username from id')
     } else {
-      console.log(results);
       res.status(201).json(results)
     }
   })
@@ -190,7 +186,6 @@ app.get('/server/profile/checkins', (req, res) => {
   let userId = req.body.userId;
   let business = req.body.business.id;
   db.checkCheckIn(userId, businessId, resp => {
-    console.log(resp);
     res.status(201).json(resp)
 
   })
@@ -199,14 +194,12 @@ app.get('/server/profile/checkins', (req, res) => {
 
 app.post('/profile/favorites', (req, res) => {
   const { userId, businessId } = req.body;
-  console.log(userId, businessId)
   db.toggleFavorite(userId, businessId, (err, result) => {
     res.status(201).json(result);
   })
 })
 
 app.get('/profile/favorites/:userId', (req, res) => {
-  console.log(req.params);
   const { userId } = req.params;
   db.getFavorite(parseInt(userId), (err, result) => {
       res.status(200).json(result);
@@ -214,7 +207,7 @@ app.get('/profile/favorites/:userId', (req, res) => {
 });
 
 app.get('/user/friends/:id', (req, res) => {
-  db.getFriends(parseInt(req.params.id), (err, result) => {
+  db.getFriends(req.params.id, (err, result) => {
     res.status(200).json(result);
   });
 });
@@ -235,6 +228,11 @@ app.get('/user/favorites/:id', (req, res) => {
   db.getFavorites(parseInt(req.params.id), (err, result) => {
     res.status(200).json(result);
   });
+});
+
+// For refreshing react router
+app.get('*', function response(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 const server = app.listen(process.env.PORT || 3000, () => {
