@@ -240,11 +240,6 @@ app.get('/user/favorites/:id', (req, res) => {
 app.get('*', function response(req, res) {
   res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
-app.get('/api/test', (req, res) => {
-  db.getYalpRatings('1a', (err, results) => {
-    res.send(results);
-  })
-})
 
 const server = app.listen(process.env.PORT || 3000, () => {
   var port = server.address().port;
