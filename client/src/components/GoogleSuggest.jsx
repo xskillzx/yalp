@@ -14,7 +14,6 @@ export default class GoogleSuggest extends React.Component {
   }
 
   userGrantedLocation() {
-  	console.log('inside user granted location');
     let geo_success = position => {
     	let latLng = {lat: position.coords.latitude, lng: position.coords.longitude}
     	this.geocodeLatLng(latLng, (results) => {
@@ -109,7 +108,7 @@ export default class GoogleSuggest extends React.Component {
                 </div>
               )}
             >
-				      <h3>Location</h3>
+				      <h3 style={{color: 'white'}}>Location</h3>
 				      {getLocation}
               <input
                 type="text"
