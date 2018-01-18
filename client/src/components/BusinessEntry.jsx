@@ -21,7 +21,7 @@ class BusinessEntry extends React.Component {
     return (
         <div className="businessEntry">
           <div className="rating">{imgArr}</div>
-          <Link style={{textDecoration: 'none'}} to={`/business/${this.props.business.id}`}><h5 className="title">{this.props.business.name}</h5></Link><br/>
+          <Link style={{textDecoration: 'none'}} to={`/business/${this.props.business.place_id}`}><h5 className="title">{this.props.business.name}</h5></Link><br/>
           <div className="address">
             <span>{this.props.business.formatted_address}</span>
           </div>
