@@ -136,6 +136,12 @@ app.get('/server/reviews/others', (req, res) => {
   })
 })
 
+app.get('/server/ratings', (req, res) => {
+  db.getYalpRatings(req.body.businessId, (err, results) => {
+    res.send(results);
+  })
+})
+
 // when user clicks add review author as friend on business page
 app.get('/server/addfriend', (req, res) => {
   db.addFriend(req.query.sender_id, req.query.receiver_id, (err, results) => {

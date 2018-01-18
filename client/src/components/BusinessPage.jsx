@@ -14,15 +14,29 @@ class BusinessPage extends React.Component {
     this.state = {
       business: {},
       friendReviews: [],
-      nonFriendReviews: []
+      nonFriendReviews: [],
+      yalpRating: 0,
+      yalpReviewCount: 0,
     }
     this.photos = [];
+
   }
 
   componentDidMount() {
     this.getBusinessInfo(this.props.businessPlaceId);
+    this.getYalpRatings(this.props.businessPlaceId)
   }
 
+  getYalpRatings(businessId) {
+    let reqInfo = {
+      businessId: businessId
+    }
+    axios.get('/server/ratings', reqInfo)
+      .then(resp => {
+        this.setState({yalpRating: resp.data.weightedAverage, yalpReviewCount: resp.data.totalReviews});
+      })
+  }
+  
   getBusinessInfo(businessId) {
     axios.get(`/server/business/${businessId}`)
     .then(resp => {
@@ -59,7 +73,7 @@ class BusinessPage extends React.Component {
     return (
       <div className="businessPage">
         <div style={{cursor: 'pointer'}} onClick={e => this.props.history.goBack()} className="backBtn">{"<"} Search Results</div><br />
-        <BusinessInfo business={this.state.business}/>
+        <BusinessInfo business={this.state.business} yalpRating={this.state.yalpRating} reviewCount={this.state.yalpReviewCount}/>
         {/* <div className="business-page-btns">
           <span>
             {

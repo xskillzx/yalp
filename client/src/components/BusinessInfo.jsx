@@ -1,29 +1,52 @@
 import React from 'react';
 
 const BusinessInfo = (props) => {
-  let imgArr = [];
+  let googleRating = [];
+  let yalpStarRating = [];
   const starTotal = 5;
   const starPercentage = (props.business.rating / starTotal) * 100;
   const starPercentageRounded = (Math.round(starPercentage / 10) * 10);
   const fullStars = Math.floor(starPercentageRounded / 20);
   const halfStar = starPercentageRounded % 20 === 10 ? 1 : 0 
   const emptyStars = 5 - fullStars - halfStar;
-  
+  const yalpMessage = "Be the first to review!";
+
   for (let i = 0; i < fullStars; i++) {
-    imgArr.push(
-      (<i class="fa fa-star" aria-hidden="true"></i>)
+    googleRating.push(
+      (<i className="fa fa-star" aria-hidden="true"></i>)
     )
   }
   if (halfStar === 1) {
-    imgArr.push(
-      (<i class="fa fa-star-half-o" aria-hidden="true"></i>)
+    googleRating.push(
+      (<i className="fa fa-star-half-o" aria-hidden="true"></i>)
     )
   }
   for(let i = 0; i < emptyStars; i++) {
-    imgArr.push(
-      (<i class="fa fa-star-o" aria-hidden="true"></i>)
+    googleRating.push(
+      (<i className="fa fa-star-o" aria-hidden="true"></i>)
     )
   }
+  const yalpStarPercentage = (props.yalpRating / starTotal) * 100;
+  const yalpStarPercentageRounded = (Math.round(yalpStarPercentage / 10) * 10);
+  const yalpFullStars = Math.floor(yalpStarPercentageRounded / 20);
+  const yalpHalfStar = yalpStarPercentageRounded % 20 === 10 ? 1 : 0 
+  const yalpEmptyStars = 5 - yalpFullStars - yalpHalfStar;
+  for (let i = 0; i < yalpFullStars; i++) {
+    yalpStarRating.push(
+      (<i className="fa fa-star" aria-hidden="true"></i>)
+    )
+  }
+  if (yalpHalfStar === 1) {
+    yalpStarRating.push(
+      (<i className="fa fa-star-half-o" aria-hidden="true"></i>)
+    )
+  }
+  for(let i = 0; i < yalpEmptyStars; i++) {
+    yalpStarRating.push(
+      (<i className="fa fa-star-o" aria-hidden="true"></i>)
+    )
+  }
+
   
 
   return (
@@ -38,11 +61,15 @@ const BusinessInfo = (props) => {
         <tbody>
           <tr className="GoogleRating">
             <td>Google:</td>
-            <td>{imgArr}</td>
+            <td>{googleRating}</td>
           </tr>
-          <tr className="YalpRating">
+          <tr className="YalpStarRating">
             <td>Yalp:</td>
-            <td></td>
+            {
+              props.reviewCount === 0 ?
+              <td>{yalpMessage}</td> :
+              <td>{yalpStarRating}</td>
+            }
           </tr>
         </tbody>
       </table>
@@ -54,5 +81,3 @@ const BusinessInfo = (props) => {
 }
 
 export default BusinessInfo;
-
-
