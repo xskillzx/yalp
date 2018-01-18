@@ -3,13 +3,13 @@ body {
   background-image: url("beer.jpg");
   background-size: 100%;
   font-size: 24px;
+  margin: 0px;
 }
 #topnav {
   background-color: #FF0000;
   color: white;
   font-size: 30px;
   font-weight: bold;
-  margin: -10px -10px 0 -10px;
   padding: 10px;
 }
 
@@ -71,6 +71,24 @@ a {
   border-radius: 5px;
   font-size: 20px;
   padding: 5px;
+}
+
+/* BUSINESSLIST & MAP */
+
+#business-map {
+
+}
+
+#businesses {
+  float: left;
+  width: 65%;
+}
+
+#map-container {
+  width: 35%;
+  height: 100%;
+  display: inline-block;
+  margin: 0px;
 }
 
 

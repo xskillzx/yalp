@@ -39,11 +39,12 @@ export class MapContainer extends React.Component {
 
   render() {
     const style = {
-      width: '80vw',
-      height: '55vh'
+      width: '30%',
+      height: '100%',
+      position: "sticky"
     }
-    return (
-      <Map google={this.props.google} zoom={14} center={} style={style}>
+    return ( //add center={location} to map
+      <Map google={this.props.google} zoom={14} style={style}> 
 
         {this.state.businesses.map( result => (
           <Marker onClick = {this.onMarkerClick}

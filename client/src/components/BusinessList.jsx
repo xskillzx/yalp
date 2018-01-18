@@ -26,9 +26,13 @@ class BusinessList extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.getBusinessEntries()}
-        <MapContainer businesses={this.props.businesses.data}/>
+      <div id="businesses&map">
+        <div id="businesses">
+          {this.getBusinessEntries()}
+        </div>
+        <div id="map-container">
+          <MapContainer businesses={this.props.businesses.data}/>
+        </div>
       </div>
     )
   }
