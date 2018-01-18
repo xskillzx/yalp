@@ -50,11 +50,7 @@ class Signup extends React.Component {
   render() {
     return(
       <div>
-        <Link to="/">
-          <button type="Home">
-            Go Back
-          </button>
-        </Link>
+        <button onClick={this.props.history.goBack}>Go Back</button>
         <form onSubmit={ this.getFormData.bind(this) } >
           <input ref="name" id="name" type="text" placeholder="Name" />
           <input ref="email" id="email" type="text" placeholder="E-mail" />

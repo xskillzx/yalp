@@ -22,11 +22,7 @@ class Login extends React.Component {
   render() {
     return(
       <div>
-        <Link to="/">
-          <button type="Home">
-            Go Back
-          </button>
-        </Link>
+        <button onClick={this.props.history.goBack}>Go Back</button>
         <form onSubmit={ this.getFormData.bind(this) }>
           <input ref="username" id="username" type="text" placeholder="Username" />
           <input ref="password" id="password" type="password" placeholder="Password" />
