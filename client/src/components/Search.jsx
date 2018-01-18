@@ -18,7 +18,7 @@ class Search extends React.Component {
       <div>
         <Suggest locChange={this.latLinChange.bind(this)}/>
         <input className="searchBar" ref="searchTerm" type="text" size="30" placeholder="What's nearby?" />
-        <button type="Search" onClick={e => this.props.goToListings(this.refs.searchTerm.value, this.latLin)}>
+        <button type="Search" onClick={e => this.props.goToListings(this.refs.searchTerm.value, this.state.latLin)}>
           Search!
         </button>
       </div>

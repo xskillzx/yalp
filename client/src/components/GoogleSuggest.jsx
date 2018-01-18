@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import GoogleMapLoader from "react-google-maps-loader";
 import GooglePlacesSuggest from "react-google-places-suggest";
- 
-const MY_API_KEY = "AIzaSyAMML28IbvEgj5ssCZ7SLoSmqMMS6_Kqbw";
+import MY_API_KEY from '../../config/yelp.js';
  
 export default class GoogleSuggest extends React.Component {
   constructor(props) {
@@ -85,7 +84,7 @@ export default class GoogleSuggest extends React.Component {
     return (
       <GoogleMapLoader
         params={{
-          key: MY_API_KEY,
+          key: MY_API_KEY.GOOGLE_API_KEY,
           libraries: "places,geocode",
         }}
         render={googleMaps =>
