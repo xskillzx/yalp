@@ -55,9 +55,9 @@ app.get('/server/search/:query/:loc', (req, res) => {
 });
 
 // when user clicks on a business
-app.get('/server/business/:reference', (req, res) => {
-  let businessRef = req.params.reference;
-  api.getBusinessInfo(businessRef, resp => {
+app.get('/server/business/:placeid', (req, res) => {
+  let businessPlaceId = req.params.placeid;
+  api.getBusinessInfoByPlaceId(businessPlaceId, resp => {
     res.json(resp.data.result)
   })
 });
@@ -107,7 +107,6 @@ app.post('/review', (req, res) => {
       res.status(400);
       res.end('Unable to submit new review');
     } else {
-      console.log(results);
       res.status(201).json(results);
     }
   })
@@ -173,7 +172,6 @@ app.get('/server/user/:id', (req, res) => {
       res.send(400)
       res.end('Unable to retrieve username from id')
     } else {
-      console.log(results);
       res.status(201).json(results)
     }
   })
@@ -188,7 +186,6 @@ app.get('/server/profile/checkins', (req, res) => {
   let userId = req.body.userId;
   let business = req.body.business.id;
   db.checkCheckIn(userId, businessId, resp => {
-    console.log(resp);
     res.status(201).json(resp)
 
   })
@@ -197,14 +194,12 @@ app.get('/server/profile/checkins', (req, res) => {
 
 app.post('/profile/favorites', (req, res) => {
   const { userId, businessId } = req.body;
-  console.log(userId, businessId)
   db.toggleFavorite(userId, businessId, (err, result) => {
     res.status(201).json(result);
   })
 })
 
 app.get('/profile/favorites/:userId', (req, res) => {
-  console.log(req.params);
   const { userId } = req.params;
   db.getFavorite(parseInt(userId), (err, result) => {
       res.status(200).json(result);
