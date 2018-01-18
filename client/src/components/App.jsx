@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Switch, Route, Link } from 'react-router-dom';
+import { withRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
@@ -15,7 +15,6 @@ class App extends React.Component {
     super(props)
     this.state = {
       username: '',
-      password: '',
       business: {},
       userId: 0,
       loggedIn: false,
@@ -27,13 +26,6 @@ class App extends React.Component {
   }
 
   createUser(userData) {
-    // userData = {
-    //   name: 
-    //   email: 
-    //   username: 
-    //   password: 
-    // }
-    let self = this;
     axios.post('/server/signup', userData)
       .then(resp => {
         if (resp.status === 201) {
@@ -50,25 +42,24 @@ class App extends React.Component {
       });
   }
 
+  hasLoggedUser() {
+    return localStorage.getItem('loggedUser') !== null;
+  }
+
   loginUser(userData) {
-    // let loginData = {
-    //   username:
-    //   password:
-    // }
-    let self = this;
     axios.post('/server/login', userData)
       .then(resp => {
         if (resp.status === 200) {
+          localStorage.setItem('loggedUser', JSON.stringify(resp.data[0])); // save in localstorage when logged in
           this.setState({
             username: resp.data[0].username,
-            password: '',
             email: resp.data[0].email,
             userId: resp.data[0].id,
             name: resp.data[0].name,
             loggedIn: true,
           });
           this.getFavorite()
-          self.props.history.push('/search');
+          this.props.history.push('/search');
         }
       })
       .catch(err => {
@@ -77,6 +68,7 @@ class App extends React.Component {
   }
 
   logoutUser() {
+    localStorage.removeItem('loggedUser'); // remove from localstorage on logout pressed
     this.setState({loggedIn: false})
   }
 
@@ -140,33 +132,33 @@ class App extends React.Component {
     return (
       <div>
         <div id="topnav">
-          {this.state.loggedIn ?
-            <div onClick={e => {
-              document.body.style.background = "url('beer.jpg')";
-              document.body.style.backgroundSize = "100%";
-            }}>
-              <Link to="/search" className="logoLink">
-                <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
-                YALP!
-              </Link>
-              <Link to="/" className="logout">
-                <div onClick={this.logoutUser.bind(this)}>Log Out</div>
-              </Link>
-              <Link to="/profile" className="profile">
-                <div onClick={this.logoutUser.bind(this)}>Profile</div>
-              </Link>
-            </div> :
-            <div>
-              <img className="logo" src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
-              YALP!
-            </div>
+          <Link to="/search" className="logoLink">
+            <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
+            YALP!
+          </Link>
+          {this.hasLoggedUser() ?
+            <span>
+              <Link to="/" className="logout"><span onClick={this.logoutUser.bind(this)}>Log Out</span></Link>
+              <Link to="/profile" className="profile"><span>Profile</span></Link>
+            </span> :
+              this.props.location.pathname !== '/' && this.props.location.pathname !== '/login' && this.props.location.pathname !== '/signup' ? 
+                <Link to="/" className="profile"><span>Log In</span></Link> : null
           }
         </div>
         <Switch>
-          <Route exact path="/" render={() => <div id="form-background"><div id="form"><Home /></div></div>}/>
+          <Route exact path="/" render={() => (!this.hasLoggedUser() ?
+            <div id="form-background"><div id="form"><Home /></div></div> :
+            <Redirect to="/search"/>
+          )}/>
           <Route path="/search" render={() => <div id="form-background"><div id="form"><Search goToListings={this.pushToListings.bind(this)}/></div></div>}/>
-          <Route path="/login" render={() => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div>}/>
-          <Route path="/signup" render={() => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div>}/>
+          <Route path="/login" render={(props) => (!this.hasLoggedUser() ?
+            <div id="form-background"><div id="form"><Login history={props.history} loginUser={this.loginUser.bind(this)}/></div></div> :
+            <Redirect to="/search"/>
+          )}/>
+          <Route path="/signup" render={(props) => (!this.hasLoggedUser() ?
+            <div id="form-background"><div id="form"><Signup history={props.history} createUser={this.createUser.bind(this)}/></div></div> :
+            <Redirect to="/search"/>
+          )}/>
           <Route path="/listings" render={(props) => <div id="listings"><BusinessList location={props.location}/></div>}/>
           {/* <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
