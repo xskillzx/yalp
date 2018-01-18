@@ -209,10 +209,10 @@ class App extends React.Component {
           <Route path="/login" render={ () => <div id="form-background"><div id="form"><Login loginUser={this.loginUser.bind(this)}/></div></div> }/>
           <Route path="/signup" render={ () => <div id="form-background"><div id="form"><Signup createUser={this.createUser.bind(this)}/></div></div> }/>
           <Route path="/listings" render={ 
-            () => <div id="listings"><BusinessList 
+            () => <BusinessList 
               businesses={this.searchResults} 
               updateBusiness={this.updateBusiness.bind(this)}
-              favorites={this.state.favorites} /></div> } />
+              favorites={this.state.favorites} /> } />
           <Route path={`/business/${this.state.business.name}`} render={ 
             () => <BusinessPage business={this.state.business} 
               getBusinessInfo={this.getBusinessInfo.bind(this)} 

@@ -8,10 +8,12 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
   }
-componentWillMount() {
-  document.body.style.background = "url('beer.jpg')";
-  document.body.style.backgroundSize = "100%";
-}
+
+  componentWillMount() {
+    document.body.style.background = "url('beer.jpg')";
+    document.body.style.backgroundSize = "100%";
+  }
+
   render() {
     return (
       <div>
