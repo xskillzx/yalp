@@ -143,6 +143,29 @@ const getStrangersReviews = function (userId, businessId, cb) {
   })
 }
 
+const getYalpRatings = function (businessId, cb) {
+  let query = `SELECT rating FROM reviews WHERE business_id = '${businessId}'`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err);
+    } else {
+      let totalReviews = 0;
+      let totalScore = 0;
+      let weightedAverage = 0;
+      results.forEach(result => {
+        totalScore += result.rating;
+        totalReviews++;
+      })
+      weightedAverage = totalScore / totalReviews;
+      let ratingsInfo = {
+        weightedAverage: weightedAverage,
+        totalReviews: totalReviews
+      }
+      cb (null, ratingsInfo);
+    }
+  })
+}
+
 const checkFavorite = function (userId, businessId, cb) {
 
   let query = `SELECT * FROM favorites WHERE favorites.user_id = ? AND favorites.business_id = ?;`
@@ -507,6 +530,7 @@ module.exports = {
   tempSearch,
   getStrangersReviews,
   getFriendsReviews,
+  getYalpRatings,
   toggleFavorite,
   addCheckIn,
   checkCheckIn,
