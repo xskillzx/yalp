@@ -16,7 +16,9 @@ class Signup extends React.Component {
   }
 
   getFormData(e) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     if (!this.refs.name.value) {
       document.getElementById("name").placeholder = "Please enter a valid name...";
     }
@@ -47,16 +49,22 @@ class Signup extends React.Component {
     }
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.getFormData();
+    }
+  }
+
   render() {
     return(
       <div>
         <button onClick={this.props.history.goBack}>Go Back</button>
         <form onSubmit={ this.getFormData.bind(this) } >
-          <input ref="name" id="name" type="text" placeholder="Name" />
+          <input ref="name" id="name" type="text" placeholder="Name" autoFocus/>
           <input ref="email" id="email" type="text" placeholder="E-mail" />
           <input ref="username" id="username" type="text" placeholder="Username" />
           <input ref="password" id="password" type="password" placeholder="Password" />
-          <input className='submitCreateForm' type="submit" value="Create Account" />
+          <input className='submitCreateForm' type="submit" value="Create Account" onKeyPress={this.handleKeyPress.bind(this)}/>
         </form>
       </div>
     )
