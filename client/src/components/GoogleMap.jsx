@@ -9,16 +9,16 @@ export class MapContainer extends React.Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      businesses: props.businesses
+      businesses: props.businesses,
+      google: undefined
     }
-    
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
-      this.setState({businesses: nextProps.businesses});
+      this.setState({businesses: nextProps.businesses, google: nextProps.google});
     }
   }
 
@@ -45,7 +45,7 @@ export class MapContainer extends React.Component {
       position: "sticky"
     }
     return (
-      <Map google={this.props.google} zoom={14} style={style} initialCenter={this.props.initLocation}> 
+      <Map google={this.state.google} zoom={14} style={style} initialCenter={this.props.initLocation}> 
         {this.state.businesses.map(result => {
           return (<Marker 
             key={result.id}
