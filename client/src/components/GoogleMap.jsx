@@ -16,6 +16,12 @@ export class MapContainer extends React.Component {
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+      this.setState({businesses: nextProps.businesses});
+    }
+  }
+
   onMarkerClick(props, marker, e) {
     this.setState({
       showingInfoWindow: true,

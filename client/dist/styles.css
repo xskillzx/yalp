@@ -54,6 +54,10 @@ button[type=Search] {
   display: inline;
   border: 2px solid red;
 }
+
+.filterButtons {
+  font-size: 12px;
+}
 a {
   text-decoration: none;
 }
@@ -74,10 +78,6 @@ a {
 }
 
 /* BUSINESSLIST & MAP */
-
-#business-map {
-
-}
 
 #businesses {
   float: left;
