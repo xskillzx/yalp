@@ -62,7 +62,6 @@ class BusinessList extends React.Component {
         filteredResults: this.state.searchResults
       })
     } else if (value === 'openNow') {
-      console.log('heyyyya');
       this.setState({
         filterBy: value,
         filteredResults: this.state.searchResults.filter(business => {
