@@ -330,3 +330,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 #friendslist.dropdown-toggle {
   padding: none;
 }
+
+.chatBtn {
+  float: right;
+}

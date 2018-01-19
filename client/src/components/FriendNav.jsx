@@ -30,7 +30,7 @@ class FriendNav extends React.Component {
 				</Nav>
 				<Nav pullRight>
 					<NavDropdown eventKey={2} title="Friends" id="basic-nav-dropdown friendslist">
-						<MenuItem eventKey={2.1}>Justin <Button bsStyle="primary">Chat</Button></MenuItem>
+						<MenuItem eventKey={2.1}><span>Justin</span><Button bsStyle="primary" className="chatBtn">Chat</Button></MenuItem>
 						<MenuItem eventKey={2.2}>Feli <Button bsStyle="primary">Chat</Button></MenuItem>
 						<MenuItem eventKey={2.3}>Franco <Button bsStyle="primary">Chat</Button></MenuItem>
 					</NavDropdown>
