@@ -9,6 +9,7 @@ import BusinessList from './BusinessList.jsx';
 import BusinessPage from './BusinessPage.jsx';
 import Profile from './Profile.jsx';
 import FriendNav from './FriendNav.jsx';
+import TopNav from './TopNav.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -131,6 +132,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/*<TopNav />*/}
         <div id="topnav">
           <Link to="/search" className="logoLink">
             <img className="logo"src="https://image.ibb.co/cRbaE6/imageedit_16_4158574454.png"/>
@@ -179,7 +181,7 @@ class App extends React.Component {
           <Route path="/business/:id" render={(props) => <BusinessPage history={props.history} businessPlaceId={props.match.params.id}/>}/>
           <Route path="/profile" render={() => <div><Profile profileId={this.state.userId} /></div>}/>
         </Switch>
-        <FriendNav />
+        { this.props.location.pathname !== '/' && this.hasLoggedUser() ? <FriendNav /> : undefined }
     </div>
     )
   }
