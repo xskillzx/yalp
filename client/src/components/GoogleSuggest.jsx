@@ -107,7 +107,7 @@ export default class GoogleSuggest extends React.Component {
                 </div>
               )}
             >
-				      <h3 style={{color: 'white'}}>Location</h3>
+				      <h3 style={{color: 'white'}}>Search for places!</h3>
 				      {getLocation}
               <input
                 type="text"

@@ -14,6 +14,7 @@ class Profile extends React.Component {
       reviews: [],
       favorites: []
     };
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     TimeAgo.locale(en);
   }
 
@@ -23,8 +24,7 @@ class Profile extends React.Component {
   }
 
   fetchProfile() {
-    const { profileId } = this.props;
-    axios.get(`/server/user/${profileId}`)
+    axios.get(`/server/user/${this.loggedUser.id}`)
       .then(resp => {
         this.setState({ user: resp.data[0] });
       })
@@ -34,8 +34,8 @@ class Profile extends React.Component {
   }
 
   fetchFriends() {
-    const { profileId } = this.props;
-    axios.get(`/user/friends/${profileId}`)
+    // const { profileId } = this.props;
+    axios.get(`/user/friends/${this.loggedUser.id}`)
       .then(resp => {
         this.setState({ friends: resp.data });
       })
@@ -45,8 +45,8 @@ class Profile extends React.Component {
   }
   
   fetchCheckins() {
-    const { profileId } = this.props;
-    axios.get(`/user/checkins/${profileId}`)
+    // const { profileId } = this.props;
+    axios.get(`/user/checkins/${this.loggedUser.id}`)
       .then(resp => {
         this.setState({ checkins: resp.data });
       })
@@ -56,8 +56,8 @@ class Profile extends React.Component {
   }
   
   fetchReviews() {
-    const { profileId } = this.props;
-    axios.get(`/user/reviews/${profileId}`)
+    // const { profileId } = this.props;
+    axios.get(`/user/reviews/${this.loggedUser.id}`)
       .then(resp => {
         this.setState({ reviews: resp.data });
       })
@@ -67,8 +67,8 @@ class Profile extends React.Component {
   }
   
   fetchFavorites() {
-    const { profileId } = this.props;
-    axios.get(`/user/favorites/${profileId}`)
+    // const { profileId } = this.props;
+    axios.get(`/user/favorites/${this.loggedUser.id}`)
       .then(resp => {
         this.setState({ favorites: resp.data });
       })
@@ -78,19 +78,19 @@ class Profile extends React.Component {
   }
   
   renderUserInfo() {
-    const { user } = this.state;
-    return user !== null ? [
-      <div key={0}>{`Name:  ${user.name}`}</div>,
-      <div key={1}>{`Email: ${user.email}`}</div>,
-      <div key={2}>{`Username: ${user.username}`}</div>,
-      <div key={3}>{`Created At: ${this.createDate(user.createdAt)}`}</div>,
-    ] : '';
+    // const { user } = this.state;
+    return [
+      <div key={0}>{`Name:  ${this.loggedUser.name}`}</div>,
+      <div key={1}>{`Email: ${this.loggedUser.email}`}</div>,
+      <div key={2}>{`Username: ${this.loggedUser.username}`}</div>,
+      <div key={3}>{`Created At: ${this.createDate(this.loggedUser.createdAt)}`}</div>,
+    ];
   }
 
   renderFriends() {
     const friends = this.state.friends;
     if (friends.length) {
-      return <FriendList friends={friends} userId={this.state.user.id}/>
+      return <FriendList friends={friends} userId={this.loggedUser.id}/>
     }
     return <span>No friends</span>;
   }

@@ -49,15 +49,7 @@ class App extends React.Component {
     axios.post('/server/login', userData)
       .then(resp => {
         if (resp.status === 200) {
-          localStorage.setItem('loggedUser', JSON.stringify(resp.data[0])); // save in localstorage when logged in
-          this.setState({
-            username: resp.data[0].username,
-            email: resp.data[0].email,
-            userId: resp.data[0].id,
-            name: resp.data[0].name,
-            loggedIn: true,
-          });
-          this.getFavorite()
+          localStorage.setItem('loggedUser', JSON.stringify(resp.data[0]));
           this.props.history.push('/search');
         }
       })
@@ -67,13 +59,14 @@ class App extends React.Component {
   }
 
   logoutUser() {
-    localStorage.removeItem('loggedUser'); // remove from localstorage on logout pressed
-    this.setState({loggedIn: false})
+    localStorage.removeItem('loggedUser');
   }
 
   pushToListings(search, loc) {
     loc ? this.props.history.push(`/listings?search=${search}&location=${loc}`) : this.props.history.push(`/listings?search=${search}`);
   }
+
+  // OLD CODE, to be moved to corresponding components
 
   updateBusiness(e, business) {
     e.preventDefault()
@@ -127,6 +120,8 @@ class App extends React.Component {
     this.props.history.push('/listings');
   }
 
+  // --------------------------------
+
   render() {
     return (
       <div>
@@ -176,7 +171,10 @@ class App extends React.Component {
             }
           /> */}
           <Route path="/business/:id" render={(props) => <BusinessPage history={props.history} businessPlaceId={props.match.params.id}/>}/>
-          <Route path="/profile" render={() => <div><Profile profileId={this.state.userId} /></div>}/>
+          <Route path="/profile" render={() => (this.hasLoggedUser() ?
+            <div><Profile profileId={this.state.userId} /></div> :
+            <Redirect to="/"/>
+          )}/>
         </Switch>
     </div>
     )
