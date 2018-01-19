@@ -326,10 +326,19 @@ h1 { font-size: 1.5em; margin: 10px; }
   min-height: 35px;
 }
 
-#friendslist.dropdown-toggle {
-  padding: none;
-}
-
 .chatBtn {
   float: right;
+}
+
+.menuitem-friend {
+  float: left;
+  margin-top: 10px;
+}
+
+.navbar-nav>li>a {
+  padding-top: 10px;
+}
+
+.dropdown-menu {
+  padding-top: 0;
 }

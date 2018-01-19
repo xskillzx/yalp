@@ -28,11 +28,11 @@ class FriendNav extends React.Component {
 						About
 					</NavItem>
 				</Nav>
-				<Nav pullRight>
-					<NavDropdown eventKey={2} title="Friends" id="basic-nav-dropdown friendslist">
-						<MenuItem eventKey={2.1}><span>Justin</span><Button bsStyle="primary" className="chatBtn">Chat</Button></MenuItem>
-						<MenuItem eventKey={2.2}>Feli <Button bsStyle="primary">Chat</Button></MenuItem>
-						<MenuItem eventKey={2.3}>Franco <Button bsStyle="primary">Chat</Button></MenuItem>
+				<Nav pullRight className="friendsNav">
+					<NavDropdown eventKey={2} title="Friends" id="basic-nav-dropdown">
+						<MenuItem eventKey={2.1}><span className="menuitem-friend">JUSTIN</span><Button bsStyle="primary" className="chatBtn">Chat</Button></MenuItem>
+						<MenuItem eventKey={2.2}><span className="menuitem-friend">Feli</span><Button bsStyle="primary" className="chatBtn">Chat</Button></MenuItem>
+						<MenuItem eventKey={2.3}><span className="menuitem-friend">Franco</span><Button bsStyle="primary" className="chatBtn">Chat</Button></MenuItem>
 					</NavDropdown>
 				</Nav>
 			</Navbar>
