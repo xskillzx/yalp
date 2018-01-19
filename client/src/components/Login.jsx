@@ -30,8 +30,8 @@ class Login extends React.Component {
       <div>
         <button onClick={this.props.history.goBack}>Go Back</button>
         <form onSubmit={ this.getFormData.bind(this) }>
-          <input ref="username" id="username" type="text" placeholder="Username" autoFocus/>
-          <input ref="password" id="password" type="password" placeholder="Password" onKeyPress={this.handleKeyPress.bind(this)}/>
+          <input ref="username" id="username" type="text" placeholder="Username" autoFocus onKeyPress={this.handleKeyPress.bind(this)} required/>
+          <input ref="password" id="password" type="password" placeholder="Password" onKeyPress={this.handleKeyPress.bind(this)} required/>
           <input style={{cursor: 'pointer'}} type="submit" value="Log In" />
         </form>
       </div>
