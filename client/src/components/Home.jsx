@@ -10,7 +10,6 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    document.body.style.background = "url('beer.jpg')";
     document.body.style.backgroundSize = "100%";
   }
 

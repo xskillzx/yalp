@@ -19,13 +19,19 @@ class Login extends React.Component {
     this.props.loginUser(this.formData)
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.getFormData(e);
+    }
+  }
+
   render() {
     return(
       <div>
         <button onClick={this.props.history.goBack}>Go Back</button>
         <form onSubmit={ this.getFormData.bind(this) }>
-          <input ref="username" id="username" type="text" placeholder="Username" />
-          <input ref="password" id="password" type="password" placeholder="Password" />
+          <input ref="username" id="username" type="text" placeholder="Username" autoFocus onKeyPress={this.handleKeyPress.bind(this)} required/>
+          <input ref="password" id="password" type="password" placeholder="Password" onKeyPress={this.handleKeyPress.bind(this)} required/>
           <input style={{cursor: 'pointer'}} type="submit" value="Log In" />
         </form>
       </div>
