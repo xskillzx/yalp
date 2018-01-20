@@ -44,10 +44,27 @@ class Review extends React.Component {
   }
 
   render() {
-    let imgArr = [];
-    for (let i = 0; i < this.props.review.rating; i++) {
-      imgArr.push(
-        (<img className="ratingLogo" key={i} src='https://image.ibb.co/bzkXSR/imageedit_12_7791151374.png' width='20px'/>)
+    let rating = [];
+    const starTotal = 5;
+    const starPercentage = (this.props.review.rating / starTotal) * 100;
+    const starPercentageRounded = (Math.round(starPercentage / 10) * 10);
+    const fullStars = Math.floor(starPercentageRounded / 20);
+    const halfStar = starPercentageRounded % 20 === 10 ? 1 : 0 
+    const emptyStars = 5 - fullStars - halfStar;
+  
+    for (let i = 0; i < fullStars; i++) {
+      rating.push(
+        (<i className="fa fa-star" aria-hidden="true"></i>)
+      )
+    }
+    if (halfStar === 1) {
+      rating.push(
+        (<i className="fa fa-star-half-o" aria-hidden="true"></i>)
+      )
+    }
+    for(let i = 0; i < emptyStars; i++) {
+      rating.push(
+        (<i className="fa fa-star-o" aria-hidden="true"></i>)
       )
     }
     return (
@@ -66,7 +83,7 @@ class Review extends React.Component {
               <span className="friend-btn" style={{float: "right"}}>Is your friend</span>
           }
         </span>
-        <div className="review-rating">{imgArr}</div>
+        <div className="review-rating">{rating}</div>
         <div className="review-date">{this.props.review.createdAt}</div>
         <div className="review-text">{this.props.review.text}</div>
       </div>
