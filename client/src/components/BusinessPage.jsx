@@ -18,13 +18,13 @@ class BusinessPage extends React.Component {
       yalpRating: 0,
       yalpReviewCount: 0,
     }
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     this.photos = [];
-
   }
 
   componentDidMount() {
     this.getBusinessInfo(this.props.businessPlaceId);
-    this.getYalpRatings(this.props.businessPlaceId)
+    this.getYalpRatings(this.props.businessPlaceId);
   }
 
   getYalpRatings(businessId) {
@@ -90,12 +90,12 @@ class BusinessPage extends React.Component {
             }
           </span>
         </div> */}
-        {/* <div className="addReview">
-          <AddReview business={this.props.business} username={this.props.username} userId={this.props.userId} />
-        </div> */}
-        {/* <div className="reviews">
-          <Reviews business={this.props.business} username={this.props.username} userId={this.props.userId} />
-        </div> */}
+        {this.loggedUser && <div className="addReview">
+          <AddReview business={this.state.business} username={this.loggedUser.username} userId={this.loggedUser.id} />
+        </div>}
+        {this.state.business.id && <div className="reviews">
+          <Reviews business={this.state.business} username={this.loggedUser ? this.loggedUser.username : null} userId={this.loggedUser ? this.loggedUser.id : null} />
+        </div>}
         {/* <div className="friend-activity">
           <FriendActivity business={this.props.business} username={this.props.username} userId={this.props.userId}/>
         </div> */}
