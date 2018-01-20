@@ -114,35 +114,6 @@ const friendChecker = function (userId, friendId, cb) {
   cb(null, checker);
 }
 
-const getFriendsReviews = function (userId, businessId, cb) {
-
-  let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews INNER JOIN friends ON friends.user_id1 = ${userId} AND friends.user_id2 = reviews.user_id AND reviews.business_id = "${businessId}";`
-
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.log(err)
-      cb(err)
-    } else {
-      cb(null, results)
-    }
-  })
-}
-
-//get non-friends' reviews for a specific business
-
-const getStrangersReviews = function (userId, businessId, cb) {
-
-  let query = `SELECT reviews.text, reviews.user_id, reviews.rating FROM reviews WHERE reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON friends.user_id1 = ${userId} AND friends.user_id2 = reviews.user_id) AND reviews.business_id = "${businessId}";`
-
-  connection.query(query, (err, results) => {
-    if (err) {
-      cb(err)
-    } else {
-      cb(null, results)
-    }
-  })
-}
-
 const getYalpRatings = function (businessId, cb) {
   let query = `SELECT rating FROM reviews WHERE business_id = '${businessId}'`;
   connection.query(query, (err, results) => {
@@ -415,6 +386,57 @@ const getReviews = function(userId, cb) {
 
 };
 
+// get all reviews for a specific business
+const getAllReviews = function(businessId, cb) {
+  let query = `SELECT users.name, users.username, users.id, reviews.* FROM users, reviews WHERE reviews.user_id = users.id AND reviews.business_id = '${businessId}'`;
+  connection.query(query, (err, results) => {
+    err ? cb(err) : cb(null, results);
+  });
+};
+
+// get friends' reviews for a specific business
+const getFriendsReviews = function (userId, businessId, cb) {
+  let query = `SELECT reviews.*, users.name, users.username FROM reviews, users WHERE business_id = "${businessId}" AND users.id = reviews.user_id AND reviews.text IN (SELECT reviews.text FROM reviews INNER JOIN friends ON ((friends.sender_id = ${userId} AND friends.receiver_id = reviews.user_id AND friends.is_pending = 0) OR (friends.receiver_id = ${userId} AND friends.sender_id = reviews.user_id AND friends.is_pending = 0)) AND business_id = "${businessId}");`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, results);
+    }
+  });
+}
+
+// get non-friends' reviews for a specific business
+const getStrangersReviews = function (userId, businessId, cb) {
+  let query = `SELECT reviews.*, users.name, users.username FROM reviews, users WHERE business_id = "${businessId}" AND users.id = reviews.user_id AND reviews.text NOT IN (SELECT reviews.text FROM reviews INNER JOIN friends ON ((friends.sender_id = ${userId} AND friends.receiver_id = reviews.user_id AND friends.is_pending = 0) OR (friends.receiver_id = ${userId} AND friends.sender_id = reviews.user_id AND friends.is_pending = 0)) AND business_id = "${businessId}");`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, results);
+    }
+  });
+}
+
+const getLoggedReviews = function(loggedId, businessId, cb) {
+  let fullData = {};
+  getFriendsReviews(loggedId, businessId, (err, results) => {
+    if (err) {
+      cb(err);
+    } else {
+      fullData.friendReviews = results;
+      getStrangersReviews(loggedId, businessId, (err, results) => {
+        if (err) {
+          cb(err);
+        } else {
+          fullData.strangerReviews = results;
+          cb(null, fullData);
+        }
+      });
+    }
+  });
+}
+
 const getFavorites = function(userId, cb) {
     let query = 'select a.id, businesses.name from (select * from favorites where favorites.user_id = ?) a left join businesses on businesses.id = a.business_id;';
 
@@ -426,99 +448,6 @@ const getFavorites = function(userId, cb) {
         }
     });
 };
-
-//MYSQL QUERIES FOR:
-
-// Businesses
-
-// INSERT INTO businesses (name) VALUE ("Tu Lan");
-// INSERT INTO businesses (name) VALUE ("Chipotle");
-// INSERT INTO businesses (name) VALUE ("McDonalds");
-// INSERT INTO businesses (name) VALUE ("Fancy Steak House");
-// INSERT INTO businesses (name) VALUE ("Tempest");
-// INSERT INTO businesses (name) VALUE ("Some Expensive Place");
-
-//Users
-
-// INSERT INTO users (name, email, password, username) VALUES ("Chris", "Chris@Chris.com", "Chris", "ChrisChris");
-// INSERT INTO users (name, email, password, username) VALUES ("Kayleigh", "Kayleigh@Kayleigh.com", "Kayleigh", "Kayleigh");
-// INSERT INTO users (name, email, password, username) VALUES ("Connor", "Connor@Connor.com", "Connor", "Connor");
-// INSERT INTO users (name, email, password, username) VALUES ("Peter", "Peter@Peter.com", "Peter", "PeterPeterPumpkinEater");
-// INSERT INTO users (name, email, password, username) VALUES ("Fred", "Fred@Fred.com", "Fred", "Fred");
-// INSERT INTO users (name, email, password, username) VALUES ("Moises", "Moises@Chris.com", "BigCuddlyBear", "Weird");
-
-//Reviews
-//user_id, business_id, text
-
-// INSERT INTO reviews (user_id, business_id, text) VALUES (1, 1, "this place is really tasty");
-// INSERT INTO reviews (user_id, business_id, text) VALUES (2, 2, "this place sucks ass");
-// INSERT INTO reviews (user_id, business_id, text) VALUES (3, 3, "this place could use better service");
-// INSERT INTO reviews (user_id, business_id, text) VALUES (4, 4, "this place is pretty mediocre");
-// INSERT INTO reviews (user_id, business_id, text) VALUES (5, 5, "this place is pretty good");
-// INSERT INTO reviews (user_id, business_id, text) VALUES (6, 6, "this place is utter trash");
-
-//CheckIns
-
-// INSERT INTO checkins (user_id, business_id) VALUES (1, 1);
-// INSERT INTO checkins (user_id, business_id) VALUES (2, 2);
-// INSERT INTO checkins (user_id, business_id) VALUES (3, 3);
-// INSERT INTO checkins (user_id, business_id) VALUES (4, 4);
-// INSERT INTO checkins (user_id, business_id) VALUES (5, 5);
-// INSERT INTO checkins (user_id, business_id) VALUES (6, 6);
-
-//friends
-
-// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 2);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 3);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 4);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (1, 6);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (2, 3);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (2, 5);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (2, 6);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (3, 4);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (3, 5);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (3, 6);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (4, 6);
-// INSERT INTO checkins (user_id1, user_id2) VALUES (5, 6);
-
-
-
-//TEST FUNCTION CALLS
-
-// connection.query(`SELECT * from USERS`, (err, results) => {
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         console.log(results);
-//     }
-// })
-
-// postUser({ name: "testName", email: "testEmail", password: "testPassword", username: "testUsername" }, (err, results) => {
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         console.log(results)
-//     }
-// })
-
-// getUserById(1, (err, results) => {
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         console.log(results);
-//     }
-// })
-
-// getBusinessById(1, (err, results) => {
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         console.log(results);
-//     }
-// })
-
-
-//connection.queries
 
 module.exports = {
   connection,
@@ -549,5 +478,6 @@ module.exports = {
   getReviews,
   getFavorites,
   checkUserExists,
-  
+  getAllReviews,
+  getLoggedReviews
 }

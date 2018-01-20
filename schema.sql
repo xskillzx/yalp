@@ -20,7 +20,7 @@ CREATE TABLE `reviews` (
   `user_id` INTEGER NOT NULL DEFAULT 0,
   `business_id` VARCHAR(255) NOT NULL DEFAULT 0,
   `text` MEDIUMTEXT NOT NULL,
-  `rating` INTEGER NOT NULL DEFAULT 0,
+  `rating` DECIMAL(2,1) NOT NULL DEFAULT 0,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
@@ -48,11 +48,11 @@ CREATE TABLE `bookmarks` (
 );
 
 CREATE TABLE `friends` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  -- `id` INTEGER NOT NULL AUTO_INCREMENT,
   `sender_id` INTEGER NOT NULL,
   `receiver_id` INTEGER NOT NULL,
   `is_pending` INTEGER NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`sender_id`, `receiver_id`)
 );
 
 CREATE TABLE `favorites` (

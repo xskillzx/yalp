@@ -150,6 +150,21 @@ app.get('/server/reviews/others', (req, res) => {
   })
 })
 
+// all reviews
+app.get('/server/allreviews', (req, res) => {
+  db.getAllReviews(req.query.businessId, (err, results) => {
+    err ? res.status(400).end('Unable to retrieve reviews.') : res.status(200).json(results);
+  });
+});
+
+// reviews when there is someone logged in
+app.get('/server/loggedreviews', (req, res) => {
+  console.log(req.query);
+  db.getLoggedReviews(req.query.loggedId, req.query.businessId, (err, results) => {
+    err ? res.status(400).end('Unable to retrieve reviews.') : res.status(200).json(results);
+  });
+});
+
 app.get('/server/ratings', (req, res) => {
   db.getYalpRatings(req.body.businessId, (err, results) => {
     res.send(results);

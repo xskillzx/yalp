@@ -17,7 +17,6 @@ class BusinessList extends React.Component {
     };
   }
   componentWillMount() {
-    document.body.style.background = "url('wood.jpg')";
     document.body.style.backgroundSize = "100%";
     document.body.style.backgroundRepeat = "repeat-y";
   }
@@ -62,7 +61,6 @@ class BusinessList extends React.Component {
         filteredResults: this.state.searchResults
       })
     } else if (value === 'openNow') {
-      console.log('heyyyya');
       this.setState({
         filterBy: value,
         filteredResults: this.state.searchResults.filter(business => {
@@ -88,13 +86,15 @@ class BusinessList extends React.Component {
           <Filters handleFilter={this.handleFilter.bind(this)}/>
         </div>
         {!this.state.filteredResults.length ? <div style={{marginTop: "20px"}}> We couldn't find any results matching your search </div> : 
-          <div id="businesses&map">
-            <div style={{"marginTop": "20px"}}> This are the {this.state.filteredResults.length} closest places that match your current filter criteria</div>
-            <div id="businesses">
-              {this.getBusinessEntries()}
-            </div>
-            <div id="map-container">
-            <MapContainer initLocation={this.state.initLocation.lat ? this.state.initLocation : {lat: '37.7749', lng: '-122.4194'}} businesses={this.state.filteredResults}/>
+          <div>
+            <div style={{"marginLeft": "10px" , "marginTop": "20px"}}> This are the {this.state.filteredResults.length} closest places that match your current filter criteria</div>
+            <div id="businesses-map">
+              <div id="businesses">
+                {this.getBusinessEntries()}
+              </div>
+              <div id="map-container">
+                <MapContainer initLocation={this.state.initLocation.lat ? this.state.initLocation : {lat: '37.7749', lng: '-122.4194'}} businesses={this.state.filteredResults}/>
+              </div>
             </div>
           </div>
         } 
