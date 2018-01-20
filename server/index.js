@@ -112,6 +112,20 @@ app.post('/review', (req, res) => {
   })
 });
 
+// User DMs a friend
+app.get('/server/dm/log', (req, res) => {
+  db.getChat(req.body.user1, req.body.user2, (err, results) => {
+    err ? res.send(err) : res.send(results);
+  });
+});
+
+
+app.post('/server/dm/message', (req, res) => {
+  db.getChat(req.body.user1, req.body.user2, (err, results) => {
+    err ? res.send(err) : res.send(results);
+  });
+});
+
 //when business page reviews render
 app.get('/server/reviews/friends', (req, res) => {
   db.getFriendsReviews(req.query.userId, req.query.businessId, (err, results) => {

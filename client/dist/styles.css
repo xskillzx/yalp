@@ -342,3 +342,9 @@ h1 { font-size: 1.5em; margin: 10px; }
 .dropdown-menu {
   padding-top: 0;
 }
+
+/* DIRECT MESSAGE */
+
+.dm-body {
+  height: 500px;
+}
