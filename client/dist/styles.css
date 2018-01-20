@@ -69,26 +69,37 @@ a {
   float: right;
 }
 .logout span, .profile span {
-  text-decoration: none;
+  text-decoration:  none;
+  vertical-align: middle;
   background-color: rgb(243, 209, 77);
   color: white;
   border-radius: 5px;
-  font-size: 20px;
-  padding: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
 }
 
 /* BUSINESSLIST & MAP */
 
+#businesses-map {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
 #businesses {
-  float: left;
-  width: 65%;
+  flex-basis: 60%
+  /* float: left;
+  width: 65%; */
 }
 
 #map-container {
-  width: 35%;
+  flex-basis: 40%;
+  height: 100%;
+  margin: 0px 0px 0px 0px;
+  /* width: 35%;
   height: 100%;
   display: inline-block;
-  margin: 0px;
+  margin: 0px; */
 }
 
 
@@ -96,9 +107,9 @@ a {
 
 .businessEntry {
   background: white;
-  margin: 10px auto;
+  margin-bottom: 10px;
   padding: 5px 15px;
-  width: 75%;
+  width: 92%;
   height: 80px;
   border: solid 1px #ddd;
   border-radius: 4px;
