@@ -69,12 +69,13 @@ a {
   float: right;
 }
 .logout span, .profile span {
-  text-decoration: none;
+  text-decoration:  none;
+  vertical-align: middle;
   background-color: rgb(243, 209, 77);
   color: white;
   border-radius: 5px;
-  font-size: 20px;
-  padding: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
 }
 
 /* BUSINESSLIST & MAP */
