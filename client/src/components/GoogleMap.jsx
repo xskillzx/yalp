@@ -40,7 +40,7 @@ export class MapContainer extends React.Component {
 
   render() {
     const style = {
-      width: '30%',
+      width: '40%',
       height: '100%',
       position: "sticky"
     }
