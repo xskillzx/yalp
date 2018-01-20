@@ -75,7 +75,7 @@ const BusinessInfo = (props) => {
       </table>
       <div>{props.business.formatted_address}</div>
       <div>{props.business.formatted_phone_number}</div>
-      <a href={props.business.website} >{props.business.website}</a>
+      <a target="_blank" href={props.business.website} >{props.business.website}</a>
     </div>
   )
 }
