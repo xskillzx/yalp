@@ -7,14 +7,9 @@ class Review extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
-      friend: false
+      friend: props.friend,
+      pending: false
     }
-  }
-
-  componentDidMount() {
-    this.checkIfFriend();
-    this.getUsernameOfReview();
   }
 
   getUsernameOfReview() {
@@ -24,7 +19,6 @@ class Review extends React.Component {
         }
       })
       .then(response => {
-        console.log('username response', response.data[0].username);
         this.setState({
           username: response.data[0].username
         })
@@ -34,41 +28,19 @@ class Review extends React.Component {
       })
   }
 
-  checkIfFriend() {
-    //check if the current review author is a friend
-    axios.get('/server/checkfriend', {
-        params: {
-          userId: this.props.userId,
-          friendId: this.props.review.user_id
-        }
-      })
-      .then(response => {
-        console.log('FRIEND:', response.data)
-        if (response.data) {
-          this.setState({ friend: true })
-        }
-      })
-      .catch(err => {
-        if (err) { console.log(err) }
-      })
-  }
-
   addFriend() {
-    //takes current user and review user and adds to friend list
-    //props.review.userId == friend to be added
+    // if the request fails i still want to set pending true, because it will fail if the request is already pending
+    this.setState({pending: true});
     axios.get('/server/addfriend', {
-        params: {
-          userId: this.props.userId,
-          friendId: this.props.review.user_id
-        }
-      })
-      .then(response => {
-        console.log('Friend added:', this.state.username)
-        this.setState({ friend: true })
-      })
-      .catch(err => {
-        if (err) { console.log(err) }
-      })
+      params: {
+        sender_id: this.props.userId,
+        receiver_id: this.props.review.user_id
+      }
+    })
+    .then(response => {
+      // nothing to do with this honestly
+    })
+    .catch(err => console.error(err));
   }
 
   render() {
@@ -80,11 +52,18 @@ class Review extends React.Component {
     }
     return (
       <div className="review">
-        <span className="review-author">{this.state.username}</span>
+        <span className="review-author">{this.props.review.name}</span><br/>
+        <span className="review-author">@{this.props.review.username}</span>
         <span>
-          {this.state.friend ?
-            <button className="friend-btn">Your Friend</button> :
-            <button className="friend-btn" onClick={this.addFriend.bind(this)}>Add {this.state.username} as Friend</button>
+          {!this.props.logged ?
+            null :
+            !this.state.friend && !this.state.pending ?
+              this.props.review.user_id === this.props.userId ? 
+                <span className="review-author" style={{float: "right"}}>This is you</span> :
+                <button className="friend-btn" onClick={this.addFriend.bind(this)}>Add as Friend</button> 
+              :
+              this.state.pending ? <span className="friend-btn" style={{float: "right"}}>Request pending</span> :
+              <span className="friend-btn" style={{float: "right"}}>Is your friend</span>
           }
         </span>
         <div className="review-rating">{imgArr}</div>
