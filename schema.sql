@@ -48,11 +48,11 @@ CREATE TABLE `bookmarks` (
 );
 
 CREATE TABLE `friends` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  -- `id` INTEGER NOT NULL AUTO_INCREMENT,
   `sender_id` INTEGER NOT NULL,
   `receiver_id` INTEGER NOT NULL,
   `is_pending` INTEGER NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`sender_id`, `receiver_id`)
 );
 
 CREATE TABLE `favorites` (
