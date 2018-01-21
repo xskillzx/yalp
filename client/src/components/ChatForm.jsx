@@ -5,12 +5,10 @@ class ChatForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      msgs: []
+      value: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
     // this.chatData = {
     //   name: this.refs.name.value,
@@ -24,22 +22,31 @@ class ChatForm extends React.Component {
     this.getChat();
   }
 
-  sendMessage(text) {
-    // sdfsd
+  sendMessage(event) {
+    event.preventDefault();
+    let chatData = {
+      text: this.state.value,
+      chatId: 1,
+      sender: JSON.parse(localStorage.getItem('loggedUser')).id
+    }
+
+    axios.post('/server/dm/message', chatData)
+      .then(resp => {
+        this.getChat();
+        this.setState({ value: '' });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   getChat() {
-    let chatData = {
-      user1: JSON.parse(localStorage.getItem('loggedUser')).id,
-      user2: this.props.friend.id
-    }
+    let user1 = JSON.parse(localStorage.getItem('loggedUser')).id;
+    let user2 = this.props.friend.id;
 
-    axios.post('/server/dm/log', chatData)
+    axios.get(`/server/dm/log?user1=${user1}&user2=${user2}`)
       .then(resp => {
-        if (resp.status === 201) {
-          console.log('Msg sent!');
-          console.log(resp);
-        }
+        this.props.receiveMsgs(resp);
       })
       .catch(err => {
         console.log(err);
@@ -50,14 +57,9 @@ class ChatForm extends React.Component {
     this.setState({value: event.target.value});
   }
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
   render() {
     return (
-      <form action="#" onSubmit={this.handleSubmit} >
+      <form action="#" onSubmit={this.sendMessage.bind(this)} >
         <input type="text" value={this.state.value} onChange={this.handleChange} id="m" autoComplete="off" className="dm-input" placeholder="Hungry? Form a Squad and grab a bite!" required/>
         <button >Send</button>
       </form>

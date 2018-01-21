@@ -72,12 +72,12 @@ CREATE TABLE `chats` (
 
 CREATE TABLE `messages` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR NOT NULL,
+  `text` VARCHAR(255) NOT NULL,
   `chat_id` INTEGER NOT NULL,
   `sender_id` INTEGER NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (`id`)
-)
+);
 
 DROP TABLE IF EXISTS `searches`;
 

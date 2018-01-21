@@ -14,8 +14,13 @@ class FriendNav extends React.Component {
 		this.state = {
 			showModal: false,
 			friends: [],
-			messageWith: {}
+			messageWith: {},
+			msgs: []
 		};
+  }
+
+  receiveMsgs(messages) {
+  	this.setState({ msgs: messages.data });
   }
 
 	handleClose() {
@@ -63,10 +68,12 @@ class FriendNav extends React.Component {
 					<Modal.Title>{this.state.messageWith.name}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body className="dm-body">
-			    <ul id="messages"></ul>
+			    <ul id="messages">
+			      {this.state.msgs.map(msg => <li key={msg.id}>{JSON.parse(localStorage.getItem('loggedUser')).name} - {msg.text} - {msg.created_at}</li>)}
+			    </ul>
 				</Modal.Body>
 				<Modal.Footer>
-				  <ChatForm friend={this.state.messageWith} />
+				  <ChatForm receiveMsgs={this.receiveMsgs.bind(this)} friend={this.state.messageWith} />
 				</Modal.Footer>
 			</Modal>
 			</div>
