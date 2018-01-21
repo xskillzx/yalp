@@ -114,8 +114,8 @@ app.post('/review', (req, res) => {
 
 // Obtain chatlog
 app.get('/server/dm/log', (req, res) => {
-  db.getChat(req.query.user1, req.query.user2, (err, results) => {
-    err ? res.send(err) : res.send(results);
+  db.getChat(req.query.user1, req.query.user2, (err, results, chatId) => {
+    err ? res.send(err) : res.send([results, chatId]);
   });
 });
 

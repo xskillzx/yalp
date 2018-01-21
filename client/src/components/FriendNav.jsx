@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Modal, OverlayTrigger } from 'react-bootstrap';
 import axios from 'axios';
-import ChatBox from './ChatBox.jsx';
 import ChatForm from './ChatForm.jsx';
 
 class FriendNav extends React.Component {
@@ -20,7 +19,7 @@ class FriendNav extends React.Component {
   }
 
   receiveMsgs(messages) {
-  	this.setState({ msgs: messages.data });
+  	this.setState({ msgs: messages });
   }
 
 	handleClose() {
@@ -28,7 +27,6 @@ class FriendNav extends React.Component {
 	}
 
 	handleShow(friend) {
-		console.log(friend);
 		this.setState({ showModal: true, messageWith: friend });
 	}
 
@@ -38,7 +36,6 @@ class FriendNav extends React.Component {
       .then(resp => {
         if (resp.status === 200) {
         	this.setState({ friends: resp.data });
-        	console.log(this.state.friends);
         }
       })
       .catch(err => {
@@ -82,9 +79,3 @@ class FriendNav extends React.Component {
 }
 
 export default FriendNav;
-
-/*			<Navbar.Header>
-				<Navbar.Brand>
-					<a href="#home">React-Bootstrap</a>
-				</Navbar.Brand>
-			</Navbar.Header>*/

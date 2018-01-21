@@ -5,7 +5,8 @@ class ChatForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
+      chatId: undefined
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,7 +27,7 @@ class ChatForm extends React.Component {
     event.preventDefault();
     let chatData = {
       text: this.state.value,
-      chatId: 1,
+      chatId: this.state.chatId,
       sender: JSON.parse(localStorage.getItem('loggedUser')).id
     }
 
@@ -46,7 +47,8 @@ class ChatForm extends React.Component {
 
     axios.get(`/server/dm/log?user1=${user1}&user2=${user2}`)
       .then(resp => {
-        this.props.receiveMsgs(resp);
+        this.props.receiveMsgs(resp.data[0]);
+        this.setState({ chatId: resp.data[1] });
       })
       .catch(err => {
         console.log(err);
